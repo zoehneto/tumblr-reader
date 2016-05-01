@@ -5,3 +5,4 @@ typings
 **/*npm-debug.log.*
 *.js
 *.js.map
+app/config/*
