@@ -13,7 +13,6 @@ export class TumblrService {
         this._apiKey = _configService.getApiKey()
     }
 
-
     getPosts(blogId: string): Observable<Response>{
         return Observable.create(observer => {
             this._apiKey.subscribe(key => {

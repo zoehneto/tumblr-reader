@@ -24,7 +24,6 @@ export class AppComponent{
         _tumblrService.getPosts("test").subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
-            }
-        );
+        });
     }
 }
