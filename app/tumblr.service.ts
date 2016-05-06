@@ -3,6 +3,7 @@ import {ConfigService} from "./config.service";
 import {Observable} from "rxjs/Observable";
 import {Post} from "./data.types";
 import {Http} from "@angular/http";
+import {Response} from "./data.types";
 
 @Injectable()
 export class TumblrService {
@@ -13,10 +14,15 @@ export class TumblrService {
     }
 
 
-    getPosts(id: string): Observable<any>{
-        return this._apiKey.map(key => {
-            this._http.get(this._baseUrl+"blog/"+id+"/posts?api_key="+key)
-                .map(res => res.json());
+    getPosts(blogId: string): Observable<Response>{
+        return Observable.create(observer => {
+            this._apiKey.subscribe(key => {
+                this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key)
+                    .map(res => res.json().response).subscribe(x => {
+                    observer.next(x);
+                    observer.complete();
+                });
+            })
         });
     }
 }

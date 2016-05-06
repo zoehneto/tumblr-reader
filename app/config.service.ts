@@ -7,7 +7,7 @@ export class ConfigService {
     private _config: Observable<any>;
     constructor(private _http: Http) {
         this._config = _http.get('app/config/config.json')
-            .map(res => res.json())
+            .map(res => res.json());
     }
 
     getApiKey(): Observable<string>{
