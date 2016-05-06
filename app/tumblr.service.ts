@@ -1,8 +1,8 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {ConfigService} from "./config.service";
 import {Observable} from "rxjs/Observable";
 import {Post} from "./data.types";
-import {Http} from "angular2/http";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class TumblrService {
@@ -15,7 +15,7 @@ export class TumblrService {
 
     getPosts(id: string): Observable<any>{
         return this._apiKey.map(key => {
-            _this._http.get(this._baseUrl+"blog/"+id+"/posts?api_key="+key)
+            this._http.get(this._baseUrl+"blog/"+id+"/posts?api_key="+key)
                 .map(res => res.json());
         });
     }

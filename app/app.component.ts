@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {TumblrService} from "./tumblr.service";
 import {ConfigService} from "./config.service";
 import {Blog} from "./data.types";

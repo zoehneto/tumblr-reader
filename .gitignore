@@ -1,8 +1,11 @@
 .idea
 *.iml
 node_modules
-typings
-**/npm-debug.log*
+typings/**
+**/*npm-debug.log*
 *.js
 *.js.map
 app/config/*
+
+!systemjs.config.js
+!typings/typings.d.ts
