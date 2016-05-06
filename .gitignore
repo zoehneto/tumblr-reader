@@ -2,7 +2,7 @@
 *.iml
 node_modules
 typings
-**/*npm-debug.log.*
+**/npm-debug.log*
 *.js
 *.js.map
 app/config/*
