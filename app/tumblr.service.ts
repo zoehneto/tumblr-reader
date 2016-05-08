@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {Post} from "./data.types";
 import {Http} from "@angular/http";
 import {Response} from "./data.types";
+import {Observer} from "rxjs/Observer";
 
 @Injectable()
 export class TumblrService {
@@ -14,7 +15,7 @@ export class TumblrService {
     }
 
     getPosts(blogId: string): Observable<Response>{
-        return Observable.create(observer => {
+        return Observable.create((observer: Observer<Response>) => {
             this._apiKey.subscribe(key => {
                 this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key)
                     .map(res => res.json().response).subscribe(x => {
