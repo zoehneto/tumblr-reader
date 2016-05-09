@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES, Routes} from '@angular/router';
-import {TumblrService} from "./tumblr.service";
-import {ConfigService} from "./config.service";
-import {SidebarComponent} from  "./sidebar.component"
-import {PostListComponent} from "./post.list.component"
+import {TumblrService} from "./shared/tumblr.service";
+import {ConfigService} from "./shared/config.service";
+import {SidebarComponent} from  "./components/sidebar.component"
+import {PostListComponent} from "./components/post.list.component"
 
 @Component({
     selector: 'my-app',

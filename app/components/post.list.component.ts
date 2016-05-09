@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouteSegment} from '@angular/router';
-import {Blog, Post} from "./data.types";
-import {TumblrService} from "./tumblr.service";
+import {Blog, Post} from "./../data.types";
+import {TumblrService} from "./../shared/tumblr.service";
 
 @Component({
     selector: 'post-list',

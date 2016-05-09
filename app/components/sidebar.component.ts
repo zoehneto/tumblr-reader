@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Blog} from "./data.types";
+import {Blog} from "./../data.types";
 import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({

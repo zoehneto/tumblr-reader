@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ConfigService} from "./config.service";
 import {Observable} from "rxjs/Observable";
-import {Post} from "./data.types";
 import {Http} from "@angular/http";
-import {Response} from "./data.types";
+import {Response} from "./../data.types";
 import {Observer} from "rxjs/Observer";
 
 @Injectable()
