@@ -4,6 +4,7 @@ import {TumblrService} from "./shared/tumblr.service";
 import {ConfigService} from "./shared/config.service";
 import {SidebarComponent} from  "./components/sidebar.component"
 import {PostListComponent} from "./components/post.list.component"
+import {SettingsService} from "./shared/settings.service";
 
 @Component({
     selector: 'my-app',
@@ -16,7 +17,7 @@ import {PostListComponent} from "./components/post.list.component"
         </div>
     `,
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent],
-    providers: [ConfigService, TumblrService]
+    providers: [ConfigService, TumblrService, SettingsService]
 })
 @Routes([
     {path: '/:name', component: PostListComponent}
