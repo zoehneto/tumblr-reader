@@ -5,6 +5,7 @@ import {ConfigService} from "./shared/config.service";
 import {SidebarComponent} from  "./components/sidebar.component"
 import {PostListComponent} from "./components/post.list.component"
 import {SettingsService} from "./shared/settings.service";
+import {SettingsComponent} from "./components/settings.component";
 
 @Component({
     selector: 'my-app',
@@ -16,11 +17,12 @@ import {SettingsService} from "./shared/settings.service";
             </div>  
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent],
+    directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [ConfigService, TumblrService, SettingsService]
 })
 @Routes([
-    {path: '/:name', component: PostListComponent}
+    {path: '/settings', component: SettingsComponent},
+    {path: '/blog/:name', component: PostListComponent}
 ])
 export class AppComponent{
 }

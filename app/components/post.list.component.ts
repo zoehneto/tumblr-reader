@@ -17,7 +17,7 @@ export class PostListComponent{
     private blog: Blog;
     private posts: Post[];
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
-        this.blog = new Blog;
+        this.blog = new Blog();
         _tumblrService.getPosts(_routeSegment.getParam("name")).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;

@@ -1,4 +1,12 @@
+//Work around missing ES6 module support in localforage
+declare var require: any;
+export const localforage:LocalForage = require("localforage");
+
 export class Blog {
+    constructor(name?:string) {
+        this.name = name;
+    }
+
     name: string;
     description: string;
     title: string;

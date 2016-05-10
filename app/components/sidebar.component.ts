@@ -7,8 +7,11 @@ import {SettingsService} from "../shared/settings.service";
     selector: 'sidebar',
     template: `
         <ul>
+            <li>
+                <a [routerLink]="['/settings']">Settings</a>
+            </li>
             <li *ngFor="let blog of blogs">
-                <a [routerLink]="['/',blog.name]">{{blog.name}}</a>
+                <a [routerLink]="['/blog/',blog.name]">{{blog.name}}</a>
             </li>
         </ul>
     `,
@@ -17,6 +20,6 @@ import {SettingsService} from "../shared/settings.service";
 export class SidebarComponent{
     private blogs:Blog[]
     constructor(private _settingsService: SettingsService){
-        this.blogs = _settingsService.getBlogs();
+        _settingsService.getBlogs().then(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
     }
 }
