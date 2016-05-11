@@ -15,7 +15,7 @@ export class SettingsComponent{
     private blogs:Blog[];
     private blogText: string = '';
     constructor(private _settingsService: SettingsService){
-        _settingsService.getBlogs().then(blogs => {
+        _settingsService.getBlogs().subscribe(blogs => {
             blogs === null ? this.blogs = [] : this.blogs = blogs;
             this.blogText = this.blogsToText(this.blogs);
         });

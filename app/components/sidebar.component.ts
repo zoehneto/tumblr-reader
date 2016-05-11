@@ -20,6 +20,6 @@ import {SettingsService} from "../shared/settings.service";
 export class SidebarComponent{
     private blogs:Blog[]
     constructor(private _settingsService: SettingsService){
-        _settingsService.getBlogs().then(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
+        _settingsService.getBlogs().subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
     }
 }
