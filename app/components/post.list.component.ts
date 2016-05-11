@@ -6,7 +6,8 @@ import {TumblrService} from "./../shared/tumblr.service";
 @Component({
     selector: 'post-list',
     template: `
-        <ul>
+        <div class="pure-u-1-6"></div>
+        <ul class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
                     <div *ngIf="post.photos">
@@ -18,7 +19,23 @@ import {TumblrService} from "./../shared/tumblr.service";
                 </div>
             </li>
         </ul>
-    `
+    `,
+    styles: [`
+        ul{
+            padding: 0;
+            list-style: none;
+        }
+        
+        li{
+            background-color: lightgrey;
+            padding: 10px;
+            margin: 40px 0;
+        }
+        
+        img{
+            width: 100%;
+        }
+    `]
 })
 export class PostListComponent{
     private blog: Blog;

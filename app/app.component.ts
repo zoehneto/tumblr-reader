@@ -12,7 +12,7 @@ import {SettingsComponent} from "./components/settings.component";
     template: `
         <div class="pure-g">
             <sidebar class="pure-u-1-5"></sidebar>
-            <div class="pure-u-4-5">
+            <div class="pure-u-3-5">
                 <router-outlet ></router-outlet>
             </div>  
         </div>
