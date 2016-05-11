@@ -15,7 +15,7 @@ export class Blog {
     posts: number;
 }
 
-export class Post{
+export interface Post{
     id: number;
     title: string;
     summary: string;
@@ -25,9 +25,29 @@ export class Post{
     format: string;
     post_url: string;
     tags: string[];
+    player?: Player[];
+    photos?: Photo[];
+    caption?: string;
 }
 
-export class Response{
+export interface Player{
+    width: number;
+    embed_code: string;
+}
+
+export interface Photo{
+    alt_sizes: PhotoSize[];
+    original_size: PhotoSize;
+    caption: string;
+}
+
+export interface PhotoSize{
+    height: number;
+    width: number;
+    url: string;
+}
+
+export interface Response{
     blog: Blog;
     posts: Post[];
 }

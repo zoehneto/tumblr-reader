@@ -8,7 +8,14 @@ import {TumblrService} from "./../shared/tumblr.service";
     template: `
         <ul>
             <li *ngFor="let post of posts">
-                <div [innerHTML]="post.body"></div>
+                <div>
+                    <div *ngIf="post.photos">
+                        <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
+                    </div>
+                    <div *ngIf="post.player" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
+                    <div [innerHTML]="post.body"></div>
+                    <div *ngIf="post.caption" [innerHTML]="post.caption"></div>
+                </div>
             </li>
         </ul>
     `
