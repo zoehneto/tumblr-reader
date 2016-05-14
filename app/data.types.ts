@@ -30,6 +30,8 @@ export interface Post{
     caption?: string;
     question?: string;
     answer?: string;
+    source?: string;
+    text?: string;
 }
 
 export interface Player{

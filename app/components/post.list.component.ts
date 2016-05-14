@@ -9,22 +9,30 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
     directives: [ InfiniteScroll ],
     template: `
         <div class="pure-u-1-6"></div>
-        <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()"class="pure-u-2-3">
+        <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()" class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
-                    <div *ngIf="post.question">
+                    <div *ngIf="post.type == 'answer'">
                         <div class="question">
                             <p>{{post.asking_name}} asked:</p>
                             <p>{{post.question}}</p>
                         </div>
                         <div [innerHTML]="post.answer"></div>
                     </div>
-                    <div *ngIf="post.photos">
+                    
+                    <div *ngIf="post.type == 'quote'">
+                        <p>{{post.text}}</p>
+                        <div [innerHTML]="post.source"></div>
+                    </div>
+                    
+                    <div *ngIf="post.type == 'photo'">
                         <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
                     </div>
-                    <div *ngIf="post.player" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
-                    <div [innerHTML]="post.body"></div>
+                    <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
                     <div *ngIf="post.caption" [innerHTML]="post.caption"></div>
+                    
+                    <div *ngIf="post.type == 'text'"[innerHTML]="post.body"></div>
+                    
                     <div>
                         <ul class="list-inline">
                             <li *ngFor="let tag of post.tags">
