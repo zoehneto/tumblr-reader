@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import {RouteSegment} from '@angular/router';
 import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
+import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
 
 @Component({
     selector: 'post-list',
+    directives: [ InfiniteScroll ],
     template: `
         <div class="pure-u-1-6"></div>
-        <ul class="pure-u-2-3">
+        <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()"class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
                     <div *ngIf="post.question">
@@ -57,5 +59,13 @@ export class PostListComponent{
             this.blog = res.blog;
             this.posts = res.posts;
         });
+    }
+
+    onScroll(){
+        if(this.posts.length < this.blog.posts){
+            this._tumblrService.getPosts(this.blog.name, this.posts.length).subscribe(res => {
+                this.posts = this.posts.concat(res.posts);
+            });
+        }
     }
 }
