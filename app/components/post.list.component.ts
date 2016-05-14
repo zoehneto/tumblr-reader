@@ -25,6 +25,13 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
                     <div *ngIf="post.player" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
                     <div [innerHTML]="post.body"></div>
                     <div *ngIf="post.caption" [innerHTML]="post.caption"></div>
+                    <div>
+                        <ul class="list-inline">
+                            <li *ngFor="let tag of post.tags">
+                                <a target="_blank" href="http://{{blog.name}}.tumblr.com/tagged/{{tag}}">#{{tag}}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -39,6 +46,12 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
             background-color: lightgrey;
             padding: 10px;
             margin: 40px 0;
+        }
+        
+        .list-inline > li{
+            display: inline-block;
+            margin: 0;
+            padding-left: 0;
         }
         
         div.question{
