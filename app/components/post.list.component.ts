@@ -10,6 +10,13 @@ import {TumblrService} from "./../shared/tumblr.service";
         <ul class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
+                    <div *ngIf="post.question">
+                        <div class="question">
+                            <p>{{post.asking_name}} asked:</p>
+                            <p>{{post.question}}</p>
+                        </div>
+                        <div [innerHTML]="post.answer"></div>
+                    </div>
                     <div *ngIf="post.photos">
                         <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
                     </div>
@@ -30,6 +37,10 @@ import {TumblrService} from "./../shared/tumblr.service";
             background-color: lightgrey;
             padding: 10px;
             margin: 40px 0;
+        }
+        
+        div.question{
+            background-color: grey;
         }
         
         img{

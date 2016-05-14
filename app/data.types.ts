@@ -28,6 +28,8 @@ export interface Post{
     player?: Player[];
     photos?: Photo[];
     caption?: string;
+    question?: string;
+    answer?: string;
 }
 
 export interface Player{
