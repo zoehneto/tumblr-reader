@@ -50,6 +50,10 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
             list-style: none;
         }
         
+        li:first-child{
+            margin-top: 0;
+        }
+        
         li{
             background-color: lightgrey;
             padding: 10px;

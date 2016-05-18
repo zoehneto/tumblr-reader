@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {ROUTER_DIRECTIVES, Routes} from '@angular/router';
 import {TumblrService} from "./shared/tumblr.service";
 import {ConfigService} from "./shared/config.service";
@@ -17,6 +17,12 @@ import {SettingsComponent} from "./components/settings.component";
             </div>  
         </div>
     `,
+    encapsulation: ViewEncapsulation.None,
+    styles: [`
+        html, body {
+            margin:0;
+        }
+    `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [ConfigService, TumblrService, SettingsService]
 })
