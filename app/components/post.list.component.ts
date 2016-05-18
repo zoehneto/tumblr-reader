@@ -25,6 +25,11 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
                         <div [innerHTML]="post.source"></div>
                     </div>
                     
+                    <div *ngIf="post.type == 'link'">
+                        <a href="{{post.url}}">{{post.title}}</a>
+                        <div [innerHTML]="post.description"></div>
+                    </div>
+                    
                     <div *ngIf="post.type == 'photo'">
                         <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
                     </div>
