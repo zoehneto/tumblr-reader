@@ -36,7 +36,10 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
                     <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
                     <div *ngIf="post.caption" [innerHTML]="post.caption"></div>
                     
-                    <div *ngIf="post.type == 'text'"[innerHTML]="post.body"></div>
+                    <div *ngIf="post.type == 'text'">
+                        <h2 *ngIf="!post.body">{{post.title}}</h2>
+                        <div *ngIf="post.body" [innerHTML]="post.body"></div>
+                    </div>
                     
                     <div>
                         <ul class="list-inline">
