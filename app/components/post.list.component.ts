@@ -9,7 +9,7 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
     directives: [ InfiniteScroll ],
     template: `
         <div class="pure-u-1-6"></div>
-        <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()" class="pure-u-2-3">
+        <ul infinite-scroll [infiniteScrollDistance]="4" (scrolled)="onScroll()" class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
                     <div *ngIf="post.type == 'answer'">
@@ -87,6 +87,7 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
 export class PostListComponent{
     private blog: Blog;
     private posts: Post[];
+    private postCounter: number = 20;
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
         this.blog = new Blog();
         _tumblrService.getPosts(_routeSegment.getParam("name")).subscribe(res => {
@@ -96,10 +97,11 @@ export class PostListComponent{
     }
 
     onScroll(){
-        if(this.posts && this.posts.length < this.blog.posts){
-            this._tumblrService.getPosts(this.blog.name, this.posts.length).subscribe(res => {
+        if(this.postCounter < this.blog.posts){
+            this._tumblrService.getPosts(this.blog.name, this.postCounter).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
+            this.postCounter += 20;
         }
     }
 }
