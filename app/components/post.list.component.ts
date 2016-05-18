@@ -96,7 +96,7 @@ export class PostListComponent{
     }
 
     onScroll(){
-        if(this.posts.length < this.blog.posts){
+        if(this.posts && this.posts.length < this.blog.posts){
             this._tumblrService.getPosts(this.blog.name, this.posts.length).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
