@@ -40,6 +40,10 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
                             </li>
                         </ul>
                     </div>
+                    
+                    <div>
+                        {{post.date | date}}
+                    </div>
                 </div>
             </li>
         </ul>

@@ -17,7 +17,11 @@ export class TumblrService {
         return Observable.create((observer: Observer<Response>) => {
             this._apiKey.subscribe(key => {
                 this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key+"&offset="+offset)
-                    .map(res => res.json().response).subscribe(x => {
+                    .map(res => {
+                        let response: Response = res.json().response;
+                        response.posts.forEach(post => post.date = new Date(post.date));
+                        return response;
+                    }).subscribe(x => {
                     observer.next(x);
                     observer.complete();
                 });

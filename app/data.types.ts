@@ -20,7 +20,7 @@ export interface Post{
     title: string;
     summary: string;
     body: string;
-    date: string;
+    date: any;
     type: string;
     format: string;
     post_url: string;
