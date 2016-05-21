@@ -1,7 +1,6 @@
 /**
- * System configuration for Angular 2 samples
+ * System configuration for Angular 2 apps
  * Adjust as necessary for your application needs.
- * Override at the last minute with global.filterSystemConfig (as plunkers do)
  */
 (function(global) {
 
@@ -21,27 +20,29 @@
         'angular2-infinite-scroll':   { defaultExtension: 'js' }
     };
 
-    var packageNames = [
-        '@angular/common',
-        '@angular/compiler',
-        '@angular/core',
-        '@angular/http',
-        '@angular/platform-browser',
-        '@angular/platform-browser-dynamic',
-        '@angular/router',
-        '@angular/testing',
-        '@angular/upgrade',
+    var ngPackageNames = [
+        'common',
+        'compiler',
+        'core',
+        'http',
+        'platform-browser',
+        'platform-browser-dynamic',
+        'router'
     ];
 
-    // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
-    packageNames.forEach(function(pkgName) {
-        packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    // Add package entries for angular packages
+    ngPackageNames.forEach(function(pkgName) {
+        // Bundled (~40 requests):
+        packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+
+        // Individual files (~300 requests):
+        //packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
     });
 
     var config = {
         map: map,
         packages: packages
-    }
+    };
 
     System.config(config);
 
