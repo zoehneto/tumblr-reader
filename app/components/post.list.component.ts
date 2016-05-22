@@ -3,12 +3,14 @@ import {RouteSegment} from '@angular/router';
 import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
 import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
+import {VideoControlsDirective} from "../attribute-directives/video.controls.directive";
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll ],
+    directives: [ InfiniteScroll, VideoControlsDirective ],
     template: `
         <div class="pure-u-1-6"></div>
+        <!--<ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()" class="pure-u-2-3">-->
         <ul infinite-scroll [infiniteScrollDistance]="4" (scrolled)="onScroll()" class="pure-u-2-3">
             <li *ngFor="let post of posts">
                 <div>
@@ -33,7 +35,7 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
                     <div *ngIf="post.type == 'photo'">
                         <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
                     </div>
-                    <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code"></div>
+                    <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code" videoControls></div>
                     <div *ngIf="post.caption" [innerHTML]="post.caption"></div>
                     
                     <div *ngIf="post.type == 'text'">
