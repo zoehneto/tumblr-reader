@@ -98,7 +98,9 @@ import {VideoControlsDirective} from "../attribute-directives/video.controls.dir
         }
         
         div.question{
-            background-color: grey;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            background-color: lightgrey;
         }
         
         img{
