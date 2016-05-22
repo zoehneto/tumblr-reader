@@ -6,9 +6,31 @@ import {SettingsService} from "../shared/settings.service";
 @Component({
     selector: 'settings',
     template: `
-        <textarea [(ngModel)]="blogText" rows="10"></textarea>
-        <button (click)="saveSettings()" type="button">Save</button>
+        <div class="pure-u-1-3"></div>
+        <div class="pure-u-1-3">
+            <textarea [(ngModel)]="blogText" rows="15"></textarea>
+            <div class="center">
+                <button (click)="saveSettings()" type="button">Save</button>
+            </div>
+        </div>
     `,
+    styles: [`
+        textarea{
+            margin-top: 16px;
+            width: 100%;
+        }
+        
+        div.center {
+            text-align: center;
+        }
+        
+        button{
+            margin-top: 10px;
+            padding: 5px 30px;
+            border: none;
+            border-radius: 4px;
+        }
+    `],
     directives: [ROUTER_DIRECTIVES]
 })
 export class SettingsComponent{
