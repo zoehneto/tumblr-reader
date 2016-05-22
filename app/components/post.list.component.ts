@@ -117,6 +117,8 @@ export class PostListComponent{
         _tumblrService.getPosts(_routeSegment.getParam("name")).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
+
+            document.title = res.blog.title;
         });
     }
 
