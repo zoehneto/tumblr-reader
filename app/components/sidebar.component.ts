@@ -36,7 +36,7 @@ import {SettingsService} from "../shared/settings.service";
         }
         
         li.blog{
-            margin-bottom: 0.5em;
+            margin-bottom: 0.8em;
             display: table;
         }
         
