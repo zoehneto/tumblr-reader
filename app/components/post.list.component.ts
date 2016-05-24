@@ -4,10 +4,11 @@ import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
 import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
 import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.directive";
+import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directive";
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll, VideoBehaviourDirective ],
+    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective ],
     template: `
         <div class="pure-u-1-6"></div>
         <div class="pure-u-2-3">
@@ -16,12 +17,12 @@ import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.d
             </div>
             
             <!--<ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()" class="pure-u-2-3">-->
-            <ul infinite-scroll [infiniteScrollDistance]="4" (scrolled)="onScroll()">
+            <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <div>
                         <div class="full">
                             <div *ngIf="post.type == 'photo'">
-                                <img *ngFor="let photo of post.photos" src="{{photo.original_size.url}}">
+                                <img *ngFor="let photo of post.photos" [tumblrImage]="photo">
                             </div>
                             <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code" videoBehaviour></div>
                         </div>
