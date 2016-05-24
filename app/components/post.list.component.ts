@@ -101,6 +101,7 @@ import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.d
         
         div.date{
             margin-top: 1em;
+            color: #6E6E6E;
         }
         
         div.question{
