@@ -22,9 +22,12 @@ export class TumblrService {
                         response.posts.forEach(post => post.date = new Date(post.date));
                         return response;
                     }).subscribe(x => {
-                    observer.next(x);
-                    observer.complete();
-                });
+                        observer.next(x);
+                        observer.complete();
+                    }, e => {
+                        observer.error(e);
+                        observer.complete();
+                    });
             })
         });
     }
