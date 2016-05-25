@@ -12,7 +12,9 @@ import {SettingsService} from "../shared/settings.service";
                     <a [routerLink]="['/settings']">Settings</a>
                 </li>
                 <li *ngFor="let blog of blogs" class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}">
-                    <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
+                    <span>
+                        <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
+                    </span>
                     <a [routerLink]="['/blog/',blog.name]">{{blog.name}}</a>
                 </li>
             </ul>
@@ -48,9 +50,13 @@ import {SettingsService} from "../shared/settings.service";
             font-weight: bold;
         }
         
-        img{
+        span{
             display: table-cell;
             vertical-align: middle;
+        }
+        
+        img{
+            display: table-cell;
         }
         
         a:link, a:visited, a:hover, a:active {
