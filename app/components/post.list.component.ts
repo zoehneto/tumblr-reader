@@ -123,7 +123,7 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
 export class PostListComponent{
     private blog: Blog;
     private posts: Post[];
-    private postCounter: number = 20;
+    private postCounter: number = 10;
     private message: string = "Loading ...";
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
         this.blog = new Blog();
@@ -144,7 +144,7 @@ export class PostListComponent{
             this._tumblrService.getPosts(this.blog.name, this.postCounter).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
-            this.postCounter += 20;
+            this.postCounter += 10;
         }
     }
 }
