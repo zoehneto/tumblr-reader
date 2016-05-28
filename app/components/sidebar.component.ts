@@ -43,6 +43,7 @@ import {SettingsService} from "../shared/settings.service";
         }
         
         li.blog a{
+            word-break: break-all;
             padding-left: .5em;
         }
         
