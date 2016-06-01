@@ -16,8 +16,7 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
                 <h2>{{message}}</h2>
             </div>
             
-            <!--<ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()" class="pure-u-2-3">-->
-            <ul infinite-scroll [infiniteScrollDistance]="2" (scrolled)="onScroll()">
+            <ul infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <div>
                         <div class="full">
