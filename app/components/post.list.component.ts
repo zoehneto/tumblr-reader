@@ -10,15 +10,13 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, ROUTER_DIRECTIVES ],
     template: `
-        <div *ngIf="tag_param" class="center">
-            <h1>#{{tag_param}}</h1>
+        <div class="center">
+            <h1 *ngIf="tag_param">#{{tag_param}}</h1>
+            <h2 *ngIf="message">{{message}}</h2>
         </div>
+        
         <div class="pure-u-1-6"></div>
         <div class="pure-u-2-3">
-            <div class="center">
-                <h2>{{message}}</h2>
-            </div>
-            
             <ul infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <div>
@@ -135,7 +133,7 @@ export class PostListComponent{
     private tag_param: string;
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
         this.blog = new Blog();
-        this.tag_param = _routeSegment.getParam("tag");
+        this.tag_param = _routeSegment.getParam("tag")?decodeURIComponent(_routeSegment.getParam("tag")):null;
         _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tag_param).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
