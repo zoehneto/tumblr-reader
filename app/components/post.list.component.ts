@@ -47,7 +47,7 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
                             <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption"></div>
                             
                             <div *ngIf="post.type == 'text'">
-                                <h2 *ngIf="!post.body">{{post.title}}</h2>
+                                <h2 class="post-title">{{post.title}}</h2>
                                 <div *ngIf="post.body" class="body" [innerHTML]="post.body"></div>
                             </div>
                             
@@ -89,6 +89,11 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
             margin: 0;
             padding-left: 0;
             padding-right: 1em;
+        }
+        
+        h2.post-title{
+            margin-top: 0;
+            padding-bottom: 0.5em;
         }
         
         div.padded{
