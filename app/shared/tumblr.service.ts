@@ -13,10 +13,11 @@ export class TumblrService {
         this._apiKey = _configService.getApiKey()
     }
 
-    getPosts(blogId: string, offset: number = 0): Observable<Response>{
+    getPosts(blogId: string, offset: number = 0, tag?: string): Observable<Response>{
         return Observable.create((observer: Observer<Response>) => {
             this._apiKey.subscribe(key => {
-                this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key+"&limit=10&offset="+offset)
+                this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key+"&limit=10&offset="
+                    +offset+(tag?"&tag="+tag.replace("_","+"):""))
                     .map(res => {
                         let response: Response = res.json().response;
                         response.posts.forEach(post => post.date = new Date(post.date));

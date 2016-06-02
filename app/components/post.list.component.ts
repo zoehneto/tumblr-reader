@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouteSegment} from '@angular/router';
+import {RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
 import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
@@ -8,8 +8,11 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective ],
+    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, ROUTER_DIRECTIVES ],
     template: `
+        <div *ngIf="tag_param" class="center">
+            <h1>#{{tag_param}}</h1>
+        </div>
         <div class="pure-u-1-6"></div>
         <div class="pure-u-2-3">
             <div class="center">
@@ -54,7 +57,7 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
                             <div>
                                 <ul class="list-inline">
                                     <li *ngFor="let tag of post.tags">
-                                        <a target="_blank" href="http://{{blog.name}}.tumblr.com/tagged/{{tag}}">#{{tag}}</a>
+                                        <a target="_blank" [routerLink]="['/blog-details', blog.name, 'tag', tag]">#{{tag}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -129,9 +132,11 @@ export class PostListComponent{
     private posts: Post[];
     private postCounter: number = 10;
     private message: string = "Loading ...";
+    private tag_param: string;
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
         this.blog = new Blog();
-        _tumblrService.getPosts(_routeSegment.getParam("name")).subscribe(res => {
+        this.tag_param = _routeSegment.getParam("tag");
+        _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tag_param).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
 
@@ -145,7 +150,7 @@ export class PostListComponent{
 
     onScroll(){
         if(this.postCounter < this.blog.posts){
-            this._tumblrService.getPosts(this.blog.name, this.postCounter).subscribe(res => {
+            this._tumblrService.getPosts(this.blog.name, this.postCounter, this.tag_param).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
             this.postCounter += 10;
