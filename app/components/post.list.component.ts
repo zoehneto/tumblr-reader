@@ -12,8 +12,11 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective, ROUTER_DIRECTIVES ],
     template: `
         <div class="center">
-            <h1 *ngIf="tag_param">#{{tag_param}}</h1>
+            <h1 *ngIf="tag_param">#{{tagParam}}</h1>
             <h2 *ngIf="message">{{message}}</h2>
+            <a *ngIf="postId" [routerLink]="['/blog', blog.name]">
+                <h1>{{blog.name}}</h1>
+            </a>
         </div>
         
         <div class="pure-u-1-6"></div>
@@ -131,11 +134,13 @@ export class PostListComponent{
     private posts: Post[];
     private postCounter: number = 10;
     private message: string = "Loading ...";
-    private tag_param: string;
+    private tagParam: string;
+    private postId: number;
     constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
         this.blog = new Blog();
-        this.tag_param = _routeSegment.getParam("tag")?decodeURIComponent(_routeSegment.getParam("tag")):null;
-        _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tag_param).subscribe(res => {
+        this.tagParam = _routeSegment.getParam("tag")?decodeURIComponent(_routeSegment.getParam("tag")):null;
+        this.postId = _routeSegment.getParam("post")?parseInt(_routeSegment.getParam("post")):null;
+        _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tagParam, this.postId).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
 
@@ -148,8 +153,8 @@ export class PostListComponent{
     }
 
     onScroll(){
-        if(this.postCounter < this.blog.posts){
-            this._tumblrService.getPosts(this.blog.name, this.postCounter, this.tag_param).subscribe(res => {
+        if(this.postCounter < this.blog.posts && !this.postId){
+            this._tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam, this.postId).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
             this.postCounter += 10;
