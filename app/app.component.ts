@@ -29,6 +29,7 @@ import {SettingsComponent} from "./components/settings.component";
 @Routes([
     {path: '/settings', component: SettingsComponent},
     {path: '/blog/:name', component: PostListComponent},
+    {path: '/blog-post/:name/post/:post', component: PostListComponent},
     {path: '/blog-details/:name/tag/:tag', component: PostListComponent}
 ])
 export class AppComponent{

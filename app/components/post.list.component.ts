@@ -5,10 +5,11 @@ import {TumblrService} from "./../shared/tumblr.service";
 import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
 import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.directive";
 import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directive";
+import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive";
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, ROUTER_DIRECTIVES ],
+    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective, ROUTER_DIRECTIVES ],
     template: `
         <div class="center">
             <h1 *ngIf="tag_param">#{{tag_param}}</h1>
@@ -45,11 +46,11 @@ import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directi
                                 <div [innerHTML]="post.description"></div>
                             </div>
                             
-                            <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption"></div>
+                            <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink=""></div>
                             
                             <div *ngIf="post.type == 'text'">
                                 <h2 class="post-title">{{post.title}}</h2>
-                                <div *ngIf="post.body" class="body" [innerHTML]="post.body"></div>
+                                <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink></div>
                             </div>
                             
                             <div>
