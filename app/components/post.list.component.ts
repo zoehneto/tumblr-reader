@@ -33,7 +33,7 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                                     <p>{{post.asking_name}} asked:</p>
                                     <p>{{post.question}}</p>
                                 </div>
-                                <div [innerHTML]="post.answer"></div>
+                                <div [innerHTML]="post.answer" tumblrLink></div>
                             </div>
                             
                             <div *ngIf="post.type == 'quote'">
