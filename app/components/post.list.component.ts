@@ -44,6 +44,10 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                                 <div [innerHTML]="post.source"></div>
                             </div>
                             
+                            <div *ngIf="post.type == 'chat'">
+                                <p *ngFor="let message of post.dialogue">{{message.label}} {{message.phrase}}</p>
+                            </div>
+                            
                             <div *ngIf="post.type == 'link'">
                                 <a href="{{post.url}}">{{post.title}}</a>
                                 <div [innerHTML]="post.description"></div>
