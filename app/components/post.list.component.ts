@@ -156,7 +156,12 @@ export class PostListComponent{
 
             this.message = null;
         }, err => {
-            this.message = "Error Loading Data";
+            let response = err.json();
+            if(response && response.meta){
+                this.message = response.meta.msg;
+            }else{
+                this.message = "Error Loading Data";
+            }
         });
     }
 
