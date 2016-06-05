@@ -50,7 +50,7 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                             
                             <div *ngIf="post.type == 'link'">
                                 <a href="{{post.url}}">{{post.title}}</a>
-                                <div [innerHTML]="post.description"></div>
+                                <div [innerHTML]="post.description" tumblrLink></div>
                             </div>
                             
                             <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink=""></div>
@@ -59,6 +59,8 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                                 <h2 class="post-title">{{post.title}}</h2>
                                 <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink></div>
                             </div>
+                            
+                            <p *ngIf="post.source_url">(Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>)</p>
                             
                             <div>
                                 <ul class="list-inline">
