@@ -12,7 +12,7 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective, ROUTER_DIRECTIVES ],
     template: `
         <div class="center">
-            <h1 *ngIf="tag_param">#{{tagParam}}</h1>
+            <h1 *ngIf="tagParam">#{{tagParam}}</h1>
             <h2 *ngIf="message">{{message}}</h2>
             <a *ngIf="postId" [routerLink]="['/blog', blog.name]">
                 <h1>{{blog.name}}</h1>
@@ -133,6 +133,7 @@ export class PostListComponent{
     private blog: Blog;
     private posts: Post[];
     private postCounter: number = 10;
+    private totalPosts: number;
     private message: string = "Loading ...";
     private tagParam: string;
     private postId: number;
@@ -143,6 +144,7 @@ export class PostListComponent{
         _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tagParam, this.postId).subscribe(res => {
             this.blog = res.blog;
             this.posts = res.posts;
+            this.totalPosts = res.total_posts;
 
             document.title = res.blog.title;
 
@@ -153,7 +155,7 @@ export class PostListComponent{
     }
 
     onScroll(){
-        if(this.postCounter < this.blog.posts && !this.postId){
+        if(this.postCounter < this.totalPosts){
             this._tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam, this.postId).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });

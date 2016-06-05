@@ -54,4 +54,5 @@ export interface PhotoSize{
 export interface Response{
     blog: Blog;
     posts: Post[];
+    total_posts: number;
 }
