@@ -21,7 +21,7 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
         
         <div class="pure-u-1-6"></div>
         <div class="pure-u-2-3">
-            <ul infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
+            <ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <div>
                         <div class="full">
