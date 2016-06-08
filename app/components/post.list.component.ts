@@ -6,10 +6,14 @@ import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll"
 import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.directive";
 import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directive";
 import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive";
+import {PostPhotoComponent} from "./post-components/post.photo.component";
+import {PostVideoComponent} from "./post-components/post.video.component";
+import {PostMetaComponent} from "./post-components/post.meta.component";
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective, ROUTER_DIRECTIVES ],
+    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
+        , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -25,10 +29,8 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                 <li *ngFor="let post of posts" class="post">
                     <div>
                         <div class="full">
-                            <div *ngIf="post.type == 'photo'">
-                                <img *ngFor="let photo of post.photos" [tumblrImage]="photo">
-                            </div>
-                            <div *ngIf="post.type == 'video'" [innerHTML]="post.player[post.player.length - 1].embed_code" videoBehaviour></div>
+                            <post-photo *ngIf="post.type == 'photo'" [postPhotos]="post.photos"></post-photo>
+                            <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player"></post-video>
                         </div>
                         <div class="padded">
                             <div *ngIf="post.type == 'answer'">
@@ -60,19 +62,7 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
                                 <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink></div>
                             </div>
                             
-                            <p *ngIf="post.source_url">(Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>)</p>
-                            
-                            <div>
-                                <ul class="list-inline">
-                                    <li *ngFor="let tag of post.tags">
-                                        <a target="_blank" [routerLink]="['/blog-details', blog.name, 'tag', tag]">#{{tag}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div class="date">
-                                {{post.date | date}}
-                            </div>
+                            <post-meta [blog]="blog" [post]="post"></post-meta>
                         </div>
                     </div>
                 </li>
@@ -95,13 +85,6 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
             margin: 40px 0;
         }
         
-        .list-inline > li{
-            display: inline-block;
-            margin: 0;
-            padding-left: 0;
-            padding-right: 1em;
-        }
-        
         h2.post-title{
             margin-top: 0;
             padding-bottom: 0.5em;
@@ -115,11 +98,6 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
             margin-top: -1em;
         }
         
-        div.date{
-            margin-top: 1em;
-            color: #6E6E6E;
-        }
-        
         div.question{
             padding: 0.5em 1em;
             border-radius: 4px;
@@ -128,10 +106,6 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
         
         div.center {
             text-align: center;
-        }
-        
-        img{
-            width: 100%;
         }
     `]
 })
