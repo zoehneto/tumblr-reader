@@ -10,11 +10,11 @@ export class TumblrImageDirective{
     }
 
     ngOnInit(){
-        this.el.nativeElement.setAttribute("height", this.getHeight())
+        this.el.nativeElement.setAttribute("height", this.getHeight(this.el.nativeElement.width))
     }
 
-    private getHeight(): string {
+    private getHeight(width: number): string {
         let ratio = this.photo.original_size.height / this.photo.original_size.width;
-        return Math.round(100 * ratio) + "%";
+        return Math.round(width * ratio) + "px";
     }
 }
