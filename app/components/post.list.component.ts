@@ -9,11 +9,12 @@ import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive
 import {PostPhotoComponent} from "./post-components/post.photo.component";
 import {PostVideoComponent} from "./post-components/post.video.component";
 import {PostMetaComponent} from "./post-components/post.meta.component";
+import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embedded.image.directive";
 
 @Component({
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
-        , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent],
+        , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -38,7 +39,7 @@ import {PostMetaComponent} from "./post-components/post.meta.component";
                                     <p>{{post.asking_name}} asked:</p>
                                     <p>{{post.question}}</p>
                                 </div>
-                                <div [innerHTML]="post.answer" tumblrLink></div>
+                                <div [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
                             </div>
                             
                             <div *ngIf="post.type == 'quote'">
@@ -52,14 +53,14 @@ import {PostMetaComponent} from "./post-components/post.meta.component";
                             
                             <div *ngIf="post.type == 'link'">
                                 <a href="{{post.url}}">{{post.title}}</a>
-                                <div [innerHTML]="post.description" tumblrLink></div>
+                                <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
                             </div>
                             
-                            <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink=""></div>
+                            <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink tumblrEmbeddedImage></div>
                             
                             <div *ngIf="post.type == 'text'">
                                 <h2 class="post-title">{{post.title}}</h2>
-                                <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink></div>
+                                <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink tumblrEmbeddedImage></div>
                             </div>
                             
                             <post-meta [blog]="blog" [post]="post"></post-meta>
