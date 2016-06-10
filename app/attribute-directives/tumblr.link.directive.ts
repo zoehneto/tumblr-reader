@@ -29,7 +29,14 @@ export class TumblrLinkDirective implements DoCheck{
     }
 
     private getHref(currentHref: string) : string{
+        //External link
+        if(currentHref.indexOf("tumblr.com") < 0){
+            return currentHref;
+        }
+
         currentHref = currentHref.replace("http://", "");
+        currentHref = currentHref.replace("https://", "");
+
         let data = currentHref.split(".tumblr.com/post/");
 
         if(data[1]===undefined){
