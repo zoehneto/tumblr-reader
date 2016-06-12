@@ -6,10 +6,8 @@ import {Photo} from "../../data.types";
     selector: 'post-photo',
     directives: [TumblrImageDirective],
     template: `
-        <div>
-            <img *ngFor="let photo of photos" src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
-            [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
-        </div>
+        <img *ngFor="let photo of photos" src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
+        [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
     `,
     styles: [`        
         img{

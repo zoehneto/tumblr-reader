@@ -7,21 +7,15 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
     selector: 'post-meta',
     directives: [ROUTER_DIRECTIVES, TumblrLinkDirective],
     template: `
-        <div>
-            <p *ngIf="post.source_url">(Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>)</p>
-            
-            <div>
-                <ul class="list-inline">
-                    <li *ngFor="let tag of post.tags">
-                        <a target="_blank" [routerLink]="['/blog-details', blog.name, 'tag', tag]">#{{tag}}</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="date">
-                {{post.date | date}}
-            </div>
-        </div>
+        <p *ngIf="post.source_url">(Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>)</p>
+        
+        <ul class="list-inline">
+            <li *ngFor="let tag of post.tags">
+                <a target="_blank" [routerLink]="['/blog-details', blog.name, 'tag', tag]">#{{tag}}</a>
+            </li>
+        </ul>
+        
+        <p class="date">{{post.date | date}}</p>
     `,
     styles: [`
         ul{
@@ -36,8 +30,9 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
             padding-right: 1em;
         }
         
-        div.date{
+        p.date{
             margin-top: 1em;
+            margin-bottom: 0;
             color: #6E6E6E;
         }
     `]

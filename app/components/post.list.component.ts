@@ -10,11 +10,13 @@ import {PostPhotoComponent} from "./post-components/post.photo.component";
 import {PostVideoComponent} from "./post-components/post.video.component";
 import {PostMetaComponent} from "./post-components/post.meta.component";
 import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embedded.image.directive";
+import {PostTextComponent} from "./post-components/post.text.component";
 
 @Component({
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
-        , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective],
+        , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective
+        , PostTextComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -58,10 +60,7 @@ import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embed
                             
                             <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink tumblrEmbeddedImage></div>
                             
-                            <div *ngIf="post.type == 'text'">
-                                <h2 class="post-title">{{post.title}}</h2>
-                                <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink tumblrEmbeddedImage></div>
-                            </div>
+                            <post-text *ngIf="post.type == 'text'" [post]="post"></post-text>
                             
                             <post-meta [blog]="blog" [post]="post"></post-meta>
                         </div>
@@ -85,17 +84,12 @@ import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embed
             border-radius: 4px;
             margin: 40px 0;
         }
-        
-        h2.post-title{
-            margin-top: 0;
-            padding-bottom: 0.5em;
-        }
-        
+                
         div.padded{
             padding: 1em;
         }
         
-        div.caption, div.body {
+        div.caption{
             margin-top: -1em;
         }
         
