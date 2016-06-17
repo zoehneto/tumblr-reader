@@ -128,8 +128,10 @@ export class PostListComponent{
             let response = err.json();
             if(response && response.meta){
                 this.message = response.meta.msg;
+                document.title = response.meta.msg;
             }else{
                 this.message = "Error Loading Data";
+                document.title = "Error Loading Data";
             }
         });
     }
