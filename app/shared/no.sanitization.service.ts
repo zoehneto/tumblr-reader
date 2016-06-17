@@ -1,4 +1,4 @@
-import { Injectable, provide } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DomSanitizationService, SecurityContext } from '@angular/platform-browser';
 
 @Injectable()
@@ -9,5 +9,5 @@ export class NoSanitizationService {
 }
 
 export const NO_SANITIZATION_PROVIDERS: any[] = [
-    provide(DomSanitizationService, { useClass: NoSanitizationService }),
+    {provide: DomSanitizationService, useClass: NoSanitizationService}
 ];
