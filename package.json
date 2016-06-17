@@ -27,7 +27,7 @@
 
     "localforage": "^1.4.1",
     "purecss": "^0.6.0",
-    "angular2-infinite-scroll": "0.1.2"
+    "angular2-infinite-scroll": "0.1.4"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
