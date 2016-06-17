@@ -6,7 +6,7 @@ import {Photo} from "../../data.types";
     selector: 'post-photo',
     directives: [TumblrImageDirective],
     template: `
-        <img *ngFor="let photo of photos" src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
+        <img *ngFor="let photo of photos" (click)="fullScreen($event)" src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
         [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
     `,
     styles: [`        
@@ -24,5 +24,15 @@ export class PostPhotoComponent{
             srcset += picture.url + " " + picture.width + "w, "
         });
         return srcset.substring(0, srcset.lastIndexOf(", "));
+    }
+
+    private fullScreen(event: any){
+        let elem = event.currentTarget;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        }
+        if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
     }
 }
