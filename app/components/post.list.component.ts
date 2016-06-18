@@ -11,12 +11,13 @@ import {PostVideoComponent} from "./post-components/post.video.component";
 import {PostMetaComponent} from "./post-components/post.meta.component";
 import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embedded.image.directive";
 import {PostTextComponent} from "./post-components/post.text.component";
+import {PostAnswerComponent} from "./post-components/post.answer.component";
 
 @Component({
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
         , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective
-        , PostTextComponent],
+        , PostTextComponent, PostAnswerComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -36,13 +37,7 @@ import {PostTextComponent} from "./post-components/post.text.component";
                             <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player"></post-video>
                         </div>
                         <div class="padded">
-                            <div *ngIf="post.type == 'answer'">
-                                <div class="question">
-                                    <p>{{post.asking_name}} asked:</p>
-                                    <p>{{post.question}}</p>
-                                </div>
-                                <div [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
-                            </div>
+                            <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>
                             
                             <div *ngIf="post.type == 'quote'">
                                 <p>{{post.text}}</p>
@@ -91,12 +86,6 @@ import {PostTextComponent} from "./post-components/post.text.component";
         
         div.caption{
             margin-top: -1em;
-        }
-        
-        div.question{
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            background-color: lightgrey;
         }
         
         div.center {
