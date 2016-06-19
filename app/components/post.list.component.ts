@@ -118,7 +118,7 @@ export class PostListComponent{
             this.posts = res.posts;
             this.totalPosts = res.total_posts;
 
-            document.title = res.blog.title;
+            document.title = res.blog.title !== ""? res.blog.title: res.blog.name;
 
             this.message = null;
         }, err => {
