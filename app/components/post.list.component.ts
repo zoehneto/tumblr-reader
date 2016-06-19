@@ -57,7 +57,7 @@ import {PostTitleComponent} from "./post-components/post.title.component";
                             
                             <post-text *ngIf="post.type == 'text'" [post]="post"></post-text>
                             
-                            <post-meta [blog]="blog" [post]="post"></post-meta>
+                            <post-meta class="meta"[blog]="blog" [post]="post"></post-meta>
                         </div>
                     </div>
                 </li>
@@ -65,6 +65,10 @@ import {PostTitleComponent} from "./post-components/post.title.component";
         </div>
     `,
     styles: [`
+        div.center {
+            text-align: center;
+        }
+        
         ul{
             padding: 0;
             list-style: none;
@@ -84,8 +88,16 @@ import {PostTitleComponent} from "./post-components/post.title.component";
             padding: 1em;
         }
         
-        div.center {
-            text-align: center;
+        div.padded *{
+            display: block;
+        }
+        
+        div.padded *:not(:first-child){
+            padding-top: 1em;
+        }
+        
+        div.padded post-meta.meta{
+            padding-top: 2em;
         }
     `]
 })

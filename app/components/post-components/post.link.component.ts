@@ -12,6 +12,9 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
         <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
     `,
     styles: [`
+        div{
+            margin-bottom: -1em;
+        }
     `]
 })
 export class PostLinkComponent{

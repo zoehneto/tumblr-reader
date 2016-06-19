@@ -7,7 +7,7 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
     selector: 'post-meta',
     directives: [ROUTER_DIRECTIVES, TumblrLinkDirective],
     template: `
-        <p *ngIf="post.source_url  || post.reblogged_from_name">
+        <p class="source" *ngIf="post.source_url  || post.reblogged_from_name">
             (<span *ngIf="post.source_url">Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a></span><span *ngIf="post.source_url && post.reblogged_from_name">, </span><span *ngIf="post.reblogged_from_name">via <a [tumblrLink]="post.reblogged_from_url">{{post.reblogged_from_name}}</a></span>)
         </p>
         
@@ -20,7 +20,12 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
         <p class="date">{{post.date | date}}</p>
     `,
     styles: [`
+        p.source{
+            margin-top: 0;
+        }
+        
         ul{
+            margin-bottom: 1em;
             padding: 0;
             list-style: none;
         }
@@ -33,8 +38,7 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
         }
         
         p.date{
-            margin-top: 1em;
-            margin-bottom: 0;
+            margin: 0;
             color: #6E6E6E;
         }
     `]

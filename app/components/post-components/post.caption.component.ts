@@ -11,7 +11,7 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
     `,
     styles: [`
         div.caption{
-            margin-top: -1em;
+            margin: -1em 0;
         }
     `]
 })

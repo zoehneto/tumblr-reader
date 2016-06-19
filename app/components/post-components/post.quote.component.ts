@@ -8,6 +8,9 @@ import {Post} from "../../data.types";
         <div [innerHTML]="post.source"></div>
     `,
     styles: [`
+        p{
+            margin-top: 0;
+        }
     `]
 })
 export class PostQuoteComponent{

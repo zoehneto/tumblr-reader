@@ -9,8 +9,10 @@ import {Photo} from "../../data.types";
         <img *ngFor="let photo of photos" (click)="fullScreen($event)" src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
         [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
     `,
-    styles: [`        
+    styles: [`
+        /*TODO add support for non webkit version*/
         img:not(:-webkit-full-screen){
+            display: block;
             width: 100%;
         }
     `]

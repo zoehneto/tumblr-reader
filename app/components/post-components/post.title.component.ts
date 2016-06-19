@@ -8,8 +8,8 @@ import {Post} from "../../data.types";
     `,
     styles: [`
         h2.post-title{
-            margin-top: 0;
-            padding-bottom: 0.5em;
+            margin: 0;
+            padding: 0;
         }
     `]
 })
