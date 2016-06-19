@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Post, Blog} from "../../data.types";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {Post} from "../../data.types";
 import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.directive";
 import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.embedded.image.directive";
 

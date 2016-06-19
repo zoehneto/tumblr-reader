@@ -12,12 +12,18 @@ import {PostMetaComponent} from "./post-components/post.meta.component";
 import {TumblrEmbeddedImageDirective} from "../attribute-directives/tumblr.embedded.image.directive";
 import {PostTextComponent} from "./post-components/post.text.component";
 import {PostAnswerComponent} from "./post-components/post.answer.component";
+import {PostLinkComponent} from "./post-components/post.link.component";
+import {PostChatComponent} from "./post-components/post.chat.component";
+import {PostQuoteComponent} from "./post-components/post.quote.component";
+import {PostCaptionComponent} from "./post-components/post.caption.component";
+import {PostTitleComponent} from "./post-components/post.title.component";
 
 @Component({
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
         , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective
-        , PostTextComponent, PostAnswerComponent],
+        , PostTextComponent, PostAnswerComponent, PostLinkComponent, PostChatComponent, PostQuoteComponent
+        , PostCaptionComponent, PostTitleComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -37,23 +43,17 @@ import {PostAnswerComponent} from "./post-components/post.answer.component";
                             <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player"></post-video>
                         </div>
                         <div class="padded">
+                            <post-title *ngIf="post.title" [post]="post"></post-title>
+                        
                             <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>
                             
-                            <div *ngIf="post.type == 'quote'">
-                                <p>{{post.text}}</p>
-                                <div [innerHTML]="post.source"></div>
-                            </div>
+                            <post-quote *ngIf="post.type == 'quote'" [post]="post"></post-quote>
                             
-                            <div *ngIf="post.type == 'chat'">
-                                <p *ngFor="let message of post.dialogue">{{message.label}} {{message.phrase}}</p>
-                            </div>
+                            <post-chat *ngIf="post.type == 'chat'" [post]="post"></post-chat>
                             
-                            <div *ngIf="post.type == 'link'">
-                                <a href="{{post.url}}">{{post.title}}</a>
-                                <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
-                            </div>
+                            <post-link *ngIf="post.type == 'link'" [post]="post"></post-link>
                             
-                            <div *ngIf="post.caption" class="caption" [innerHTML]="post.caption" tumblrLink tumblrEmbeddedImage></div>
+                            <post-caption *ngIf="post.caption" [post]="post"></post-caption>
                             
                             <post-text *ngIf="post.type == 'text'" [post]="post"></post-text>
                             
@@ -82,10 +82,6 @@ import {PostAnswerComponent} from "./post-components/post.answer.component";
                 
         div.padded{
             padding: 1em;
-        }
-        
-        div.caption{
-            margin-top: -1em;
         }
         
         div.center {

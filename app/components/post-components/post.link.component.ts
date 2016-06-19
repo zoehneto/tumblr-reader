@@ -4,17 +4,15 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
 import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.embedded.image.directive";
 
 @Component({
-    selector: 'post-text',
+    selector: 'post-link',
     directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
-        <div *ngIf="post.body" class="body" [innerHTML]="post.body" tumblrLink tumblrEmbeddedImage></div>
+        <a href="{{post.url}}">{{post.title}}</a>
+        <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
     `,
     styles: [`
-        div.body {
-            margin-top: -1em;
-        }
     `]
 })
-export class PostTextComponent{
+export class PostLinkComponent{
     @Input('post') post: Post;
 }
