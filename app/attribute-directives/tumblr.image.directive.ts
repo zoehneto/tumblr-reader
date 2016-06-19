@@ -11,10 +11,10 @@ export class TumblrImageDirective implements DoCheck{
 
     ngDoCheck(){
         //TODO Abstract fullscreen api for browser independence
-        if(!this.el.nativeElement.hasAttribute("height") && !document.webkitFullscreenEnabled) {
+        if(!this.el.nativeElement.hasAttribute("height") && !document.webkitIsFullScreen) {
             this.el.nativeElement.setAttribute("height", this.getHeight(this.el.nativeElement.width));
         }
-        if(this.el.nativeElement.hasAttribute("height") && document.webkitFullscreenEnabled) {
+        if(this.el.nativeElement.hasAttribute("height") && document.webkitIsFullScreen) {
             this.el.nativeElement.setAttribute("height", "");
         }
     }
