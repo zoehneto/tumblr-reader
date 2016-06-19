@@ -22,11 +22,6 @@ import {SettingsComponent} from "./components/settings.component";
         html, body {
             margin:0;
         }
-        
-        img:-webkit-full-screen {
-          width: 100%;
-          height: 100%;
-        }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [ConfigService, TumblrService, SettingsService]
