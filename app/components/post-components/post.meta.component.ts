@@ -7,7 +7,9 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
     selector: 'post-meta',
     directives: [ROUTER_DIRECTIVES, TumblrLinkDirective],
     template: `
-        <p *ngIf="post.source_url">(Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>)</p>
+        <p *ngIf="post.source_url  || post.reblogged_from_name">
+            (<span *ngIf="post.source_url">Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a></span><span *ngIf="post.source_url">, </span><span *ngIf="post.reblogged_from_name">via <a [tumblrLink]="post.reblogged_from_url">{{post.reblogged_from_name}}</a></span>)
+        </p>
         
         <ul class="list-inline">
             <li *ngFor="let tag of post.tags">
