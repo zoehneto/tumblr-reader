@@ -39,7 +39,7 @@ import {PostTitleComponent} from "./post-components/post.title.component";
                 <li *ngFor="let post of posts" class="post">
                     <div>
                         <div class="full">
-                            <post-photo *ngIf="post.type == 'photo'" [postPhotos]="post.photos"></post-photo>
+                            <post-photo *ngIf="post.photos" [postPhotos]="post.photos"></post-photo>
                             <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player"></post-video>
                         </div>
                         <div class="padded">
