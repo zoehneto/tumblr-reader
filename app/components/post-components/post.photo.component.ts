@@ -10,7 +10,7 @@ import {Photo} from "../../data.types";
         [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
     `,
     styles: [`        
-        img{
+        img:not(:-webkit-full-screen){
             width: 100%;
         }
     `]

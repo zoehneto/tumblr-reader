@@ -1,16 +1,22 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import {Directive, ElementRef, Input, DoCheck} from '@angular/core';
 import {Photo} from "../data.types";
 
 @Directive({ selector: '[tumblrImage]' })
-export class TumblrImageDirective{
+export class TumblrImageDirective implements DoCheck{
     @Input('tumblrImage') photo: Photo;
     private el: ElementRef;
     constructor(el: ElementRef) {
         this.el = el;
     }
 
-    ngOnInit(){
-        this.el.nativeElement.setAttribute("height", this.getHeight(this.el.nativeElement.width))
+    ngDoCheck(){
+        //TODO Abstract fullscreen api for browser independence
+        if(!this.el.nativeElement.hasAttribute("height") && !document.webkitFullscreenEnabled) {
+            this.el.nativeElement.setAttribute("height", this.getHeight(this.el.nativeElement.width));
+        }
+        if(this.el.nativeElement.hasAttribute("height") && document.webkitFullscreenEnabled) {
+            this.el.nativeElement.setAttribute("height", "");
+        }
     }
 
     private getHeight(width: number): string {
