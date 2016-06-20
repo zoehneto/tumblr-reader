@@ -8,17 +8,25 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
     directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
         <div class="question">
-            <p *ngIf="!post.asking_url">{{post.asking_name}} asked:</p>
-            <p *ngIf="post.asking_url"><a [tumblrLink]="post.asking_url">{{post.asking_name}}</a> asked:</p>
-            <p>{{post.question}}</p>
+            <p *ngIf="!post.asking_url" class="asking">{{post.asking_name}} asked:</p>
+            <p *ngIf="post.asking_url" class="asking"><a [tumblrLink]="post.asking_url">{{post.asking_name}}</a> asked:</p>
+            <p class="question-text">{{post.question}}</p>
         </div>
         <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
     `,
     styles: [`
         div.question{
-            padding: 0.5em 1em;
+            padding: 1em;
             border-radius: 4px;
             background-color: lightgrey;
+        }
+        
+        p.asking{
+            margin-top: 0;
+        }
+        
+        p.question-text{
+            margin-bottom: 0;
         }
         
         div.answer{
