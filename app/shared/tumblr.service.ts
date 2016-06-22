@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ConfigService} from "./config.service";
 import {Observable} from "rxjs/Observable";
-import {Http} from "@angular/http";
+import {Http, Jsonp, URLSearchParams} from "@angular/http";
 import {Response} from "./../data.types";
 import {Observer} from "rxjs/Observer";
 
@@ -9,15 +9,27 @@ import {Observer} from "rxjs/Observer";
 export class TumblrService {
     private _apiKey: Observable<string>;
     private _baseUrl = "https://api.tumblr.com/v2/";
-    constructor(private _configService: ConfigService, private _http: Http){
+    constructor(private _configService: ConfigService, private _jsonp: Jsonp){
         this._apiKey = _configService.getApiKey()
     }
 
     getPosts(blogId: string, offset: number = 0, tag?: string, id?: number): Observable<Response>{
         return Observable.create((observer: Observer<Response>) => {
             this._apiKey.subscribe(key => {
-                this._http.get(this._baseUrl+"blog/"+blogId+"/posts?api_key="+key+"&reblog_info=True&limit=10&offset="
-                    +offset+(tag?"&tag="+encodeURIComponent(tag):"")+(id?"&id="+id:""))
+                let params = new URLSearchParams();
+                params.set('api_key', key);
+                params.set('reblog_info', 'True');
+                params.set('jsonp', 'JSONP_CALLBACK');
+                params.set('limit', '10');
+                params.set('offset', offset.toString());
+                if(tag){
+                    params.set('tag', tag);
+                }
+                if(id){
+                    params.set('id', id.toString());
+                }
+                
+                this._jsonp.get(this._baseUrl+"blog/"+blogId+"/posts", { search: params })
                     .map(res => {
                         let response: Response = res.json().response;
                         response.posts.forEach(post => post.date = new Date(post.date));
