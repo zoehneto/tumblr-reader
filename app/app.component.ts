@@ -22,6 +22,13 @@ import {SettingsComponent} from "./components/settings.component";
         html, body {
             margin:0;
         }
+        
+        /*Styles for comments in text post or caption*/
+        blockquote{
+            border-left: 3px solid lightgrey;
+            margin: 1em 0;
+            padding: 0 20px;
+        }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [ConfigService, TumblrService, SettingsService]
