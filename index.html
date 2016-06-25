@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <base href="/">
 
@@ -18,6 +18,15 @@
 </head>
 
 <body>
-<my-app>Loading...</my-app>
+<style>
+    div.loading-initial {
+        width: 100%;
+        text-align: center;
+        font-family: Verdana, Geneva, sans-serif;
+    }
+</style>
+<my-app>
+    <div class="loading-initial"><h2>Loading...</h2></div>
+</my-app>
 </body>
 </html>
