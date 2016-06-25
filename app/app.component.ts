@@ -23,6 +23,11 @@ import {SettingsComponent} from "./components/settings.component";
             margin:0;
         }
         
+        html, button, input, select, textarea,
+        .pure-g [class *= "pure-u"] {
+            font-family: Verdana, Geneva, sans-serif;
+        }
+        
         /*Styles for comments in text post or caption*/
         blockquote{
             border-left: 3px solid lightgrey;
