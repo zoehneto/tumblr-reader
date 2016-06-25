@@ -33,8 +33,8 @@ import {PostTitleComponent} from "./post-components/post.title.component";
             </a>
         </div>
         
-        <div class="pure-u-1-6"></div>
-        <div class="pure-u-2-3">
+        <div class="pure-u-1-5"></div>
+        <div class="pure-u-3-5">
             <ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <div>
