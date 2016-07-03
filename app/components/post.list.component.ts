@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
 import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
@@ -55,7 +55,7 @@ import {PostTitleComponent} from "./post-components/post.title.component";
                             
                             <post-caption *ngIf="post.caption" [post]="post"></post-caption>
                             
-                            <post-text *ngIf="post.type == 'text'" [post]="post"></post-text>
+                            <post-text *ngIf="post.type == 'text' && post.body" [post]="post"></post-text>
                             
                             <post-meta class="meta"[blog]="blog" [post]="post"></post-meta>
                         </div>
@@ -109,27 +109,29 @@ export class PostListComponent{
     private message: string = "Loading ...";
     private tagParam: string;
     private postId: number;
-    constructor(private _routeSegment: RouteSegment, private _tumblrService: TumblrService) {
-        this.blog = new Blog();
-        this.tagParam = _routeSegment.getParam("tag")?decodeURIComponent(_routeSegment.getParam("tag")):null;
-        this.postId = _routeSegment.getParam("post")?parseInt(_routeSegment.getParam("post")):null;
-        _tumblrService.getPosts(_routeSegment.getParam("name"), 0, this.tagParam, this.postId).subscribe(res => {
-            this.blog = res.blog;
-            this.posts = res.posts;
-            this.totalPosts = res.total_posts;
+    constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService) {
+        _route.params.subscribe(params => {
+            this.blog = new Blog(params["name"]);
+            this.tagParam = params["tag"]?decodeURIComponent(params["tag"]):null;
+            this.postId = params["post"]?parseInt(params["post"]):null;
+            _tumblrService.getPosts(params["name"], 0, this.tagParam, this.postId).subscribe(res => {
+                this.blog = res.blog;
+                this.posts = res.posts;
+                this.totalPosts = res.total_posts;
 
-            document.title = res.blog.title !== ""? res.blog.title: res.blog.name;
+                document.title = res.blog.title !== ""? res.blog.title: res.blog.name;
 
-            this.message = null;
-        }, err => {
-            let response = err.json();
-            if(response && response.meta){
-                this.message = response.meta.msg;
-                document.title = response.meta.msg;
-            }else{
-                this.message = "Error Loading Data";
-                document.title = "Error Loading Data";
-            }
+                this.message = null;
+            }, err => {
+                let response = err.json();
+                if(response && response.meta){
+                    this.message = response.meta.msg;
+                    document.title = response.meta.msg;
+                }else{
+                    this.message = "Error Loading Data";
+                    document.title = "Error Loading Data";
+                }
+            });
         });
     }
 
