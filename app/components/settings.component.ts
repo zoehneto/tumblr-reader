@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Blog} from "./../data.types";
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {SettingsService} from "../shared/settings.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'settings',
@@ -36,7 +37,7 @@ import {SettingsService} from "../shared/settings.service";
 export class SettingsComponent implements OnInit{
     private blogs:Blog[];
     private blogText: string = '';
-    constructor(private _settingsService: SettingsService){
+    constructor(private _settingsService: SettingsService, private _titleService: Title){
         _settingsService.getBlogs().subscribe(blogs => {
             blogs === null ? this.blogs = [] : this.blogs = blogs;
             this.blogText = this.blogsToText(this.blogs);
@@ -44,7 +45,7 @@ export class SettingsComponent implements OnInit{
     }
 
     ngOnInit(){
-        document.title = "tumblr reader - Settings"
+        this._titleService.setTitle("tumblr reader - Settings");
     }
 
     saveSettings(){

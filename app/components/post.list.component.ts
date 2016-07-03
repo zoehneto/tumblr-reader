@@ -18,6 +18,7 @@ import {PostQuoteComponent} from "./post-components/post.quote.component";
 import {PostCaptionComponent} from "./post-components/post.caption.component";
 import {PostTitleComponent} from "./post-components/post.title.component";
 import {FaviconService} from "../shared/favicon.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'post-list',
@@ -111,7 +112,7 @@ export class PostListComponent{
     private tagParam: string;
     private postId: number;
     constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService,
-                private _faviconService: FaviconService) {
+                private _faviconService: FaviconService, private _titleService: Title) {
         _route.params.subscribe(params => {
             this.blog = new Blog(params["name"]);
             _faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
@@ -122,17 +123,17 @@ export class PostListComponent{
                 this.posts = res.posts;
                 this.totalPosts = res.total_posts;
 
-                document.title = res.blog.title !== ""? res.blog.title: res.blog.name;
+                _titleService.setTitle(res.blog.title !== ""? res.blog.title: res.blog.name);
 
                 this.message = null;
             }, err => {
                 let response = err.json();
                 if(response && response.meta){
                     this.message = response.meta.msg;
-                    document.title = response.meta.msg;
+                    _titleService.setTitle(response.meta.msg);
                 }else{
                     this.message = "Error Loading Data";
-                    document.title = "Error Loading Data";
+                    _titleService.setTitle("Error Loading Data");
                 }
             });
         });
