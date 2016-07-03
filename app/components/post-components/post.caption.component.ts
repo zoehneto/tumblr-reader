@@ -1,13 +1,14 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {Post} from "../../data.types";
 import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.directive";
 import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.embedded.image.directive";
+import {DomSanitizationService} from "@angular/platform-browser";
 
 @Component({
     selector: 'post-caption',
     directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
-        <div class="caption" [innerHTML]="post.caption" tumblrLink tumblrEmbeddedImage></div>
+        <div class="caption" [innerHTML]="caption" tumblrLink tumblrEmbeddedImage></div>
     `,
     styles: [`
         div.caption{
@@ -15,6 +16,13 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
         }
     `]
 })
-export class PostCaptionComponent{
+export class PostCaptionComponent implements OnChanges{
     @Input('post') post: Post;
+    private caption;
+
+    constructor(private _sanitizer: DomSanitizationService) {}
+
+    ngOnChanges(){
+        this.caption = this.post.caption?this._sanitizer.bypassSecurityTrustHtml(this.post.caption):null;
+    }
 }
