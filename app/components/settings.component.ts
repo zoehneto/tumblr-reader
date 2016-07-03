@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Blog} from "./../data.types";
-import {ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {SettingsService} from "../shared/settings.service";
 
 @Component({
@@ -33,7 +33,7 @@ import {SettingsService} from "../shared/settings.service";
     `],
     directives: [ROUTER_DIRECTIVES]
 })
-export class SettingsComponent implements OnActivate{
+export class SettingsComponent implements OnInit{
     private blogs:Blog[];
     private blogText: string = '';
     constructor(private _settingsService: SettingsService){
@@ -43,7 +43,7 @@ export class SettingsComponent implements OnActivate{
         });
     }
 
-    routerOnActivate(){
+    ngOnInit(){
         document.title = "tumblr reader - Settings"
     }
 

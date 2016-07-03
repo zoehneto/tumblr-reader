@@ -6,6 +6,7 @@ import {SidebarComponent} from  "./components/sidebar.component"
 import {PostListComponent} from "./components/post.list.component"
 import {SettingsService} from "./shared/settings.service";
 import {SettingsComponent} from "./components/settings.component";
+import {CustomSanitizationService} from "./shared/custom.sanitization.service";
 
 @Component({
     selector: 'my-app',
@@ -36,7 +37,7 @@ import {SettingsComponent} from "./components/settings.component";
         }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
-    providers: [ConfigService, TumblrService, SettingsService]
+    providers: [ConfigService, TumblrService, SettingsService, CustomSanitizationService]
 })
 export class AppComponent{
 }
