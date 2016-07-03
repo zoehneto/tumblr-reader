@@ -98,7 +98,7 @@ import {Title} from "@angular/platform-browser";
             padding-top: 1em;
         }
         
-        div.padded post-meta.meta{
+        div.padded post-meta.meta:not(:first-child){
             padding-top: 2em;
         }
     `]
