@@ -13,7 +13,7 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
         
         <ul *ngIf="post.tags.length > 0" class="list-inline">
             <li *ngFor="let tag of post.tags">
-                <a target="_blank" [routerLink]="['/blog-details', blog.name, 'tag', tag]">#{{tag}}</a>
+                <a target="_blank" [routerLink]="['/blog', blog.name, 'tag', tag]">#{{tag}}</a>
             </li>
         </ul>
         

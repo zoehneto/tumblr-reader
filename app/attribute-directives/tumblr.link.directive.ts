@@ -43,6 +43,6 @@ export class TumblrLinkDirective implements DoCheck{
             return "/blog/" + currentHref.substring(0, currentHref.indexOf("."));
         }
         
-        return "/blog-post/" + data[0] + "/post/" + data[1].match(/\d+/)[0];
+        return "/blog/" + data[0] + "/post/" + data[1].match(/\d+/)[0];
     }
 }
