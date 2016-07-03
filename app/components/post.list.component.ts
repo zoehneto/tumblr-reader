@@ -17,6 +17,7 @@ import {PostChatComponent} from "./post-components/post.chat.component";
 import {PostQuoteComponent} from "./post-components/post.quote.component";
 import {PostCaptionComponent} from "./post-components/post.caption.component";
 import {PostTitleComponent} from "./post-components/post.title.component";
+import {FaviconService} from "../shared/favicon.service";
 
 @Component({
     selector: 'post-list',
@@ -109,9 +110,11 @@ export class PostListComponent{
     private message: string = "Loading ...";
     private tagParam: string;
     private postId: number;
-    constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService) {
+    constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService,
+                private _faviconService: FaviconService) {
         _route.params.subscribe(params => {
             this.blog = new Blog(params["name"]);
+            _faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
             this.tagParam = params["tag"]?decodeURIComponent(params["tag"]):null;
             this.postId = params["post"]?parseInt(params["post"]):null;
             _tumblrService.getPosts(params["name"], 0, this.tagParam, this.postId).subscribe(res => {
