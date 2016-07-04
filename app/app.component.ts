@@ -36,6 +36,14 @@ import {FaviconService} from "./shared/favicon.service";
             margin: 1em 0;
             padding: 0 20px;
         }
+        
+        a:link, a:visited, a:hover, a:active {
+            text-decoration: underline;
+            color: #6E6E6E;
+        }
+        a:hover{
+            color: black;
+        }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [ConfigService, TumblrService, SettingsService, CustomSanitizationService, FaviconService]
