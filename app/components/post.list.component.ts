@@ -106,18 +106,22 @@ import {Title} from "@angular/platform-browser";
 export class PostListComponent{
     private blog: Blog;
     private posts: Post[];
-    private postCounter: number = 10;
+    private postCounter: number;
     private totalPosts: number;
-    private message: string = "Loading ...";
+    private message: string;
     private tagParam: string;
     private postId: number;
     constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService,
                 private _faviconService: FaviconService, private _titleService: Title) {
         _route.params.subscribe(params => {
+            this.postCounter = 10;
+            this.posts = [];
+            this.message = "Loading ...";
             this.blog = new Blog(params["name"]);
-            _faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
             this.tagParam = params["tag"]?decodeURIComponent(params["tag"]):null;
             this.postId = params["post"]?parseInt(params["post"]):null;
+            _faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
+            
             _tumblrService.getPosts(params["name"], 0, this.tagParam, this.postId).subscribe(res => {
                 this.blog = res.blog;
                 this.posts = res.posts;
