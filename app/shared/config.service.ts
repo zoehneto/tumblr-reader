@@ -5,8 +5,8 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class ConfigService {
     private _config: Observable<any>;
-    constructor(private _http: Http) {
-        this._config = _http.get('app/config/config.json')
+    constructor(private http: Http) {
+        this._config = http.get('app/config/config.json')
             .map(res => res.json());
     }
 

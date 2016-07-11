@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ConfigService} from "./config.service";
 import {Observable} from "rxjs/Observable";
-import {Http, Jsonp, URLSearchParams} from "@angular/http";
+import {Jsonp, URLSearchParams} from "@angular/http";
 import {Response} from "./../data.types";
 import {Observer} from "rxjs/Observer";
 
@@ -9,8 +9,8 @@ import {Observer} from "rxjs/Observer";
 export class TumblrService {
     private _apiKey: Observable<string>;
     private _baseUrl = "https://api.tumblr.com/v2/";
-    constructor(private _configService: ConfigService, private _jsonp: Jsonp){
-        this._apiKey = _configService.getApiKey()
+    constructor(private configService: ConfigService, private jsonp: Jsonp){
+        this._apiKey = configService.getApiKey()
     }
 
     getPosts(blogId: string, offset: number = 0, tag?: string, id?: number): Observable<Response>{
@@ -29,7 +29,7 @@ export class TumblrService {
                     params.set('id', id.toString());
                 }
                 
-                this._jsonp.get(this._baseUrl+"blog/"+blogId+"/posts", { search: params })
+                this.jsonp.get(this._baseUrl+"blog/"+blogId+"/posts", { search: params })
                     .map(res => {
                         let response: Response = res.json().response;
                         response.posts.forEach(post => post.date = new Date(post.date));

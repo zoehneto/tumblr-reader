@@ -12,10 +12,9 @@ import {IframeBehaviourDirective} from "../../attribute-directives/iframe.behavi
 export class PostAudioComponent implements OnChanges{
     @Input('postPlayer') postPlayer: string;
     private player: any;
-
-    constructor(private _sanitizer: CustomSanitizationService) {}
+    constructor(private sanitizationService: CustomSanitizationService) {}
 
     ngOnChanges(){
-        this.player = this._sanitizer.sanitize(this.postPlayer);
+        this.player = this.sanitizationService.sanitize(this.postPlayer);
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Blog} from "./../data.types";
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {SettingsService} from "../shared/settings.service";
@@ -69,10 +69,13 @@ import {SettingsService} from "../shared/settings.service";
     `],
     directives: [ROUTER_DIRECTIVES]
 })
-export class SidebarComponent{
+export class SidebarComponent implements OnInit{
     private blogs:Blog[];
-    constructor(private _settingsService: SettingsService){
-        _settingsService.getBlogs().subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
+    constructor(private settingsService: SettingsService){
+    }
+
+    ngOnInit() {
+        this.settingsService.getBlogs().subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
     }
 
     selected(blogName: string){

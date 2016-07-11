@@ -14,10 +14,9 @@ import {IframeBehaviourDirective} from "../../attribute-directives/iframe.behavi
 export class PostVideoComponent implements OnChanges{
     @Input('postPlayers') players: VideoPlayer[];
     private player: any;
-
-    constructor(private _sanitizer: CustomSanitizationService) {}
+    constructor(private sanitizationService: CustomSanitizationService) {}
 
     ngOnChanges(){
-        this.player = this._sanitizer.sanitize(this.players[this.players.length - 1].embed_code);
+        this.player = this.sanitizationService.sanitize(this.players[this.players.length - 1].embed_code);
     }
 }

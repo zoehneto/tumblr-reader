@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {Blog, Post} from "./../data.types";
 import {TumblrService} from "./../shared/tumblr.service";
@@ -105,7 +105,7 @@ import {PostAudioComponent} from "./post-components/post.audio.component";
         }
     `]
 })
-export class PostListComponent{
+export class PostListComponent implements OnInit{
     private blog: Blog;
     private posts: Post[];
     private postCounter: number;
@@ -113,33 +113,36 @@ export class PostListComponent{
     private message: string;
     private tagParam: string;
     private postId: number;
-    constructor(private _route: ActivatedRoute, private _tumblrService: TumblrService,
-                private _faviconService: FaviconService, private _titleService: Title) {
-        _route.params.subscribe(params => {
+    constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
+                private faviconService: FaviconService, private titleService: Title) {
+    }
+
+    ngOnInit() {
+        this.route.params.subscribe(params => {
             this.postCounter = 10;
             this.posts = [];
             this.message = "Loading ...";
             this.blog = new Blog(params["name"]);
             this.tagParam = params["tag"]?decodeURIComponent(params["tag"]):null;
             this.postId = params["post"]?parseInt(params["post"]):null;
-            _faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
-            
-            _tumblrService.getPosts(params["name"], 0, this.tagParam, this.postId).subscribe(res => {
+            this.faviconService.setFavicon("https://api.tumblr.com/v2/blog/" + params["name"] + "/avatar/16");
+
+            this.tumblrService.getPosts(params["name"], 0, this.tagParam, this.postId).subscribe(res => {
                 this.blog = res.blog;
                 this.posts = res.posts;
                 this.totalPosts = res.total_posts;
 
-                _titleService.setTitle(res.blog.title !== ""? res.blog.title: res.blog.name);
+                this.titleService.setTitle(res.blog.title !== ""? res.blog.title: res.blog.name);
 
                 this.message = null;
             }, err => {
                 let response = err.json();
                 if(response && response.meta){
                     this.message = response.meta.msg;
-                    _titleService.setTitle(response.meta.msg);
+                    this.titleService.setTitle(response.meta.msg);
                 }else{
                     this.message = "Error Loading Data";
-                    _titleService.setTitle("Error Loading Data");
+                    this.titleService.setTitle("Error Loading Data");
                 }
             });
         });
@@ -147,7 +150,7 @@ export class PostListComponent{
 
     onScroll(){
         if(this.postCounter < this.totalPosts){
-            this._tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam, this.postId).subscribe(res => {
+            this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam, this.postId).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
             });
             this.postCounter += 10;

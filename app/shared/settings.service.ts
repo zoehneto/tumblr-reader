@@ -7,6 +7,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class SettingsService {
     private subject: Subject<Blog[]> = new Subject<Blog[]>();
+    
     getBlogs(): Observable<Blog[]>{
         localforage.getItem("blogs").then((blogs: Blog[]) => this.subject.next(blogs));
         return this.subject;

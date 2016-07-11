@@ -37,19 +37,19 @@ import {Title} from "@angular/platform-browser";
 export class SettingsComponent implements OnInit{
     private blogs:Blog[];
     private blogText: string = '';
-    constructor(private _settingsService: SettingsService, private _titleService: Title){
-        _settingsService.getBlogs().subscribe(blogs => {
+    constructor(private settingsService: SettingsService, private titleService: Title){
+    }
+
+    ngOnInit(){
+        this.titleService.setTitle("tumblr reader - Settings");
+        this.settingsService.getBlogs().subscribe(blogs => {
             blogs === null ? this.blogs = [] : this.blogs = blogs;
             this.blogText = this.blogsToText(this.blogs);
         });
     }
 
-    ngOnInit(){
-        this._titleService.setTitle("tumblr reader - Settings");
-    }
-
     saveSettings(){
-        this._settingsService.setBlogs(this.textToBlogs(this.blogText));
+        this.settingsService.setBlogs(this.textToBlogs(this.blogText));
     }
 
     blogsToText(blogs:Blog[]): string {

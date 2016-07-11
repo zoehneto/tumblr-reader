@@ -19,10 +19,9 @@ import {CustomSanitizationService} from "../../shared/custom.sanitization.servic
 export class PostCaptionComponent implements OnChanges{
     @Input('post') post: Post;
     private caption: any;
-
-    constructor(private _sanitizer: CustomSanitizationService) {}
+    constructor(private sanitizationService: CustomSanitizationService) {}
 
     ngOnChanges(){
-        this.caption = this._sanitizer.sanitize(this.post.caption);
+        this.caption = this.sanitizationService.sanitize(this.post.caption);
     }
 }

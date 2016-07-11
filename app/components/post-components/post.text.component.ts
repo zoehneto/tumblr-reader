@@ -19,10 +19,9 @@ import {CustomSanitizationService} from "../../shared/custom.sanitization.servic
 export class PostTextComponent implements OnChanges{
     @Input('post') post: Post;
     private body: any;
-
-    constructor(private _sanitizer: CustomSanitizationService) {}
+    constructor(private sanitizationService: CustomSanitizationService) {}
 
     ngOnChanges(){
-        this.body = this._sanitizer.sanitize(this.post.body);
+        this.body = this.sanitizationService.sanitize(this.post.body);
     }
 }
