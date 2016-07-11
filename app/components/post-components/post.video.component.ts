@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {Player} from "../../data.types";
+import {VideoPlayer} from "../../data.types";
 import {VideoBehaviourDirective} from "../../attribute-directives/video.behaviour.directive";
-import {DomSanitizationService} from "@angular/platform-browser";
 import {CustomSanitizationService} from "../../shared/custom.sanitization.service";
 
 @Component({
@@ -12,7 +11,7 @@ import {CustomSanitizationService} from "../../shared/custom.sanitization.servic
     `
 })
 export class PostVideoComponent implements OnChanges{
-    @Input('postPlayers') players: Player[];
+    @Input('postPlayers') players: VideoPlayer[];
     private player: any;
 
     constructor(private _sanitizer: CustomSanitizationService) {}

@@ -19,13 +19,14 @@ import {PostCaptionComponent} from "./post-components/post.caption.component";
 import {PostTitleComponent} from "./post-components/post.title.component";
 import {FaviconService} from "../shared/favicon.service";
 import {Title} from "@angular/platform-browser";
+import {PostAudioComponent} from "./post-components/post.audio.component";
 
 @Component({
     selector: 'post-list',
     directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective, TumblrLinkDirective
         , ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostMetaComponent, TumblrEmbeddedImageDirective
         , PostTextComponent, PostAnswerComponent, PostLinkComponent, PostChatComponent, PostQuoteComponent
-        , PostCaptionComponent, PostTitleComponent],
+        , PostCaptionComponent, PostTitleComponent, PostAudioComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -43,6 +44,7 @@ import {Title} from "@angular/platform-browser";
                         <div class="full">
                             <post-photo *ngIf="post.photos" [postPhotos]="post.photos"></post-photo>
                             <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player"></post-video>
+                            <post-audio *ngIf="post.type == 'audio'" [postPlayer]="post.player"></post-audio>
                         </div>
                         <div class="padded">
                             <post-title *ngIf="post.title" [post]="post"></post-title>

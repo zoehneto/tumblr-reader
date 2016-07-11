@@ -25,7 +25,7 @@ export interface Post{
     format: string;
     post_url: string;
     tags: string[];
-    player?: Player[];
+    player?: VideoPlayer[] | string;
     photos?: Photo[];
     caption?: string;
     question?: string;
@@ -35,7 +35,7 @@ export interface Post{
     excerpt?: string;
 }
 
-export interface Player{
+export interface VideoPlayer{
     width: number;
     embed_code: string;
 }
