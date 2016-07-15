@@ -7,9 +7,9 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
     selector: 'post-link',
     directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
-        <a href="{{post.url}}">{{post.title}}</a>
+        <a [tumblrLink]="post.url">{{post.title}}</a>
         <p *ngIf="post.excerpt">{{post.excerpt}}</p>
-        <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
+        <div *ngIf="post.description" [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
     `,
     styles: [`
         div{
