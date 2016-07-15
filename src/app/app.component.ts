@@ -1,13 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {TumblrService} from "./shared/tumblr.service";
-import {ConfigService} from "./shared/config.service";
 import {SidebarComponent} from  "./components/sidebar.component"
 import {PostListComponent} from "./components/post.list.component"
 import {SettingsService} from "./shared/settings.service";
 import {SettingsComponent} from "./components/settings.component";
 import {CustomSanitizationService} from "./shared/custom.sanitization.service";
 import {FaviconService} from "./shared/favicon.service";
+import 'purecss/build/grids-min.css';
 
 @Component({
     selector: 'my-app',
@@ -46,7 +46,7 @@ import {FaviconService} from "./shared/favicon.service";
         }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
-    providers: [ConfigService, TumblrService, SettingsService, CustomSanitizationService, FaviconService]
+    providers: [TumblrService, SettingsService, CustomSanitizationService, FaviconService]
 })
 export class AppComponent{
 }

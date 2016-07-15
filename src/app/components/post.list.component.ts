@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
-import {Blog, Post} from "./../data.types";
-import {TumblrService} from "./../shared/tumblr.service";
-import {InfiniteScroll} from "angular2-infinite-scroll/angular2-infinite-scroll";
+import {Blog, Post} from "../data.types";
+import {TumblrService} from "../shared/tumblr.service";
+import {InfiniteScroll} from "angular2-infinite-scroll";
 import {VideoBehaviourDirective} from "../attribute-directives/video.behaviour.directive";
 import {TumblrImageDirective} from "../attribute-directives/tumblr.image.directive";
 import {TumblrLinkDirective} from "../attribute-directives/tumblr.link.directive";

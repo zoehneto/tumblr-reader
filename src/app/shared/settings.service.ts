@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Blog} from "../data.types";
-import {localforage} from "../data.types";
+import {Blog, localforage} from "../data.types";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 
