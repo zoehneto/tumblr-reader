@@ -7,7 +7,10 @@ import '@angular/http';
 import '@angular/router';
 
 // RxJS
-import 'rxjs';
+import 'rxjs/Subject';
+import 'rxjs/Observable';
+import 'rxjs/Observer';
+import 'rxjs/add/operator/map';
 
 // angular2-infinite-scroll
 import 'angular2-infinite-scroll';
