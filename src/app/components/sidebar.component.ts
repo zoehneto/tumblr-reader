@@ -79,7 +79,7 @@ export class SidebarComponent implements OnInit{
     }
 
     selected(blogName: string){
-        if(location.pathname === blogName){
+        if(location.pathname.indexOf(blogName) > -1){
             return true;
         }
         return false;
