@@ -1,5 +1,5 @@
 {
-  "name": "chrome-tumblr-reader",
+  "name": "tumblr-reader",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js --inline --progress --port 8080",
