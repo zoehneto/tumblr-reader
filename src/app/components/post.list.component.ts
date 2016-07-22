@@ -18,7 +18,8 @@ import { Title } from '@angular/platform-browser';
         <div class="pure-u-1-5"></div>
         <div class="pure-u-3-5">
             <ul postSwitch (moreItemsNeeded)="onScroll()" infinite-scroll
-            [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
+            [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
+            [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
