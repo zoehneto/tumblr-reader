@@ -17,6 +17,12 @@ module.exports = webpackMerge(commonConfig, {
         new ExtractTextPlugin('[name].css')
     ],
 
+    tslint: {
+        emitErrors: false,
+        failOnHint: false,
+        resourcePath: 'src'
+    },
+
     devServer: {
         historyApiFallback: true,
         stats: 'minimal'

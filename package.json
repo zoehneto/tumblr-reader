@@ -2,10 +2,10 @@
   "name": "tumblr-reader",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack-dev-server --config config/webpack.dev.js --inline --progress --port 8080",
-    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "postinstall": "typings install",
-    "typings": "typings"
+    "start": "webpack-dev-server --config config/webpack.dev.js --inline --progress --port 8080",
+    "lint": "tslint \"src/**/*.ts\"",
+    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "license": "ISC",
   "dependencies": {
@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "typescript": "^1.8.10",
+    "tslint": "^3.13.0",
+    "codelyzer": "~0.0.25",
     "typings": "^1.0.4",
     "rimraf": "^2.5.3",
 
@@ -40,6 +42,7 @@
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.1",
+    "tslint-loader": "^2.1.5",
 
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.15.0",
