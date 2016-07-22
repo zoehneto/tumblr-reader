@@ -37,7 +37,7 @@
     ],
 
     "ban": false,
-    "curly": false,
+    "curly": true,
     "forin": true,
     "label-position": true,
     "label-undefined": true,
