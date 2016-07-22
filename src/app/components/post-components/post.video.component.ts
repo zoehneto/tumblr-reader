@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {VideoPlayer} from "../../data.types";
-import {VideoBehaviourDirective} from "../../attribute-directives/video.behaviour.directive";
-import {CustomSanitizationService} from "../../shared/custom.sanitization.service";
-import {IframeBehaviourDirective} from "../../attribute-directives/iframe.behaviour.directive";
+import { Component, Input, OnChanges } from '@angular/core';
+import { VideoPlayer } from '../../data.types';
+import { VideoBehaviourDirective } from '../../attribute-directives/video.behaviour.directive';
+import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
+import { IframeBehaviourDirective } from '../../attribute-directives/iframe.behaviour.directive';
 
 @Component({
     selector: 'post-video',
@@ -11,12 +11,13 @@ import {IframeBehaviourDirective} from "../../attribute-directives/iframe.behavi
         <div [innerHTML]="player" videoBehaviour iframeBehaviour></div>
     `
 })
-export class PostVideoComponent implements OnChanges{
-    @Input('postPlayers') players: VideoPlayer[];
+export class PostVideoComponent implements OnChanges {
+    @Input('postPlayers') postPlayers: VideoPlayer[];
     private player: any;
     constructor(private sanitizationService: CustomSanitizationService) {}
 
-    ngOnChanges(){
-        this.player = this.sanitizationService.sanitize(this.players[this.players.length - 1].embed_code);
+    ngOnChanges() {
+        this.player = this.sanitizationService.sanitize(
+            this.postPlayers[this.postPlayers.length - 1].embed_code);
     }
 }

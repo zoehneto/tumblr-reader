@@ -1,14 +1,21 @@
-import {Component, Input} from '@angular/core';
-import {Post, Blog} from "../../data.types";
-import {ROUTER_DIRECTIVES} from "@angular/router";
-import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.directive";
+import { Component, Input } from '@angular/core';
+import { Post, Blog } from '../../data.types';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
 
 @Component({
     selector: 'post-meta',
     directives: [ROUTER_DIRECTIVES, TumblrLinkDirective],
     template: `
         <p class="source" *ngIf="post.source_url  || post.reblogged_from_name">
-            (<span *ngIf="post.source_url">Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a></span><span *ngIf="post.source_url && post.reblogged_from_name">, </span><span *ngIf="post.reblogged_from_name">via <a [tumblrLink]="post.reblogged_from_url">{{post.reblogged_from_name}}</a></span>)
+            (<span *ngIf="post.source_url">
+                Source: <a [tumblrLink]="post.source_url">{{post.source_title}}</a>
+            </span>
+            <span *ngIf="post.source_url && post.reblogged_from_name">, 
+            </span>
+            <span *ngIf="post.reblogged_from_name">
+                via <a [tumblrLink]="post.reblogged_from_url">{{post.reblogged_from_name}}</a>
+            </span>)
         </p>
         
         <ul *ngIf="post.tags.length > 0" class="list-inline">
@@ -43,7 +50,7 @@ import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.direct
         }
     `]
 })
-export class PostMetaComponent{
+export class PostMetaComponent {
     @Input('blog') blog: Blog;
     @Input('post') post: Post;
 }

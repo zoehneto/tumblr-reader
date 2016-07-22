@@ -16,4 +16,4 @@ import 'rxjs/add/operator/map';
 import 'angular2-infinite-scroll';
 
 // localforage
-require("localforage");
+require('localforage');

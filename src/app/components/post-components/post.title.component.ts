@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Post} from "../../data.types";
+import { Component, Input } from '@angular/core';
+import { Post } from '../../data.types';
 
 @Component({
     selector: 'post-title',
@@ -13,6 +13,6 @@ import {Post} from "../../data.types";
         }
     `]
 })
-export class PostTitleComponent{
+export class PostTitleComponent {
     @Input('post') post: Post;
 }

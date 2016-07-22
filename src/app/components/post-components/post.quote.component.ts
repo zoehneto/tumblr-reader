@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Post} from "../../data.types";
+import { Component, Input } from '@angular/core';
+import { Post } from '../../data.types';
 
 @Component({
     selector: 'post-quote',
@@ -13,6 +13,6 @@ import {Post} from "../../data.types";
         }
     `]
 })
-export class PostQuoteComponent{
+export class PostQuoteComponent {
     @Input('post') post: Post;
 }

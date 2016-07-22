@@ -1,19 +1,19 @@
-import {Injectable} from '@angular/core';
-import {Blog, localforage} from "../data.types";
-import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Blog, localforage } from '../data.types';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SettingsService {
     private subject: Subject<Blog[]> = new Subject<Blog[]>();
-    
-    getBlogs(): Observable<Blog[]>{
-        localforage.getItem("blogs").then((blogs: Blog[]) => this.subject.next(blogs));
+
+    getBlogs(): Observable<Blog[]> {
+        localforage.getItem('blogs').then((blogs: Blog[]) => this.subject.next(blogs));
         return this.subject;
     }
 
-    setBlogs(blogs: Blog[]){
-        localforage.setItem("blogs", blogs);
+    setBlogs(blogs: Blog[]) {
+        localforage.setItem('blogs', blogs);
         this.subject.next(blogs);
     }
 }

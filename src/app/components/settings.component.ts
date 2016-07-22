@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Blog} from "../data.types";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {SettingsService} from "../shared/settings.service";
-import {Title} from "@angular/platform-browser";
+import { Component, OnInit } from '@angular/core';
+import { Blog } from '../data.types';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { SettingsService } from '../shared/settings.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
-    selector: 'settings',
+    selector: 'reader-settings',
     template: `
         <div class="pure-u-1-3"></div>
         <div class="pure-u-1-3">
@@ -34,41 +34,39 @@ import {Title} from "@angular/platform-browser";
     `],
     directives: [ROUTER_DIRECTIVES]
 })
-export class SettingsComponent implements OnInit{
-    private blogs:Blog[];
+export class SettingsComponent implements OnInit {
+    private blogs: Blog[];
     private blogText: string = '';
-    constructor(private settingsService: SettingsService, private titleService: Title){
+    constructor(private settingsService: SettingsService, private titleService: Title) {
     }
 
-    ngOnInit(){
-        this.titleService.setTitle("tumblr reader - Settings");
+    ngOnInit() {
+        this.titleService.setTitle('tumblr reader - Settings');
         this.settingsService.getBlogs().subscribe(blogs => {
             blogs === null ? this.blogs = [] : this.blogs = blogs;
             this.blogText = this.blogsToText(this.blogs);
         });
     }
 
-    saveSettings(){
+    saveSettings() {
         this.settingsService.setBlogs(this.textToBlogs(this.blogText));
     }
 
-    blogsToText(blogs:Blog[]): string {
+    blogsToText(blogs: Blog[]): string {
         let blogText: string = '';
-        blogs.forEach(blog =>{
+        blogs.forEach(blog => {
             blogText += blog.name + '\n';
         });
-        
         return blogText;
     }
 
-    textToBlogs(blogText:string): Blog[] {
+    textToBlogs(blogText: string): Blog[] {
         let blogs: Blog[] = [];
-        blogText.split("\n").forEach(blogName => {
-            if(blogName){
+        blogText.split('\n').forEach(blogName => {
+            if (blogName) {
                 blogs.push(new Blog(blogName));
             }
         });
-
         return blogs;
     }
 }

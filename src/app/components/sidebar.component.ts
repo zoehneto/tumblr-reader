@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Blog} from "../data.types";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {SettingsService} from "../shared/settings.service";
+import { Component, OnInit } from '@angular/core';
+import { Blog } from '../data.types';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { SettingsService } from '../shared/settings.service';
 
 @Component({
-    selector: 'sidebar',
+    selector: 'side-bar',
     template: `
         <div>
             <ul>
                 <li class="settings" class="settings {{selected('/settings') ? 'selected' : ''}}">
                     <a [routerLink]="['/settings']">Settings</a>
                 </li>
-                <li *ngFor="let blog of blogs" class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}">
+                <li *ngFor="let blog of blogs" 
+                class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}">
                     <span>
                         <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
                     </span>
@@ -69,17 +70,18 @@ import {SettingsService} from "../shared/settings.service";
     `],
     directives: [ROUTER_DIRECTIVES]
 })
-export class SidebarComponent implements OnInit{
-    private blogs:Blog[];
-    constructor(private settingsService: SettingsService){
+export class SidebarComponent implements OnInit {
+    private blogs: Blog[];
+    constructor(private settingsService: SettingsService) {
     }
 
     ngOnInit() {
-        this.settingsService.getBlogs().subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
+        this.settingsService.getBlogs()
+            .subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
     }
 
-    selected(blogName: string){
-        if(location.pathname.indexOf(blogName) > -1){
+    selected(blogName: string) {
+        if (location.pathname.indexOf(blogName) > -1) {
             return true;
         }
         return false;

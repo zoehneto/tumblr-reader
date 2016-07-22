@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {Post} from "../../data.types";
-import {TumblrLinkDirective} from "../../attribute-directives/tumblr.link.directive";
-import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.embedded.image.directive";
+import { Component, Input } from '@angular/core';
+import { Post } from '../../data.types';
+import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
+import { TumblrEmbeddedImageDirective }
+from '../../attribute-directives/tumblr.embedded.image.directive';
 
 @Component({
     selector: 'post-answer',
@@ -9,7 +10,9 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
     template: `
         <div class="question">
             <p *ngIf="!post.asking_url" class="asking">{{post.asking_name}} asked:</p>
-            <p *ngIf="post.asking_url" class="asking"><a [tumblrLink]="post.asking_url">{{post.asking_name}}</a> asked:</p>
+            <p *ngIf="post.asking_url" class="asking">
+                <a [tumblrLink]="post.asking_url">{{post.asking_name}}</a> asked:
+            </p>
             <p class="question-text">{{post.question}}</p>
         </div>
         <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
@@ -34,6 +37,6 @@ import {TumblrEmbeddedImageDirective} from "../../attribute-directives/tumblr.em
         }
     `]
 })
-export class PostAnswerComponent{
+export class PostAnswerComponent {
     @Input('post') post: Post;
 }

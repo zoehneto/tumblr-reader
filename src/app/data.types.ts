@@ -1,21 +1,20 @@
-//Work around missing ES6 module support in localforage
-export const localforage:LocalForage = require("localforage");
-export const config:any = require("./config/config.json");
+// Work around missing ES6 module support in localforage
+export const localforage: LocalForage = require('localforage');
+export const config: any = require('./config/config.json');
 
 export class Blog {
-    constructor(name?:string) {
-        this.name = name;
-    }
-
     name: string;
     description: string;
     title: string;
     updated: number;
     url: string;
     posts: number;
+    constructor(name?: string) {
+        this.name = name;
+    }
 }
 
-export interface Post{
+export interface Post {
     id: number;
     title: string;
     summary: string;
@@ -35,24 +34,24 @@ export interface Post{
     excerpt?: string;
 }
 
-export interface VideoPlayer{
+export interface VideoPlayer {
     width: number;
     embed_code: string;
 }
 
-export interface Photo{
+export interface Photo {
     alt_sizes: PhotoSize[];
     original_size: PhotoSize;
     caption: string;
 }
 
-export interface PhotoSize{
+export interface PhotoSize {
     height: number;
     width: number;
     url: string;
 }
 
-export interface Response{
+export interface Response {
     blog: Blog;
     posts: Post[];
     total_posts: number;

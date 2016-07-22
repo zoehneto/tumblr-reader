@@ -1,19 +1,19 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {TumblrService} from "./shared/tumblr.service";
-import {SidebarComponent} from  "./components/sidebar.component"
-import {PostListComponent} from "./components/post.list.component"
-import {SettingsService} from "./shared/settings.service";
-import {SettingsComponent} from "./components/settings.component";
-import {CustomSanitizationService} from "./shared/custom.sanitization.service";
-import {FaviconService} from "./shared/favicon.service";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { TumblrService } from './shared/tumblr.service';
+import { SidebarComponent } from  './components/sidebar.component';
+import { PostListComponent } from './components/post.list.component';
+import { SettingsService } from './shared/settings.service';
+import { SettingsComponent } from './components/settings.component';
+import { CustomSanitizationService } from './shared/custom.sanitization.service';
+import { FaviconService } from './shared/favicon.service';
 import 'purecss/build/grids-min.css';
 
 @Component({
-    selector: 'my-app',
+    selector: 'tumblr-reader',
     template: `
         <div class="pure-g">
-            <sidebar class="pure-u-1-5"></sidebar>
+            <side-bar class="pure-u-1-5"></side-bar>
             <div class="pure-u-3-5">
                 <router-outlet ></router-outlet>
             </div>  
@@ -48,5 +48,5 @@ import 'purecss/build/grids-min.css';
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [TumblrService, SettingsService, CustomSanitizationService, FaviconService]
 })
-export class AppComponent{
+export class AppComponent {
 }

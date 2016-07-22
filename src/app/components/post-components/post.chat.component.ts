@@ -1,10 +1,12 @@
-import {Component, Input} from '@angular/core';
-import {Post} from "../../data.types";
+import { Component, Input } from '@angular/core';
+import { Post } from '../../data.types';
 
 @Component({
     selector: 'post-chat',
     template: `
-        <p *ngFor="let message of post.dialogue"><span class="label">{{message.label}}</span> {{message.phrase}}</p>
+        <p *ngFor="let message of post.dialogue">
+            <span class="label">{{message.label}}</span> {{message.phrase}}
+        </p>
     `,
     styles: [`
         p{
@@ -31,6 +33,6 @@ import {Post} from "../../data.types";
         }
     `]
 })
-export class PostChatComponent{
+export class PostChatComponent {
     @Input('post') post: Post;
 }
