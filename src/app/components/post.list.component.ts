@@ -3,32 +3,13 @@ import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { Blog, Post } from '../data.types';
 import { TumblrService } from '../shared/tumblr.service';
 import { InfiniteScroll } from 'angular2-infinite-scroll';
-import { VideoBehaviourDirective } from '../attribute-directives/video.behaviour.directive';
-import { TumblrImageDirective } from '../attribute-directives/tumblr.image.directive';
-import { TumblrLinkDirective } from '../attribute-directives/tumblr.link.directive';
-import { PostPhotoComponent } from './post-components/post.photo.component';
-import { PostVideoComponent } from './post-components/post.video.component';
-import { PostMetaComponent } from './post-components/post.meta.component';
-import { TumblrEmbeddedImageDirective }
-from '../attribute-directives/tumblr.embedded.image.directive';
-import { PostTextComponent } from './post-components/post.text.component';
-import { PostAnswerComponent } from './post-components/post.answer.component';
-import { PostLinkComponent } from './post-components/post.link.component';
-import { PostChatComponent } from './post-components/post.chat.component';
-import { PostQuoteComponent } from './post-components/post.quote.component';
-import { PostCaptionComponent } from './post-components/post.caption.component';
-import { PostTitleComponent } from './post-components/post.title.component';
 import { FaviconService } from '../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
-import { PostAudioComponent } from './post-components/post.audio.component';
+import { PostComponent } from './post-components/post.component';
 
 @Component({
     selector: 'post-list',
-    directives: [ InfiniteScroll, VideoBehaviourDirective, TumblrImageDirective,
-        TumblrLinkDirective, ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent,
-        PostMetaComponent, TumblrEmbeddedImageDirective, PostTextComponent, PostAnswerComponent,
-        PostLinkComponent, PostChatComponent, PostQuoteComponent, PostCaptionComponent,
-        PostTitleComponent, PostAudioComponent],
+    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -43,32 +24,7 @@ import { PostAudioComponent } from './post-components/post.audio.component';
             <ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" 
             (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
-                    <div class="full">
-                        <post-photo *ngIf="post.photos" [postPhotos]="post.photos">
-                        </post-photo>
-                        <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player">
-                        </post-video>
-                        <post-audio *ngIf="post.type == 'audio'" [postPlayer]="post.player">
-                        </post-audio>
-                    </div>
-                    <div class="padded">
-                        <post-title *ngIf="post.title" [post]="post"></post-title>
-                    
-                        <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>
-                        
-                        <post-quote *ngIf="post.type == 'quote'" [post]="post"></post-quote>
-                        
-                        <post-chat *ngIf="post.type == 'chat'" [post]="post"></post-chat>
-                        
-                        <post-link *ngIf="post.type == 'link'" [post]="post"></post-link>
-                        
-                        <post-caption *ngIf="post.caption" [post]="post"></post-caption>
-                        
-                        <post-text *ngIf="post.type == 'text' && post.body" [post]="post">
-                        </post-text>
-                        
-                        <post-meta class="meta"[blog]="blog" [post]="post"></post-meta>
-                    </div>
+                    <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
             </ul>
         </div>
@@ -91,22 +47,6 @@ import { PostAudioComponent } from './post-components/post.audio.component';
             border: 1px solid lightgrey;
             border-radius: 4px;
             margin: 40px 0;
-        }
-                
-        div.padded{
-            padding: 1em;
-        }
-        
-        div.padded *{
-            display: block;
-        }
-        
-        div.padded *:not(:first-child){
-            padding-top: 1em;
-        }
-        
-        div.padded post-meta.meta:not(:first-child){
-            padding-top: 2em;
         }
     `]
 })
