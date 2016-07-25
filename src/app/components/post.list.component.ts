@@ -47,6 +47,7 @@ import { PostComponent } from './post-components/post.component';
             border: 1px solid lightgrey;
             border-radius: 4px;
             margin: 40px 0;
+            overflow: hidden;
         }
     `]
 })
