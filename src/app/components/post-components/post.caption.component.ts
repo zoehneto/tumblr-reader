@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Post } from '../../data.types';
 import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
 import { TumblrEmbeddedImageDirective }
@@ -20,9 +20,11 @@ import { CustomSanitizationService } from '../../shared/custom.sanitization.serv
 export class PostCaptionComponent implements OnChanges {
     @Input('post') post: Post;
     private caption: any;
-    constructor(private sanitizationService: CustomSanitizationService) {}
+    constructor(private sanitizationService: CustomSanitizationService,
+                private detectorRef: ChangeDetectorRef) {}
 
     ngOnChanges() {
         this.caption = this.sanitizationService.sanitize(this.post.caption);
+        this.detectorRef.detectChanges();
     }
 }

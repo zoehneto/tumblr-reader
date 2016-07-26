@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Post } from '../../data.types';
 import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
 import { TumblrEmbeddedImageDirective }
@@ -37,6 +37,11 @@ from '../../attribute-directives/tumblr.embedded.image.directive';
         }
     `]
 })
-export class PostAnswerComponent {
+export class PostAnswerComponent implements OnChanges {
     @Input('post') post: Post;
+    constructor(private detectorRef: ChangeDetectorRef) {}
+
+    ngOnChanges() {
+        this.detectorRef.detectChanges();
+    }
 }
