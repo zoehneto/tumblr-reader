@@ -15,5 +15,8 @@ import 'rxjs/add/operator/map';
 // angular2-infinite-scroll
 import 'angular2-infinite-scroll';
 
+// angular2-hotkeys
+import 'angular2-hotkeys';
+
 // localforage
 require('localforage');

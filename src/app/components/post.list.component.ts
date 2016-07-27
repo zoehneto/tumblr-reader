@@ -6,10 +6,11 @@ import { InfiniteScroll } from 'angular2-infinite-scroll';
 import { FaviconService } from '../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 import { PostComponent } from './post-components/post.component';
+import { PostScrollDirective } from '../attribute-directives/post.scroll.directive';
 
 @Component({
     selector: 'post-list',
-    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent],
+    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent, PostScrollDirective],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -21,8 +22,8 @@ import { PostComponent } from './post-components/post.component';
         
         <div class="pure-u-1-5"></div>
         <div class="pure-u-3-5">
-            <ul infinite-scroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" 
-            (scrolled)="onScroll()">
+            <ul postScroll infinite-scroll [infiniteScrollDistance]="4" 
+            [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
