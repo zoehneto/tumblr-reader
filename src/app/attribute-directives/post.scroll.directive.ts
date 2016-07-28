@@ -44,7 +44,7 @@ export class PostScrollDirective implements OnDestroy {
         return Array.prototype.slice.call(el.nativeElement.children);
     }
 
-    private getTopVisibleIndex(elements: HTMLElement[]) {
+    private getTopVisibleIndex(elements: HTMLElement[]): number {
         let clientRects: ClientRect[] = elements.map(element => element.getBoundingClientRect());
         for (let i = 0; i < clientRects.length; i++) {
             if (clientRects[i].top >= 0 && i === 0) {

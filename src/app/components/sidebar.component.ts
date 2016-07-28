@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../data.types';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { SettingsService } from '../shared/settings.service';
+import { HotObservable } from 'rxjs/testing/HotObservable';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
 
 @Component({
     selector: 'side-bar',
@@ -72,7 +74,17 @@ import { SettingsService } from '../shared/settings.service';
 })
 export class SidebarComponent implements OnInit {
     private blogs: Blog[];
-    constructor(private settingsService: SettingsService) {
+    constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
+        private router: Router) {
+        hotkeysService.add([
+            new Hotkey('shift+j', (event: KeyboardEvent): boolean => {
+                this.nextBlog();
+                return false;
+            }), new Hotkey('shift+k', (event: KeyboardEvent): boolean => {
+                this.previousBlog();
+                return false;
+            })
+        ]);
     }
 
     ngOnInit() {
@@ -85,5 +97,32 @@ export class SidebarComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    private nextBlog() {
+        this.showBlog(1);
+    }
+
+    private previousBlog() {
+        this.showBlog(-1);
+    }
+
+    private showBlog(modifier: number) {
+        let currentBlogIndex = this.getCurrentBlogIndex();
+        if (currentBlogIndex !== null) {
+            let blogIndex = currentBlogIndex + modifier;
+            if (blogIndex > -1 && blogIndex < this.blogs.length) {
+                this.router.navigate(['/blog/', this.blogs[blogIndex].name]);
+            }
+        }
+    }
+
+    private getCurrentBlogIndex(): number {
+        for (let i = 0; i < this.blogs.length; i++) {
+            if (this.selected('/blog/' + this.blogs[i].name)) {
+                return i;
+            }
+        }
+        return null;
     }
 }
