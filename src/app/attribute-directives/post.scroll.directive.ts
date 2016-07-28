@@ -1,18 +1,24 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, OnDestroy } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Directive({ selector: '[postScroll]' })
-export class PostScrollDirective {
+export class PostScrollDirective implements OnDestroy {
+    private hotkeys: Hotkey[];
     constructor(el: ElementRef, private hotkeysService: HotkeysService) {
-        hotkeysService.add(new Hotkey('j', (event: KeyboardEvent): boolean => {
-            this.showNextPost(el);
-            return false;
-        }));
+        this.hotkeys = [
+            new Hotkey('j', (event: KeyboardEvent): boolean => {
+                this.showNextPost(el);
+                return false;
+            }), new Hotkey('k', (event: KeyboardEvent): boolean => {
+                this.showPreviousPost(el);
+                return false;
+            })
+        ];
+        hotkeysService.add(this.hotkeys);
+    }
 
-        hotkeysService.add(new Hotkey('k', (event: KeyboardEvent): boolean => {
-            this.showPreviousPost(el);
-            return false;
-        }));
+    ngOnDestroy() {
+        this.hotkeysService.remove(this.hotkeys);
     }
 
     private showPreviousPost(el: ElementRef) {
