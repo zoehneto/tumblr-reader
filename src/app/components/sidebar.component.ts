@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Blog } from '../data.types';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { SettingsService } from '../shared/settings.service';
-import { HotObservable } from 'rxjs/testing/HotObservable';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
 
 @Component({
     selector: 'side-bar',
+    directives: [ROUTER_DIRECTIVES],
     template: `
         <div>
             <ul>
@@ -69,8 +69,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
             color: black;
             text-decoration: none;
         }
-    `],
-    directives: [ROUTER_DIRECTIVES]
+    `]
 })
 export class SidebarComponent implements OnInit {
     private blogs: Blog[];

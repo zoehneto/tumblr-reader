@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'reader-settings',
+    directives: [ROUTER_DIRECTIVES],
     template: `
         <div class="pure-u-1-3"></div>
         <div class="pure-u-1-3">
@@ -31,8 +32,7 @@ import { Title } from '@angular/platform-browser';
             border: none;
             border-radius: 4px;
         }
-    `],
-    directives: [ROUTER_DIRECTIVES]
+    `]
 })
 export class SettingsComponent implements OnInit {
     private blogs: Blog[];
