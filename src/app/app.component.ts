@@ -8,6 +8,8 @@ import { SettingsComponent } from './components/settings.component';
 import { CustomSanitizationService } from './shared/custom.sanitization.service';
 import { FaviconService } from './shared/favicon.service';
 import { HotkeysService } from 'angular2-hotkeys/angular2-hotkeys';
+import { PostItemSwitch } from './item-switch/post.item.switch';
+import { BlogItemSwitch } from './item-switch/blog.item.switch';
 import 'purecss/build/grids-min.css';
 
 @Component({
@@ -48,7 +50,7 @@ import 'purecss/build/grids-min.css';
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
     providers: [TumblrService, SettingsService, CustomSanitizationService, FaviconService,
-        HotkeysService]
+        HotkeysService, PostItemSwitch, BlogItemSwitch]
 })
 export class AppComponent {
 }

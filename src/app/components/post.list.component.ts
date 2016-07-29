@@ -6,11 +6,11 @@ import { InfiniteScroll } from 'angular2-infinite-scroll';
 import { FaviconService } from '../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 import { PostComponent } from './post-components/post.component';
-import { PostScrollDirective } from '../attribute-directives/post.scroll.directive';
+import { PostSwitchDirective } from '../attribute-directives/post.switch.directive';
 
 @Component({
     selector: 'post-list',
-    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent, PostScrollDirective],
+    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent, PostSwitchDirective],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
@@ -22,8 +22,8 @@ import { PostScrollDirective } from '../attribute-directives/post.scroll.directi
         
         <div class="pure-u-1-5"></div>
         <div class="pure-u-3-5">
-            <ul postScroll infinite-scroll [infiniteScrollDistance]="4" 
-            [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
+            <ul postSwitch [loadMoreItemsCallback]="onScroll" infinite-scroll
+            [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
@@ -65,6 +65,7 @@ export class PostListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.onScroll = this.onScroll.bind(this);
         this.route.params.subscribe(params => {
             this.postCounter = 10;
             this.posts = [];
