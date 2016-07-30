@@ -16,11 +16,13 @@ export abstract class ItemSwitch<T> {
     protected showItem(items: T[], modifier: number): void {
         let currentItemIndex = this.getCurrentItemIndex(items);
         if (currentItemIndex !== null) {
-            if (this.loadMoreItems && this.moreItemsNeeded(items)) {
+            let nextItemIndex = currentItemIndex + modifier;
+
+            if (this.loadMoreItems && this.moreItemsNeeded(items, currentItemIndex,
+                    nextItemIndex)) {
                 this.loadMoreItems();
             }
 
-            let nextItemIndex = currentItemIndex + modifier;
             if (nextItemIndex > -1 && nextItemIndex < items.length) {
                 this.switchToItem(items[nextItemIndex]);
             }
@@ -29,7 +31,8 @@ export abstract class ItemSwitch<T> {
 
     protected abstract getCurrentItemIndex(items: T[]): number;
 
-    protected abstract moreItemsNeeded(items: T[]): boolean;
+    protected abstract moreItemsNeeded(items: T[], currentItemIndex: number,
+        nextItemIndex: number): boolean;
 
     protected abstract switchToItem(item: T): void;
 }

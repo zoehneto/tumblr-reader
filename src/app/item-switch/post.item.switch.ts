@@ -20,8 +20,10 @@ export class PostItemSwitch extends ItemSwitch<HTMLElement> {
         return elements.length === 0 ? null : elements.length - 1;
     }
 
-    protected moreItemsNeeded(items: HTMLElement[]): boolean {
-        return items[items.length - 1].getBoundingClientRect().bottom < window.innerHeight;
+    protected moreItemsNeeded(items: HTMLElement[], currentItemIndex: number,
+        nextItemIndex: number): boolean {
+        return currentItemIndex === items.length - 1 ||
+            items[items.length - 1].getBoundingClientRect().bottom < window.innerHeight;
     }
 
     protected switchToItem(element: HTMLElement) {

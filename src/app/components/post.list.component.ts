@@ -22,7 +22,7 @@ import { PostSwitchDirective } from '../attribute-directives/post.switch.directi
         
         <div class="pure-u-1-5"></div>
         <div class="pure-u-3-5">
-            <ul postSwitch [loadMoreItemsCallback]="onScroll" infinite-scroll
+            <ul postSwitch (moreItemsNeeded)="onScroll()" infinite-scroll
             [infiniteScrollDistance]="4" [infiniteScrollThrottle]="600" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
@@ -65,7 +65,6 @@ export class PostListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.onScroll = this.onScroll.bind(this);
         this.route.params.subscribe(params => {
             this.postCounter = 10;
             this.posts = [];

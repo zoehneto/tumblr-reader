@@ -1,10 +1,10 @@
-import { Directive, ElementRef, OnDestroy, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { PostItemSwitch } from '../item-switch/post.item.switch';
 
 @Directive({ selector: '[postSwitch]' })
 export class PostSwitchDirective implements OnInit, OnDestroy {
-    @Input('loadMoreItemsCallback') loadMoreItemsCallback: Function;
+    @Output() moreItemsNeeded = new EventEmitter();
     private hotkeys: Hotkey[];
     private el: ElementRef;
     constructor(el: ElementRef, private hotkeysService: HotkeysService,
@@ -13,7 +13,7 @@ export class PostSwitchDirective implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.postItemSwitch.setLoadMoreItemsCallback(this.loadMoreItemsCallback);
+        this.postItemSwitch.setLoadMoreItemsCallback(this.onMoreItemsNeeded.bind(this));
         this.hotkeys = [
             new Hotkey('j', (event: KeyboardEvent): boolean => {
                 this.postItemSwitch.showNextItem(this.getElements(this.el));
@@ -28,6 +28,10 @@ export class PostSwitchDirective implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.hotkeysService.remove(this.hotkeys);
+    }
+
+    onMoreItemsNeeded() {
+        this.moreItemsNeeded.emit('load');
     }
 
     private getElements(el: ElementRef): HTMLElement[] {
