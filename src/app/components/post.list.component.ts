@@ -29,13 +29,17 @@ import { PostSwitchDirective } from '../attribute-directives/post.switch.directi
             </ul>
         </div>
         
-        <div class="center">
+        <div class="center message">
             <h2 *ngIf="message">{{message}}</h2>
         </div>
     `,
     styles: [`
         div.center {
             text-align: center;
+        }
+        
+        div.center.message{
+            margin-top: -1em;
         }
         
         ul{
@@ -45,6 +49,10 @@ import { PostSwitchDirective } from '../attribute-directives/post.switch.directi
         
         li.post:first-child{
             margin-top: 0;
+        }
+        
+        li.post:last-child{
+            margin-bottom: 0;
         }
         
         li.post{
