@@ -60,13 +60,15 @@ export class PostListComponent implements OnInit {
     private message: string;
     private tagParam: string;
     private postId: number;
+    private loading: boolean;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title) {
     }
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.postCounter = 10;
+            this.loading = true;
+            this.postCounter = 0;
             this.posts = [];
             this.message = 'Loading ...';
             this.blog = new Blog(params['name']);
@@ -80,10 +82,12 @@ export class PostListComponent implements OnInit {
                 this.blog = res.blog;
                 this.posts = res.posts;
                 this.totalPosts = res.total_posts;
+                this.postCounter = res.posts.length;
 
                 this.titleService.setTitle(res.blog.title !== '' ? res.blog.title : res.blog.name);
 
                 this.message = null;
+                this.loading = false;
             }, err => {
                 let response = err.json();
                 if (response && response.meta) {
@@ -99,11 +103,13 @@ export class PostListComponent implements OnInit {
 
     onScroll() {
         if (this.postCounter < this.totalPosts) {
+            this.loading = true;
             this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam
                 , this.postId).subscribe(res => {
                 this.posts = this.posts.concat(res.posts);
+                this.postCounter += res.posts.length;
+                this.loading = false;
             });
-            this.postCounter += 10;
         }
     }
 }
