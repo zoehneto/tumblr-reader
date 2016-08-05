@@ -14,7 +14,6 @@ import { PostSwitchDirective } from '../attribute-directives/post.switch.directi
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>
-            <h2 *ngIf="message">{{message}}</h2>
             <a *ngIf="postId" [routerLink]="['/blog', blog.name]">
                 <h1>{{blog.name}}</h1>
             </a>
@@ -28,6 +27,10 @@ import { PostSwitchDirective } from '../attribute-directives/post.switch.directi
                     <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
             </ul>
+        </div>
+        
+        <div class="center">
+            <h2 *ngIf="message">{{message}}</h2>
         </div>
     `,
     styles: [`
@@ -67,49 +70,47 @@ export class PostListComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.loading = true;
             this.postCounter = 0;
             this.posts = [];
-            this.message = 'Loading ...';
             this.blog = new Blog(params['name']);
             this.tagParam = params['tag'] ? decodeURIComponent(params['tag']) : null;
             this.postId = params['post'] ? parseInt(params['post'], 10) : null;
             this.faviconService.setFavicon('https://api.tumblr.com/v2/blog/'
                 + params['name'] + '/avatar/16');
 
-            this.tumblrService.getPosts(params['name'], 0, this.tagParam, this.postId)
-                .subscribe(res => {
-                this.blog = res.blog;
-                this.posts = res.posts;
-                this.totalPosts = res.total_posts;
-                this.postCounter = res.posts.length;
-
-                this.titleService.setTitle(res.blog.title !== '' ? res.blog.title : res.blog.name);
-
-                this.message = null;
-                this.loading = false;
-            }, err => {
-                let response = err.json();
-                if (response && response.meta) {
-                    this.message = response.meta.msg;
-                    this.titleService.setTitle(response.meta.msg);
-                }else {
-                    this.message = 'Error Loading Data';
-                    this.titleService.setTitle('Error Loading Data');
-                }
-            });
+            this.loadPosts();
         });
     }
 
     onScroll() {
-        if (this.postCounter < this.totalPosts) {
-            this.loading = true;
-            this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam
-                , this.postId).subscribe(res => {
-                this.posts = this.posts.concat(res.posts);
-                this.postCounter += res.posts.length;
-                this.loading = false;
-            });
+        if (this.postCounter < this.totalPosts && !this.loading) {
+            this.loadPosts();
         }
+    }
+
+    loadPosts() {
+        this.loading = true;
+        this.message = 'Loading ...';
+        this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam,
+             this.postId).subscribe(res => {
+            this.blog = res.blog;
+            this.posts = this.posts.concat(res.posts);
+            this.totalPosts = res.total_posts;
+            this.postCounter += res.posts.length;
+
+            this.titleService.setTitle(res.blog.title !== '' ? res.blog.title : res.blog.name);
+
+            this.message = null;
+            this.loading = false;
+        }, err => {
+            let response = err.json();
+            if (response && response.meta) {
+                this.message = response.meta.msg;
+                this.titleService.setTitle(response.meta.msg);
+            }else {
+                this.message = 'Error Loading Data';
+                this.titleService.setTitle('Error Loading Data');
+            }
+        });
     }
 }
