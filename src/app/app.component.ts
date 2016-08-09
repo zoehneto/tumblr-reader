@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { TumblrService } from './shared/tumblr.service';
 import { SidebarComponent } from  './components/sidebar.component';
 import { PostListComponent } from './components/post.list.component';
@@ -49,7 +50,7 @@ import 'purecss/build/grids-min.css';
         }
     `],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
-    providers: [TumblrService, SettingsService, CustomSanitizationService, FaviconService,
+    providers: [Title, TumblrService, SettingsService, CustomSanitizationService, FaviconService,
         HotkeysService, PostItemSwitch, BlogItemSwitch]
 })
 export class AppComponent {
