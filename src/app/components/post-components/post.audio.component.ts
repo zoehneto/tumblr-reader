@@ -1,10 +1,8 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
-import { IframeBehaviourDirective } from '../../attribute-directives/iframe.behaviour.directive';
 
 @Component({
     selector: 'post-audio',
-    directives: [IframeBehaviourDirective],
     template: `
         <div [innerHTML]="player" iframeBehaviour></div>
     `

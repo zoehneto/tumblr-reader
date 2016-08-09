@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Blog, Post } from '../data.types';
 import { TumblrService } from '../shared/tumblr.service';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
 import { FaviconService } from '../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
-import { PostComponent } from './post-components/post.component';
-import { PostSwitchDirective } from '../attribute-directives/post.switch.directive';
 
 @Component({
     selector: 'post-list',
-    directives: [InfiniteScroll, ROUTER_DIRECTIVES, PostComponent, PostSwitchDirective],
     template: `
         <div class="center">
             <h1 *ngIf="tagParam">#{{tagParam}}</h1>

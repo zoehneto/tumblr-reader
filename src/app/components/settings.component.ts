@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../data.types';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { SettingsService } from '../shared/settings.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'reader-settings',
-    directives: [ROUTER_DIRECTIVES],
     template: `
         <div class="pure-u-1-3"></div>
         <div class="pure-u-1-3">

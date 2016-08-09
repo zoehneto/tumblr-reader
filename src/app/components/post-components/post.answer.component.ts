@@ -1,12 +1,8 @@
 import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { Post } from '../../data.types';
-import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
-import { TumblrEmbeddedImageDirective }
-from '../../attribute-directives/tumblr.embedded.image.directive';
 
 @Component({
     selector: 'post-answer',
-    directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
         <div class="question">
             <p *ngIf="!post.asking_url" class="asking">{{post.asking_name}} asked:</p>

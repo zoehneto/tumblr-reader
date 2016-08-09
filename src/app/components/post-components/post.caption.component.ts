@@ -1,13 +1,9 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Post } from '../../data.types';
-import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
-import { TumblrEmbeddedImageDirective }
-from '../../attribute-directives/tumblr.embedded.image.directive';
 import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
 
 @Component({
     selector: 'post-caption',
-    directives: [TumblrLinkDirective, TumblrEmbeddedImageDirective],
     template: `
         <div class="caption" [innerHTML]="caption" tumblrLink tumblrEmbeddedImage></div>
     `,

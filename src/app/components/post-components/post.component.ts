@@ -1,23 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { PostAnswerComponent } from './post.answer.component';
-import { PostLinkComponent } from './post.link.component';
-import { PostTextComponent } from './post.text.component';
-import { PostChatComponent } from './post.chat.component';
-import { PostQuoteComponent } from './post.quote.component';
-import { PostCaptionComponent } from './post.caption.component';
-import { PostTitleComponent } from './post.title.component';
-import { PostAudioComponent } from './post.audio.component';
 import { Post, Blog } from '../../data.types';
-import { PostPhotoComponent } from './post.photo.component';
-import { PostVideoComponent } from './post.video.component';
-import { PostMetaComponent } from './post.meta.component';
 
 @Component({
     selector: 'complete-post',
-    directives: [ROUTER_DIRECTIVES, PostPhotoComponent, PostVideoComponent, PostAudioComponent,
-        PostTitleComponent, PostAnswerComponent, PostQuoteComponent, PostChatComponent,
-        PostLinkComponent, PostCaptionComponent, PostTextComponent, PostMetaComponent],
     template: `
         <div class="full">
             <post-photo *ngIf="post.photos" [postPhotos]="post.photos">

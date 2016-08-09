@@ -1,12 +1,9 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { VideoPlayer } from '../../data.types';
-import { VideoBehaviourDirective } from '../../attribute-directives/video.behaviour.directive';
 import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
-import { IframeBehaviourDirective } from '../../attribute-directives/iframe.behaviour.directive';
 
 @Component({
     selector: 'post-video',
-    directives: [VideoBehaviourDirective, IframeBehaviourDirective],
     template: `
         <div [innerHTML]="player" videoBehaviour iframeBehaviour></div>
     `

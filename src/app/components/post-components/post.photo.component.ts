@@ -1,10 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { TumblrImageDirective } from '../../attribute-directives/tumblr.image.directive';
 import { Photo } from '../../data.types';
 
 @Component({
     selector: 'post-photo',
-    directives: [TumblrImageDirective],
     template: `
         <img *ngFor="let photo of postPhotos" (click)="fullScreen($event)"
         src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 

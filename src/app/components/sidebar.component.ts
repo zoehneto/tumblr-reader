@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../data.types';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { SettingsService } from '../shared/settings.service';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
 import { BlogItemSwitch } from '../item-switch/blog.item.switch';
 
 @Component({
     selector: 'side-bar',
-    directives: [ROUTER_DIRECTIVES],
     template: `
         <div>
             <ul>

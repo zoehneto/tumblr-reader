@@ -1,16 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { TumblrService } from './shared/tumblr.service';
-import { SidebarComponent } from  './components/sidebar.component';
-import { PostListComponent } from './components/post.list.component';
-import { SettingsService } from './shared/settings.service';
-import { SettingsComponent } from './components/settings.component';
-import { CustomSanitizationService } from './shared/custom.sanitization.service';
-import { FaviconService } from './shared/favicon.service';
-import { HotkeysService } from 'angular2-hotkeys/angular2-hotkeys';
-import { PostItemSwitch } from './item-switch/post.item.switch';
-import { BlogItemSwitch } from './item-switch/blog.item.switch';
 import 'purecss/build/grids-min.css';
 
 @Component({
@@ -49,9 +37,6 @@ import 'purecss/build/grids-min.css';
             color: black;
         }
     `],
-    directives: [ROUTER_DIRECTIVES, SidebarComponent, PostListComponent, SettingsComponent],
-    providers: [Title, TumblrService, SettingsService, CustomSanitizationService, FaviconService,
-        HotkeysService, PostItemSwitch, BlogItemSwitch]
 })
 export class AppComponent {
 }

@@ -1,11 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Post, Blog } from '../../data.types';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { TumblrLinkDirective } from '../../attribute-directives/tumblr.link.directive';
 
 @Component({
     selector: 'post-meta',
-    directives: [ROUTER_DIRECTIVES, TumblrLinkDirective],
     template: `
         <p class="source" *ngIf="post.source_url  || post.reblogged_from_name">
             (<span *ngIf="post.source_url">
