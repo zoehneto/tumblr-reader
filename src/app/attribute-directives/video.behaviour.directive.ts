@@ -14,6 +14,7 @@ export class VideoBehaviourDirective implements DoCheck {
                 videoElement.setAttribute('controls', '');
                 videoElement.setAttribute('width', '100%');
                 videoElement.setAttribute('height', '');
+                videoElement.removeAttribute('muted');
             }
         }
     }
