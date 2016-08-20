@@ -4,7 +4,7 @@ import { CustomSanitizationService } from '../../shared/custom.sanitization.serv
 @Component({
     selector: 'post-audio',
     template: `
-        <div [innerHTML]="player" iframeBehaviour></div>
+        <div [innerHTML]="player" embedBehaviour></div>
     `
 })
 export class PostAudioComponent implements OnChanges {

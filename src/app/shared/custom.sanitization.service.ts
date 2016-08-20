@@ -7,7 +7,7 @@ export class CustomSanitizationService {
     }
 
     public sanitize(html: string) {
-        if (/iframe/i.test(html)) {
+        if (/iframe/i.test(html) || /embed/i.test(html) ) {
             return this.sanitizationService.bypassSecurityTrustHtml(html);
         }else {
             return html;

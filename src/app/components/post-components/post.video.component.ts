@@ -5,7 +5,7 @@ import { CustomSanitizationService } from '../../shared/custom.sanitization.serv
 @Component({
     selector: 'post-video',
     template: `
-        <div [innerHTML]="player" videoBehaviour iframeBehaviour></div>
+        <div [innerHTML]="player" videoBehaviour embedBehaviour></div>
     `
 })
 export class PostVideoComponent implements OnChanges {
