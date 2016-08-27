@@ -23,15 +23,21 @@ import { BlogItemSwitch } from '../item-switch/blog.item.switch';
         </div>
     `,
     styles: [`
+        @media screen and (min-width: 48em){
+            div{
+                position: fixed;
+                height: 100%;
+                width: inherit;
+            }
+        }
+        
         div{
-            position: fixed;
-            height: 100%;
-            width: 20%;
             background-color: #EEEEEE;
         }
         
         ul{
-            padding-left: 2em;
+            padding: 1em 0 1em 2em;
+            margin: 0;
             list-style: none;
         }
         

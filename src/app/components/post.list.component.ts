@@ -15,8 +15,8 @@ import { Title } from '@angular/platform-browser';
             </a>
         </div>
         
-        <div class="pure-u-1-5"></div>
-        <div class="pure-u-3-5">
+        <div class="pure-u-lg-1-5"></div>
+        <div class="pure-u-1 pure-u-lg-3-5">
             <ul postSwitch (moreItemsNeeded)="onScroll()" infinite-scroll
             [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
@@ -40,6 +40,7 @@ import { Title } from '@angular/platform-browser';
         }
         
         ul{
+            margin: 1em 0.5em;
             padding: 0;
             list-style: none;
         }

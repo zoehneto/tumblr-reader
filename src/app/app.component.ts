@@ -1,13 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import 'purecss/build/grids-min.css';
+import 'purecss/build/grids-responsive-min.css';
 
 @Component({
     selector: 'tumblr-reader',
     template: `
         <div class="pure-g">
-            <side-bar class="pure-u-1-5"></side-bar>
-            <div class="pure-u-3-5">
-                <router-outlet ></router-outlet>
+            <side-bar class="pure-u-1 pure-u-md-1-4 pure-u-lg-1-5"></side-bar>
+            <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-3-5">
+                <router-outlet></router-outlet>
             </div>  
         </div>
     `,

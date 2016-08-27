@@ -6,27 +6,35 @@ import { Title } from '@angular/platform-browser';
 @Component({
     selector: 'reader-settings',
     template: `
-        <div class="pure-u-1-3"></div>
-        <div class="pure-u-1-3">
-            <textarea [(ngModel)]="blogText" rows="15"></textarea>
-            <div class="center">
-                <button (click)="saveSettings()" type="button">Save</button>
+        <div class="pure-u-md-1-6 pure-u-lg-1-3"></div>
+        <div class="pure-u-1 pure-u-md-2-3 pure-u-lg-1-3">
+            <div class="container">
+                <p>Enter blog urls here, one per line</p>
+                <textarea [(ngModel)]="blogText" rows="15"></textarea>
+                <div class="center">
+                    <button (click)="saveSettings()" type="button">Save</button>
+                </div>
             </div>
         </div>
     `,
     styles: [`
-        textarea{
-            margin-top: 16px;
-            width: 100%;
+        div.container {
+            margin: 0 1em;
+        }
+        
+        textarea {
+            margin: 0 0 1em 0;
+            border: 1px solid lightgrey;
+            padding: 2px;
+            width: calc(100% - 6px);
         }
         
         div.center {
             text-align: center;
         }
         
-        button{
-            margin-top: 10px;
-            padding: 5px 30px;
+        button {
+            padding: 0.8em 4em;
             border: none;
             border-radius: 4px;
         }
