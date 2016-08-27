@@ -16,7 +16,7 @@ import { TumblrService } from './shared/tumblr.service';
 import { Title } from '@angular/platform-browser';
 import { HotkeysService } from 'angular2-hotkeys';
 import { SidebarComponent } from './components/sidebar.component';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
 import { PostSwitchDirective } from './attribute-directives/post.switch.directive';
 import { TumblrEmbeddedImageDirective }
@@ -42,10 +42,10 @@ import { PostVideoComponent } from './components/post-components/post.video.comp
         PostComponent, PostAnswerComponent, PostAudioComponent, PostCaptionComponent,
         PostChatComponent, PostLinkComponent, PostMetaComponent, PostPhotoComponent,
         PostQuoteComponent, PostTextComponent, PostTitleComponent, PostVideoComponent,
-        InfiniteScroll, EmbedBehaviourDirective, PostSwitchDirective,
-        TumblrEmbeddedImageDirective, TumblrImageDirective, TumblrLinkDirective,
-        VideoBehaviourDirective],
-    imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule],
+        EmbedBehaviourDirective, PostSwitchDirective, TumblrEmbeddedImageDirective,
+        TumblrImageDirective, TumblrLinkDirective, VideoBehaviourDirective],
+    imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
+        InfiniteScrollModule],
     providers: [Title, HotkeysService, TumblrService, SettingsService, CustomSanitizationService,
         FaviconService, PostItemSwitch, BlogItemSwitch],
     bootstrap: [AppComponent]
