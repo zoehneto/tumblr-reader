@@ -29,10 +29,6 @@ import { Title } from '@angular/platform-browser';
             width: calc(100% - 6px);
         }
         
-        div.center {
-            text-align: center;
-        }
-        
         button {
             padding: 0.8em 4em;
             border: none;

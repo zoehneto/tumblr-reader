@@ -30,11 +30,7 @@ import { Title } from '@angular/platform-browser';
             <h2 *ngIf="message">{{message}}</h2>
         </div>
     `,
-    styles: [`
-        div.center {
-            text-align: center;
-        }
-        
+    styles: [`        
         div.center.message{
             margin-top: -1em;
         }
