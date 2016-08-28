@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import 'purecss/build/grids-min.css';
-import 'purecss/build/grids-responsive-min.css';
+import 'purecss/build/grids.css';
+import 'purecss/build/grids-responsive.css';
 import '../../public/css/purecss-utils.css';
 
 @Component({
