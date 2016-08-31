@@ -24,6 +24,7 @@ import { Post, Note } from '../../data.types';
                     rebloged this from
                     <a [tumblrLink]="'http://' + reblog.reblog_parent_blog_name + '.tumblr.com'">
                     {{reblog.reblog_parent_blog_name}}</a>
+                    <span *ngIf="reblog.added_text">and added: "{{reblog.added_text}}"</span>
                 </p>
             </div>
         </div>

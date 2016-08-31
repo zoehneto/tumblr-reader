@@ -59,6 +59,7 @@ export interface Note {
     post_id: string;
     reblog_parent_blog_name?: string;
     reply_text?: string;
+    added_text?: string;
     type: 'reblog' | 'like' | 'reply' | 'posted';
 }
 
