@@ -22,11 +22,11 @@ import { Post, Blog } from '../../data.types';
         </ul>
         
         <p class="bottom">
-            <a class="notes" *ngIf="post.note_count > 0">{{post.note_count}} notes</a>
+            <a class="notes" *ngIf="post.notes.length > 0">{{post.notes.length}} notes</a>
             <span class="date">{{post.date | date}}</span>
         </p>
         
-        <post-note *ngIf="post.note_count > 0" [post]="post"></post-note>
+        <post-note *ngIf="post.notes.length > 0" [post]="post"></post-note>
     `,
     styles: [`
         p.source{
