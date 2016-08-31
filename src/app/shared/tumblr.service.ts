@@ -26,9 +26,34 @@ export class TumblrService {
 
         return this.jsonp.get(this.baseUrl + 'blog/' + blogId + '/posts', { search: params })
             .map(res => {
-                let response: Response = res.json().response;
-                response.posts.forEach(post => post.date = new Date(post.date));
+                let response = res.json().response;
+                response.posts.forEach((post: any) => {
+                    this.postDateTransform(post);
+                    this.postNoteTransform(post);
+                });
                 return response;
             });
     }
+
+    private postDateTransform(post: any) {
+        post.date = new Date(post.date);
+    }
+
+    private postNoteTransform(post: any) {
+        post.likes = 0;
+        post.replies = [];
+        post.reblogs = [];
+        post.notes.forEach((note: any) => {
+            if (note.type === 'like') {
+                post.likes++;
+            }
+            if (note.type === 'reblog') {
+                post.reblogs.push(note);
+            }
+            if (note.type === 'reply') {
+                post.replies.push(note);
+            }
+        });
+    }
+
 }

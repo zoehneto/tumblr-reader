@@ -19,7 +19,7 @@ export interface Post {
     title: string;
     summary: string;
     body: string;
-    date: any;
+    date: Date;
     type: string;
     format: string;
     post_url: string;
@@ -34,6 +34,9 @@ export interface Post {
     excerpt?: string;
     note_count: number;
     notes: Note[];
+    replies: Note[];
+    reblogs: Note[];
+    likes: number;
 }
 
 export interface VideoPlayer {
