@@ -43,17 +43,18 @@ export class TumblrService {
         post.likes = 0;
         post.replies = [];
         post.reblogs = [];
-        post.notes.forEach((note: any) => {
-            if (note.type === 'like') {
-                post.likes++;
-            }
-            if (note.type === 'reblog') {
-                post.reblogs.push(note);
-            }
-            if (note.type === 'reply') {
-                post.replies.push(note);
-            }
-        });
+        if (post.notes) {
+            post.notes.forEach((note: any) => {
+                if (note.type === 'like') {
+                    post.likes++;
+                }
+                if (note.type === 'reblog') {
+                    post.reblogs.push(note);
+                }
+                if (note.type === 'reply') {
+                    post.replies.push(note);
+                }
+            });
+        }
     }
-
 }

@@ -33,7 +33,7 @@ export interface Post {
     text?: string;
     excerpt?: string;
     note_count: number;
-    notes: Note[];
+    notes?: Note[];
     replies: Note[];
     reblogs: Note[];
     likes: number;
