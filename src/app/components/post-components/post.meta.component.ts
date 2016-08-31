@@ -22,11 +22,18 @@ import { Post, Blog } from '../../data.types';
         </ul>
         
         <p class="bottom">
-            <a class="notes" *ngIf="post.notes.length > 0">{{post.notes.length}} notes</a>
-            <span class="date">{{post.date | date}}</span>
+            <a *ngIf="post.reblogs.length > 0">{{post.reblogs.length}}
+             {{post.reblogs.length > 1 ? 'reblogs' : 'reblog'}}</a>
+            <a *ngIf="post.replies.length > 0">{{post.replies.length}}
+             {{post.replies.length > 1 ? 'replies' : 'reply'}}</a>
+            <span class="text" *ngIf="post.likes > 0">{{post.likes}}
+             {{post.likes > 1 ? 'likes' : 'like'}}</span>
+            <span class="text">{{post.date | date}}</span>
         </p>
         
-        <post-note *ngIf="post.notes.length > 0" [post]="post"></post-note>
+        <post-replies *ngIf="post.replies.length > 0" [post]="post"></post-replies>
+        
+        <post-reblogs *ngIf="post.reblogs.length > 0" [post]="post"></post-reblogs>
     `,
     styles: [`
         p.source{
@@ -46,16 +53,16 @@ import { Post, Blog } from '../../data.types';
             padding-right: 1em;
         }
         
-        a.notes {
+        p.bottom {
+            margin: 0;
+        }
+        
+        .bottom *  {
             margin-right: 0.7em;
         }
         
-        span.date{
+        span.text{
             color: #6E6E6E;
-        }
-        
-        p.bottom {
-            margin: 0;
         }
     `]
 })
