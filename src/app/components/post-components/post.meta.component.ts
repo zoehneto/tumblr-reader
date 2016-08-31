@@ -22,18 +22,18 @@ import { Post, Blog } from '../../data.types';
         </ul>
         
         <p class="bottom">
-            <a *ngIf="post.reblogs.length > 0">{{post.reblogs.length}}
+            <a *ngIf="post.reblogs.length > 0" (click)="toggleReblogs()">{{post.reblogs.length}}
              {{post.reblogs.length > 1 ? 'reblogs' : 'reblog'}}</a>
-            <a *ngIf="post.replies.length > 0">{{post.replies.length}}
+            <a *ngIf="post.replies.length > 0" (click)="toggleReplies()">{{post.replies.length}}
              {{post.replies.length > 1 ? 'replies' : 'reply'}}</a>
             <span class="text" *ngIf="post.likes > 0">{{post.likes}}
              {{post.likes > 1 ? 'likes' : 'like'}}</span>
             <span class="text">{{post.date | date}}</span>
         </p>
+                
+        <post-reblogs *ngIf="post.reblogs.length > 0 && showReblogs" [post]="post"></post-reblogs>
         
-        <post-replies *ngIf="post.replies.length > 0" [post]="post"></post-replies>
-        
-        <post-reblogs *ngIf="post.reblogs.length > 0" [post]="post"></post-reblogs>
+        <post-replies *ngIf="post.replies.length > 0 && showReplies" [post]="post"></post-replies>
     `,
     styles: [`
         p.source{
@@ -69,4 +69,18 @@ import { Post, Blog } from '../../data.types';
 export class PostMetaComponent {
     @Input('blog') blog: Blog;
     @Input('post') post: Post;
+    showReblogs: boolean;
+    showReplies: boolean;
+    constructor() {
+        this.showReblogs = false;
+        this.showReplies = false;
+    }
+
+    private toggleReblogs() {
+        this.showReblogs = !this.showReblogs;
+    }
+
+    private toggleReplies() {
+        this.showReplies = !this.showReplies;
+    }
 }

@@ -4,14 +4,28 @@ import { Post } from '../../data.types';
 @Component({
     selector: 'post-replies',
     template: `
-        <hr>
-        <div *ngFor="let reply of post.replies">
-            <p><a [tumblrLink]="reply.blog_url">{{reply.blog_name}}</a></p>
-            <p>{{reply.reply_text}}</p>
-        </div>
+        <ul>
+            <li *ngFor="let reply of post.replies">
+                <a [tumblrLink]="reply.blog_url">{{reply.blog_name}}</a> said: {{reply.reply_text}}
+            </li>
+        </ul>
     `,
     styles: [`
-
+        ul {
+            margin: 1em 0 0 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        li {
+            padding: 1em 0;
+            border-bottom: 1px solid #6E6E6E;
+        }
+        
+        li:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
     `]
 })
 export class PostRepliesComponent {
