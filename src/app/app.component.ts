@@ -33,7 +33,7 @@ import '../../public/css/purecss-utils.css';
             padding: 0 20px;
         }
         
-        a:link, a:visited, a:hover, a:active {
+        a, a:link, a:visited, a:hover, a:active {
             text-decoration: underline;
             color: #6E6E6E;
         }

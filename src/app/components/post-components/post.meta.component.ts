@@ -21,7 +21,12 @@ import { Post, Blog } from '../../data.types';
             </li>
         </ul>
         
-        <p class="date">{{post.date | date}}</p>
+        <p class="bottom">
+            <a class="notes" *ngIf="post.note_count > 0">{{post.note_count}} notes</a>
+            <span class="date">{{post.date | date}}</span>
+        </p>
+        
+        <post-note *ngIf="post.note_count > 0" [post]="post"></post-note>
     `,
     styles: [`
         p.source{
@@ -41,9 +46,16 @@ import { Post, Blog } from '../../data.types';
             padding-right: 1em;
         }
         
-        p.date{
-            margin: 0;
+        a.notes {
+            margin-right: 0.7em;
+        }
+        
+        span.date{
             color: #6E6E6E;
+        }
+        
+        p.bottom {
+            margin: 0;
         }
     `]
 })

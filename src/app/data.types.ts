@@ -32,6 +32,8 @@ export interface Post {
     source?: string;
     text?: string;
     excerpt?: string;
+    note_count: number;
+    notes: Note[];
 }
 
 export interface VideoPlayer {
@@ -49,6 +51,15 @@ export interface PhotoSize {
     height: number;
     width: number;
     url: string;
+}
+
+export interface Note {
+    blog_name: string;
+    blog_url: string;
+    post_id: string;
+    reblog_parent_blog_name?: string;
+    reply_text?: string;
+    type: 'reblog' | 'like' | 'reply' | 'posted';
 }
 
 export interface Response {

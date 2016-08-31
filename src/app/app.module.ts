@@ -37,6 +37,7 @@ import { PostTextComponent } from './components/post-components/post.text.compon
 import { PostTitleComponent } from './components/post-components/post.title.component';
 import { PostVideoComponent } from './components/post-components/post.video.component';
 import { ResponsiveMenuComponent } from './components/responsive.menu.component';
+import { PostNoteComponent } from './components/post-components/post.note.component';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -45,7 +46,7 @@ import { ResponsiveMenuComponent } from './components/responsive.menu.component'
         PostQuoteComponent, PostTextComponent, PostTitleComponent, PostVideoComponent,
         EmbedBehaviourDirective, PostSwitchDirective, TumblrEmbeddedImageDirective,
         TumblrImageDirective, TumblrLinkDirective, VideoBehaviourDirective,
-        ResponsiveMenuComponent],
+        ResponsiveMenuComponent, PostNoteComponent],
     imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
         InfiniteScrollModule],
     providers: [Title, HotkeysService, TumblrService, SettingsService, CustomSanitizationService,

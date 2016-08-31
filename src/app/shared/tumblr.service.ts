@@ -13,6 +13,7 @@ export class TumblrService {
         let params = new URLSearchParams();
         params.set('api_key', config.consumerKey);
         params.set('reblog_info', 'True');
+        params.set('notes_info', 'True');
         params.set('jsonp', 'JSONP_CALLBACK');
         params.set('limit', '10');
         params.set('offset', offset.toString());
