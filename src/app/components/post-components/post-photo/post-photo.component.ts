@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Photo } from '../../data.types';
+import { Photo } from '../../../data.types';
 
 @Component({
     selector: 'post-photo',
@@ -8,13 +8,7 @@ import { Photo } from '../../data.types';
         src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
         [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
     `,
-    styles: [`
-        /*TODO add support for non webkit version*/
-        img:not(:-webkit-full-screen){
-            display: block;
-            width: 100%;
-        }
-    `]
+    styleUrls: ['./post-photo.component.scss']
 })
 export class PostPhotoComponent {
     @Input('postPhotos') postPhotos: Photo[];

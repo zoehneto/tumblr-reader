@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
+import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
 
 @Component({
     selector: 'post-audio',
     template: `
         <div [innerHTML]="player" embedBehaviour></div>
-    `
+    `,
+    styleUrls: ['./post-audio.component.scss']
 })
 export class PostAudioComponent implements OnChanges {
     @Input('postPlayer') postPlayer: string;

@@ -1,6 +1,6 @@
 import { Routes }  from '@angular/router';
-import { SettingsComponent } from './components/settings.component';
-import { PostListComponent } from './components/post.list.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 export const ROUTES: Routes = [
     {path: '', redirectTo: '/settings', pathMatch: 'full'},

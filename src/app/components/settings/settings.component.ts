@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../data.types';
-import { SettingsService } from '../shared/settings.service';
+import { Blog } from '../../data.types';
+import { SettingsService } from '../../shared/settings.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -17,24 +17,7 @@ import { Title } from '@angular/platform-browser';
             </div>
         </div>
     `,
-    styles: [`
-        div.container {
-            margin: 0 1em;
-        }
-        
-        textarea {
-            margin: 0 0 1em 0;
-            border: 1px solid lightgrey;
-            padding: 2px;
-            width: calc(100% - 6px);
-        }
-        
-        button {
-            padding: 0.8em 4em;
-            border: none;
-            border-radius: 4px;
-        }
-    `]
+    styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
     private blogs: Blog[];

@@ -5,8 +5,8 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ROUTES } from './app.routes';
-import { SettingsComponent } from './components/settings.component';
-import { PostListComponent } from './components/post.list.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 import { BlogItemSwitch } from './item-switch/blog.item.switch';
 import { PostItemSwitch } from './item-switch/post.item.switch';
 import { FaviconService } from './shared/favicon.service';
@@ -15,7 +15,7 @@ import { SettingsService } from './shared/settings.service';
 import { TumblrService } from './shared/tumblr.service';
 import { Title } from '@angular/platform-browser';
 import { HotkeysService } from 'angular2-hotkeys';
-import { SidebarComponent } from './components/sidebar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
 import { PostSwitchDirective } from './attribute-directives/post.switch.directive';
@@ -24,21 +24,25 @@ from './attribute-directives/tumblr.embedded.image.directive';
 import { TumblrImageDirective } from './attribute-directives/tumblr.image.directive';
 import { TumblrLinkDirective } from './attribute-directives/tumblr.link.directive';
 import { VideoBehaviourDirective } from './attribute-directives/video.behaviour.directive';
-import { PostComponent } from './components/post-components/post.component';
-import { PostAnswerComponent } from './components/post-components/post.answer.component';
-import { PostAudioComponent } from './components/post-components/post.audio.component';
-import { PostCaptionComponent } from './components/post-components/post.caption.component';
-import { PostChatComponent } from './components/post-components/post.chat.component';
-import { PostLinkComponent } from './components/post-components/post.link.component';
-import { PostMetaComponent } from './components/post-components/post.meta.component';
-import { PostPhotoComponent } from './components/post-components/post.photo.component';
-import { PostQuoteComponent } from './components/post-components/post.quote.component';
-import { PostTextComponent } from './components/post-components/post.text.component';
-import { PostTitleComponent } from './components/post-components/post.title.component';
-import { PostVideoComponent } from './components/post-components/post.video.component';
-import { ResponsiveMenuComponent } from './components/responsive.menu.component';
-import { PostReblogsComponent } from './components/post-components/post.reblogs.component';
-import { PostRepliesComponent } from './components/post-components/post.replies.component';
+import { PostComponent } from './components/post-components/post/post.component';
+import { PostAnswerComponent }
+from './components/post-components/post-answer/post-answer.component';
+import { PostAudioComponent } from './components/post-components/post-audio/post-audio.component';
+import { PostCaptionComponent }
+from './components/post-components/post-caption/post-caption.component';
+import { PostChatComponent } from './components/post-components/post-chat/post-chat.component';
+import { PostLinkComponent } from './components/post-components/post-link/post-link.component';
+import { PostMetaComponent } from './components/post-components/post-meta/post-meta.component';
+import { PostPhotoComponent } from './components/post-components/post-photo/post-photo.component';
+import { PostQuoteComponent } from './components/post-components/post-quote/post-quote.component';
+import { PostTextComponent } from './components/post-components/post-text/post-text.component';
+import { PostTitleComponent } from './components/post-components/post-title/post-title.component';
+import { PostVideoComponent } from './components/post-components/post-video/post-video.component';
+import { ResponsiveMenuComponent } from './components/responsive-menu/responsive-menu.component';
+import { PostReblogsComponent }
+from './components/post-components/post-reblogs/post-reblogs.component';
+import { PostRepliesComponent }
+from './components/post-components/post-replies/post-replies.component';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,

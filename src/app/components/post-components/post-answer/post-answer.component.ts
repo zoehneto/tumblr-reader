@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { Post } from '../../data.types';
+import { Post } from '../../../data.types';
 
 @Component({
     selector: 'post-answer',
@@ -13,25 +13,7 @@ import { Post } from '../../data.types';
         </div>
         <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
     `,
-    styles: [`
-        div.question{
-            padding: 1em;
-            border-radius: 4px;
-            background-color: lightgrey;
-        }
-        
-        p.asking{
-            margin-top: 0;
-        }
-        
-        p.question-text{
-            margin-bottom: 0;
-        }
-        
-        div.answer{
-            margin-bottom: -1em;
-        }
-    `]
+    styleUrls: ['./post-answer.component.scss']
 })
 export class PostAnswerComponent implements OnChanges {
     @Input('post') post: Post;

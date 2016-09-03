@@ -1,0 +1,5 @@
+/*TODO add support for non webkit version*/
+img:not(:-webkit-full-screen){
+  display: block;
+  width: 100%;
+}

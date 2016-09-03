@@ -1,0 +1,28 @@
+p.source{
+  margin-top: 0;
+}
+
+ul{
+  margin-bottom: 1em;
+  padding: 0;
+  list-style: none;
+}
+
+.list-inline > li{
+  display: inline-block;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 1em;
+}
+
+p.bottom {
+  margin: 0;
+}
+
+.bottom *  {
+  margin-right: 0.7em;
+}
+
+span.text{
+  color: #6E6E6E;
+}

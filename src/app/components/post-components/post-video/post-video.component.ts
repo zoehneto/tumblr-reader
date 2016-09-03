@@ -1,12 +1,13 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { VideoPlayer } from '../../data.types';
-import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
+import { VideoPlayer } from '../../../data.types';
+import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
 
 @Component({
     selector: 'post-video',
     template: `
         <div [innerHTML]="player" videoBehaviour embedBehaviour></div>
-    `
+    `,
+    styleUrls: ['./post-video.component.scss']
 })
 export class PostVideoComponent implements OnChanges {
     @Input('postPlayers') postPlayers: VideoPlayer[];

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../data.types';
-import { SettingsService } from '../shared/settings.service';
+import { Blog } from '../../data.types';
+import { SettingsService } from '../../shared/settings.service';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
-import { BlogItemSwitch } from '../item-switch/blog.item.switch';
+import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
 
 @Component({
     selector: 'side-bar',
@@ -22,59 +22,7 @@ import { BlogItemSwitch } from '../item-switch/blog.item.switch';
             </ul>
         </div>
     `,
-    styles: [`
-        @media screen and (min-width: 48em){
-            div{
-                position: fixed;
-                height: 100%;
-                width: inherit;
-            }
-        }
-        
-        div{
-            background-color: #EEEEEE;
-        }
-        
-        ul{
-            padding: 1em 0 1em 2em;
-            margin: 0;
-            list-style: none;
-        }
-        
-        li.settings{
-            margin-bottom: 2em;
-        }
-        
-        li.blog{
-            margin-bottom: 0.8em;
-            display: table;
-        }
-        
-        li.blog a{
-            word-break: break-all;
-            padding-left: .5em;
-        }
-        
-        li.selected{
-            font-weight: bold;
-        }
-        
-        span{
-            display: table-cell;
-            vertical-align: middle;
-        }
-        
-        img{
-            display: table-cell;
-        }
-        
-        a:link, a:visited, a:hover, a:active {
-            display: table-cell;
-            vertical-align: middle;
-            color: black;
-            text-decoration: none;
-        }
-    `]
+    styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
     private blogs: Blog[];

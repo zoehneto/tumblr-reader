@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { Post } from '../../data.types';
+import { Post } from '../../../data.types';
 
 @Component({
     selector: 'post-link',
@@ -9,11 +9,7 @@ import { Post } from '../../data.types';
         <div *ngIf="post.description" [innerHTML]="post.description" 
         tumblrLink tumblrEmbeddedImage></div>
     `,
-    styles: [`
-        div{
-            margin-bottom: -1em;
-        }
-    `]
+    styleUrls: ['./post-link.component.scss']
 })
 export class PostLinkComponent implements OnChanges {
     @Input('post') post: Post;

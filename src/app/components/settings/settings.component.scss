@@ -1,0 +1,16 @@
+div.container {
+  margin: 0 1em;
+}
+
+textarea {
+  margin: 0 0 1em 0;
+  border: 1px solid lightgrey;
+  padding: 2px;
+  width: calc(100% - 6px);
+}
+
+button {
+  padding: 0.8em 4em;
+  border: none;
+  border-radius: 4px;
+}

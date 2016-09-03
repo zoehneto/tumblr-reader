@@ -16,35 +16,7 @@ import '../../public/css/purecss-utils.css';
         </div>
     `,
     encapsulation: ViewEncapsulation.None,
-    styles: [`
-        html, body {
-            margin:0;
-        }
-        
-        html, button, input, select, textarea,
-        .pure-g [class *= "pure-u"] {
-            font-family: Verdana, Geneva, sans-serif;
-        }
-        
-        /*Styles for comments in text post or caption*/
-        blockquote{
-            border-left: 3px solid lightgrey;
-            margin: 1em 0;
-            padding: 0 20px;
-        }
-        
-        a, a:link, a:visited, a:hover, a:active {
-            text-decoration: underline;
-            color: #6E6E6E;
-        }
-        a:hover{
-            color: black;
-        }
-        
-        div.center {
-            text-align: center;
-        }
-    `],
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
     hideComponents: boolean;

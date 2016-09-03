@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post, Blog } from '../../data.types';
+import { Post, Blog } from '../../../data.types';
 
 @Component({
     selector: 'post-meta',
@@ -35,36 +35,7 @@ import { Post, Blog } from '../../data.types';
         
         <post-replies *ngIf="post.replies.length > 0 && showReplies" [post]="post"></post-replies>
     `,
-    styles: [`
-        p.source{
-            margin-top: 0;
-        }
-        
-        ul{
-            margin-bottom: 1em;
-            padding: 0;
-            list-style: none;
-        }
-
-        .list-inline > li{
-            display: inline-block;
-            margin: 0;
-            padding-left: 0;
-            padding-right: 1em;
-        }
-        
-        p.bottom {
-            margin: 0;
-        }
-        
-        .bottom *  {
-            margin-right: 0.7em;
-        }
-        
-        span.text{
-            color: #6E6E6E;
-        }
-    `]
+    styleUrls: ['./post-meta.component.scss']
 })
 export class PostMetaComponent {
     @Input('blog') blog: Blog;

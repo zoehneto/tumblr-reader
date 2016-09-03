@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post, Blog } from '../../data.types';
+import { Post, Blog } from '../../../data.types';
 
 @Component({
     selector: 'complete-post',
@@ -31,23 +31,7 @@ import { Post, Blog } from '../../data.types';
             <post-meta class="meta" [blog]="blog" [post]="post"></post-meta>
         </div>
     `,
-    styles: [`
-        div.padded{
-            padding: 1em;
-        }
-        
-        div.padded *{
-            display: block;
-        }
-        
-        div.padded *:not(:first-child){
-            padding-top: 1em;
-        }
-        
-        div.padded post-meta.meta:not(:first-child){
-            padding-top: 2em;
-        }
-    `]
+    styleUrls: ['./post.component.scss']
 })
 export class PostComponent {
     @Input('blog') blog: Blog;

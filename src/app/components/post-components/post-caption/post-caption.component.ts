@@ -1,17 +1,13 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { Post } from '../../data.types';
-import { CustomSanitizationService } from '../../shared/custom.sanitization.service';
+import { Post } from '../../../data.types';
+import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
 
 @Component({
     selector: 'post-caption',
     template: `
         <div class="caption" [innerHTML]="caption" tumblrLink tumblrEmbeddedImage></div>
     `,
-    styles: [`
-        div.caption{
-            margin: -1em 0;
-        }
-    `]
+    styleUrls: ['./post-caption.component.scss']
 })
 export class PostCaptionComponent implements OnChanges {
     @Input('post') post: Post;

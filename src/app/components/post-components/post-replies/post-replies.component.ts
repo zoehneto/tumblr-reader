@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '../../data.types';
+import { Post } from '../../../data.types';
 
 @Component({
     selector: 'post-replies',
@@ -10,23 +10,7 @@ import { Post } from '../../data.types';
             </li>
         </ul>
     `,
-    styles: [`
-        ul {
-            margin: 1em 0 0 0;
-            padding: 0;
-            list-style: none;
-        }
-        
-        li {
-            padding: 1em 0;
-            border-bottom: 1px solid #6E6E6E;
-        }
-        
-        li:last-of-type {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-    `]
+    styleUrls: ['./post-replies.component.scss']
 })
 export class PostRepliesComponent {
     @Input('post') post: Post;

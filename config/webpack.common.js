@@ -40,9 +40,9 @@ module.exports = {
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 include: helpers.root('src', 'app'),
-                loader: 'raw'
+                loaders: ['raw', 'sass-loader']
             },
             {
                 test: /\.json$/,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Blog, Post } from '../data.types';
-import { TumblrService } from '../shared/tumblr.service';
-import { FaviconService } from '../shared/favicon.service';
+import { Blog, Post } from '../../data.types';
+import { TumblrService } from '../../shared/tumblr.service';
+import { FaviconService } from '../../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -30,32 +30,7 @@ import { Title } from '@angular/platform-browser';
             <h2 *ngIf="message">{{message}}</h2>
         </div>
     `,
-    styles: [`        
-        div.center.message{
-            margin-top: -1em;
-        }
-        
-        ul{
-            margin: 1em 0.5em;
-            padding: 0;
-            list-style: none;
-        }
-        
-        li.post:first-child{
-            margin-top: 0;
-        }
-        
-        li.post:last-child{
-            margin-bottom: 0;
-        }
-        
-        li.post{
-            border: 1px solid lightgrey;
-            border-radius: 4px;
-            margin: 40px 0;
-            overflow: hidden;
-        }
-    `]
+    styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
     private blog: Blog;

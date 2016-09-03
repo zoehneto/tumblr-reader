@@ -9,23 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
         <div class="pure-visible-sm spacer"></div>
         <side-bar (click)="toggleMenu()" class="{{showMenu ? '' : 'pure-hidden-sm'}}"></side-bar>
     `,
-    styles: [`
-        .menu-bar {
-            position: fixed;
-            height: 3em;
-            width: inherit;
-            background-color: #EEEEEE;
-            border-bottom: 3px solid white;
-        }
-        
-        div.spacer {
-            height: calc(3em + 3px);
-        }
-        
-        side-bar {
-            width: inherit;
-        }
-    `]
+    styleUrls: ['./responsive-menu.component.scss']
 })
 export class ResponsiveMenuComponent implements OnInit {
     @Output() onMenuToggled = new EventEmitter<boolean>();
