@@ -34,6 +34,7 @@
     "codelyzer": "~0.0.25",
     "typings": "^1.0.4",
     "node-sass": "^3.8.0",
+    "sass-lint": "^1.9.1",
     "rimraf": "^2.5.3",
 
     "angular2-template-loader": "^0.4.0",
@@ -50,6 +51,7 @@
 
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.15.0",
+    "sasslint-webpack-plugin": "^1.0.4",
 
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",

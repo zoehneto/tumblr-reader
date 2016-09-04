@@ -1,17 +1,19 @@
-div.question{
+@import '../../../../../public/scss/variables';
+
+.question {
   padding: 1em;
   border-radius: 4px;
-  background-color: lightgrey;
+  background-color: $grey;
 }
 
-p.asking{
+.asking {
   margin-top: 0;
 }
 
-p.question-text{
+.question-text {
   margin-bottom: 0;
 }
 
-div.answer{
+.answer {
   margin-bottom: -1em;
 }

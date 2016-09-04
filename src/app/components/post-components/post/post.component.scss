@@ -1,15 +1,15 @@
-div.padded{
+.padded {
   padding: 1em;
 }
 
-div.padded *{
+.padded * {
   display: block;
 }
 
-div.padded *:not(:first-child){
+.padded *:not(:first-child) {
   padding-top: 1em;
 }
 
-div.padded post-meta.meta:not(:first-child){
+.padded .meta:not(:first-child) {
   padding-top: 2em;
 }

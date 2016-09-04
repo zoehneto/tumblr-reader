@@ -9,7 +9,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
     template: `
         <div>
             <ul>
-                <li class="settings" class="settings {{selected('/settings') ? 'selected' : ''}}">
+                <li class="settings {{selected('/settings') ? 'selected' : ''}}">
                     <a [routerLink]="['/settings']">Settings</a>
                 </li>
                 <li *ngFor="let blog of blogs" 

@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var SassLintPlugin = require('sasslint-webpack-plugin');
 var helpers = require('./helpers');
 
 module.exports = {
@@ -41,6 +42,11 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                exclude: helpers.root('src', 'app'),
+                loaders: [ExtractTextPlugin.extract('style', 'css?sourceMap'), 'sass-loader']
+            },
+            {
+                test: /\.scss$/,
                 include: helpers.root('src', 'app'),
                 loaders: ['raw', 'sass-loader']
             },
@@ -58,6 +64,11 @@ module.exports = {
 
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+
+        new SassLintPlugin({
+            context: [helpers.root('src', 'app'), helpers.root('public', 'scss')],
+            ignorePlugins: ['extract-text-webpack-plugin']
         })
     ]
 };

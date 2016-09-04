@@ -1,52 +1,56 @@
+@import '../../../../public/scss/variables';
 
-@media screen and (min-width: 48em){
-  div{
+@media screen and (min-width: 48em) {
+  div {
     position: fixed;
     height: 100%;
     width: inherit;
   }
 }
 
-div{
-  background-color: #EEEEEE;
+div {
+  background-color: $light-grey;
 }
 
-ul{
+ul {
   padding: 1em 0 1em 2em;
   margin: 0;
   list-style: none;
 }
 
-li.settings{
+.settings {
   margin-bottom: 2em;
 }
 
-li.blog{
+.blog {
   margin-bottom: 0.8em;
   display: table;
 }
 
-li.blog a{
+.blog a {
   word-break: break-all;
-  padding-left: .5em;
+  padding-left: 0.5em;
 }
 
-li.selected{
+.selected {
   font-weight: bold;
 }
 
-span{
+span {
   display: table-cell;
   vertical-align: middle;
 }
 
-img{
+img {
   display: table-cell;
 }
 
-a:link, a:visited, a:hover, a:active {
+a:link,
+a:visited,
+a:hover,
+a:active {
   display: table-cell;
   vertical-align: middle;
-  color: black;
+  color: $black;
   text-decoration: none;
 }

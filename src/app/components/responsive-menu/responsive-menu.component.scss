@@ -1,12 +1,14 @@
+@import '../../../../public/scss/variables';
+
 .menu-bar {
   position: fixed;
   height: 3em;
   width: inherit;
-  background-color: #EEEEEE;
-  border-bottom: 3px solid white;
+  background-color: $light-grey;
+  border-bottom: 3px solid $white;
 }
 
-div.spacer {
+.spacer {
   height: calc(3em + 3px);
 }
 
