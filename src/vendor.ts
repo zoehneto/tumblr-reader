@@ -21,3 +21,6 @@ import 'angular2-hotkeys';
 
 // localforage
 require('localforage');
+
+// momentjs
+import 'moment';

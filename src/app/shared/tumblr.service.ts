@@ -37,7 +37,7 @@ export class TumblrService {
     }
 
     private postDateTransform(post: any) {
-        let postDate = moment.utc(post.date.substring(0, post.date.lastIndexOf(' '))
+        let postDate: moment.Moment = moment.utc(post.date.substring(0, post.date.lastIndexOf(' '))
             , 'YYYY-MM-DD HH:mm:ss');
         post.date = postDate.local().toDate();
     }
