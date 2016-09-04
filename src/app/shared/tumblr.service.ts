@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Jsonp, URLSearchParams } from '@angular/http';
 import { Response, config } from '../data.types';
+import * as moment from 'moment';
 
 @Injectable()
 export class TumblrService {
@@ -36,7 +37,9 @@ export class TumblrService {
     }
 
     private postDateTransform(post: any) {
-        post.date = new Date(post.date);
+        let postDate = moment.utc(post.date.substring(0, post.date.lastIndexOf(' '))
+            , 'YYYY-MM-DD HH:mm:ss');
+        post.date = postDate.local().toDate();
     }
 
     private postNoteTransform(post: any) {
