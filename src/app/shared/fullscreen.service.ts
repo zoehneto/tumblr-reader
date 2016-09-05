@@ -19,7 +19,7 @@ export class FullscreenService {
     }
 
     public isFullscreen(): boolean {
-        if (document.fullscreenElement !== null) {
+        if (document.fullscreenElement !== null && document.fullscreenElement !== undefined) {
             return true;
         }
         if (document.webkitIsFullScreen) {
