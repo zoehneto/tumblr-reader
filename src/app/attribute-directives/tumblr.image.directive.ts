@@ -1,21 +1,22 @@
 import { Directive, ElementRef, Input, DoCheck } from '@angular/core';
 import { Photo } from '../data.types';
+import { FullscreenService } from '../shared/fullscreen.service';
 
 @Directive({ selector: '[tumblrImage]' })
 export class TumblrImageDirective implements DoCheck {
     @Input('tumblrImage') tumblrImage: Photo;
     private el: ElementRef;
-    constructor(el: ElementRef) {
+    constructor(el: ElementRef, private fullscreenService: FullscreenService) {
         this.el = el;
     }
 
     ngDoCheck() {
-        // TODO Abstract fullscreen api for browser independence
-        if (!this.el.nativeElement.hasAttribute('height') && !document.webkitIsFullScreen) {
+        if (!this.el.nativeElement.hasAttribute('height') &&
+            !this.fullscreenService.isFullscreen()) {
             this.el.nativeElement.setAttribute('height',
                 this.getHeight(this.el.nativeElement.width));
         }
-        if (this.el.nativeElement.hasAttribute('height') && document.webkitIsFullScreen) {
+        if (this.el.nativeElement.hasAttribute('height') && this.fullscreenService.isFullscreen()) {
             this.el.nativeElement.setAttribute('height', '');
         }
     }

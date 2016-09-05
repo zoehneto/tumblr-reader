@@ -1,17 +1,21 @@
 import { Component, Input } from '@angular/core';
 import { Photo } from '../../../data.types';
+import { FullscreenService } from '../../../shared/fullscreen.service';
 
 @Component({
     selector: 'post-photo',
     template: `
         <img *ngFor="let photo of postPhotos" (click)="fullScreen($event)"
-        src="{{photo.alt_sizes[photo.alt_sizes.length - 1].url}}" 
-        [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
+        src="{{photo.alt_sizes[0].url}}" sizes="(min-width: 64em) 34vw,
+        (min-width: 48em) 73vw, 95vw" [srcset]="createSrcSet(photo)"
+        [tumblrImage]="photo">
     `,
     styleUrls: ['./post-photo.component.scss']
 })
 export class PostPhotoComponent {
     @Input('postPhotos') postPhotos: Photo[];
+    constructor(private fullscreenService: FullscreenService) {
+    }
 
     private createSrcSet(photo: Photo): string {
         let srcset: string = '';
@@ -23,11 +27,6 @@ export class PostPhotoComponent {
 
     private fullScreen(event: any) {
         let elem = event.currentTarget;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        }
-        if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
-        }
+        this.fullscreenService.requestFullscreen(elem);
     }
 }

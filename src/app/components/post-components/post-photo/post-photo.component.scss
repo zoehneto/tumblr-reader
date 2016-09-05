@@ -1,5 +1,16 @@
-//TODO add support for non webkit version
-img:not(:-webkit-full-screen) {
+img {
   display: block;
   width: 100%;
+}
+
+img:-webkit-full-screen {
+  width: inherit;
+}
+
+img:-moz-full-screen {
+  width: inherit;
+}
+
+img:full-screen {
+  width: inherit;
 }

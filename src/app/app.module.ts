@@ -43,6 +43,7 @@ import { PostReblogsComponent }
 from './components/post-components/post-reblogs/post-reblogs.component';
 import { PostRepliesComponent }
 from './components/post-components/post-replies/post-replies.component';
+import { FullscreenService } from './shared/fullscreen.service';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -55,7 +56,7 @@ from './components/post-components/post-replies/post-replies.component';
     imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
         InfiniteScrollModule],
     providers: [Title, HotkeysService, TumblrService, SettingsService, CustomSanitizationService,
-        FaviconService, PostItemSwitch, BlogItemSwitch],
+        FaviconService, PostItemSwitch, BlogItemSwitch, FullscreenService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
