@@ -6,7 +6,7 @@ import { FullscreenService } from '../../../shared/fullscreen.service';
     selector: 'post-photo',
     template: `
         <img *ngFor="let photo of postPhotos" (click)="fullScreen($event)"
-        src="{{photo.alt_sizes[0].url}}" sizes="(min-width: 64em) 34vw,
+        src="{{photo.original_size.url}}" sizes="(min-width: 64em) 34vw,
         (min-width: 48em) 73vw, 95vw" [srcset]="createSrcSet(photo)"
         [tumblrImage]="photo">
     `,
@@ -18,6 +18,10 @@ export class PostPhotoComponent {
     }
 
     private createSrcSet(photo: Photo): string {
+        if (photo.alt_sizes.length === 0) {
+            return photo.original_size.url;
+        }
+
         let srcset: string = '';
         photo.alt_sizes.forEach(picture => {
             srcset += picture.url + ' ' + picture.width + 'w, ';
