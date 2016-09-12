@@ -41,3 +41,10 @@ with the following content:
       RewriteRule . index.html [L]
   </IfModule>
   ```
+## Shortcuts
+- Next Post: `j`
+- Previous Post: `k`
+
+
+- Next Blog: `shift + j`
+- Previous Blog: `shift + k`
