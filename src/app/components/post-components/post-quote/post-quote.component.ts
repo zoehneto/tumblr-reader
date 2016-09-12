@@ -4,7 +4,9 @@ import { Post } from '../../../data.types';
 @Component({
     selector: 'post-quote',
     template: `
-        <p>{{post.text}}</p>
+        <blockquote>
+            <h2>{{post.text}}</h2>
+        </blockquote>
         <div [innerHTML]="post.source"></div>
     `,
     styleUrls: ['./post-quote.component.scss']
