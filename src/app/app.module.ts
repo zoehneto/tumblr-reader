@@ -14,7 +14,7 @@ import { CustomSanitizationService } from './shared/custom.sanitization.service'
 import { SettingsService } from './shared/settings.service';
 import { TumblrService } from './shared/tumblr.service';
 import { Title } from '@angular/platform-browser';
-import { HotkeysService } from 'angular2-hotkeys';
+import { HotkeyModule } from 'angular2-hotkeys';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
@@ -54,8 +54,8 @@ import { FullscreenService } from './shared/fullscreen.service';
         TumblrImageDirective, TumblrLinkDirective, VideoBehaviourDirective,
         ResponsiveMenuComponent, PostReblogsComponent, PostRepliesComponent],
     imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
-        InfiniteScrollModule],
-    providers: [Title, HotkeysService, TumblrService, SettingsService, CustomSanitizationService,
+        InfiniteScrollModule, HotkeyModule.forRoot()],
+    providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
         FaviconService, PostItemSwitch, BlogItemSwitch, FullscreenService],
     bootstrap: [AppComponent]
 })

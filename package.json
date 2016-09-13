@@ -25,7 +25,7 @@
     "localforage": "^1.4.1",
     "purecss": "^0.6.0",
     "angular2-infinite-scroll": "0.2.1",
-    "angular2-hotkeys": "^0.2.0",
+    "angular2-hotkeys": "^0.3.0",
     "moment": "^2.14.1"
   },
   "devDependencies": {
