@@ -6,7 +6,7 @@
     "lint": "tslint \"src/**/*.ts\"",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@angular/common": "2.0.0-rc.7",
     "@angular/compiler": "2.0.0-rc.7",
