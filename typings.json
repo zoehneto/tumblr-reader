@@ -1,8 +1,0 @@
-{
-  "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160602141332",
-    "node": "registry:dt/node#6.0.0+20160807145350",
-    "localForage": "github:DefinitelyTyped/DefinitelyTyped/localForage/localForage.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711",
-    "mousetrap": "registry:dt/mousetrap#1.5.0+20160501152135"
-  }
-}
