@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Jsonp, URLSearchParams } from '@angular/http';
-import { Response, config } from '../data.types';
+import { Response, config, Blog } from '../data.types';
 import * as moment from 'moment';
 
 @Injectable()
 export class TumblrService {
     private baseUrl = 'https://api.tumblr.com/v2/';
     constructor( private jsonp: Jsonp) {
+    }
+
+    getBlogInfo(blogId: string): Observable<Blog> {
+        let params = new URLSearchParams();
+        params.set('api_key', config.consumerKey);
+        params.set('jsonp', 'JSONP_CALLBACK');
+
+        return this.jsonp.get(this.baseUrl + 'blog/' + blogId + '/info', { search: params })
+            .map(res => {
+                let response = res.json().response;
+                this.blogDateTransform(response.blog);
+                return response.blog;
+            });
     }
 
     getPosts(blogId: string, offset: number = 0, tag?: string, id?: number): Observable<Response> {
@@ -28,12 +41,18 @@ export class TumblrService {
         return this.jsonp.get(this.baseUrl + 'blog/' + blogId + '/posts', { search: params })
             .map(res => {
                 let response = res.json().response;
+                this.blogDateTransform(response.blog);
                 response.posts.forEach((post: any) => {
                     this.postDateTransform(post);
                     this.postNoteTransform(post);
                 });
                 return response;
             });
+    }
+
+    private blogDateTransform(blog: any) {
+        let blogDate: moment.Moment = moment.utc(blog.updated * 1000);
+        blog.updated = blogDate.local().toDate();
     }
 
     private postDateTransform(post: any) {
