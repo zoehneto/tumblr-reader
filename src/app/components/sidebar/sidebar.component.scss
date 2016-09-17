@@ -37,6 +37,10 @@ ul {
   font-weight: bold;
 }
 
+.blog:not(.recent) a {
+  color: $dark-grey;
+}
+
 span {
   display: table-cell;
   vertical-align: middle;

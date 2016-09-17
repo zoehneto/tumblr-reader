@@ -13,7 +13,8 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
                     <a [routerLink]="['/settings']">Settings</a>
                 </li>
                 <li *ngFor="let blog of blogs" 
-                class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}">
+                class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}
+                {{isRecent(blog) ? 'recent' : ''}}">
                     <span>
                         <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
                     </span>
@@ -26,28 +27,53 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
 })
 export class SidebarComponent implements OnInit {
     private blogs: Blog[];
+    private updateInDays: number = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
         private blogItemSwitch: BlogItemSwitch) {
-        hotkeysService.add([
-            new Hotkey('shift+j', (event: KeyboardEvent): boolean => {
-                blogItemSwitch.showNextItem(this.blogs);
-                return false;
-            }), new Hotkey('shift+k', (event: KeyboardEvent): boolean => {
-                blogItemSwitch.showPreviousItem(this.blogs);
-                return false;
-            })
-        ]);
     }
 
     ngOnInit() {
+        this.hotkeysService.add([
+            new Hotkey('shift+j', (event: KeyboardEvent): boolean => {
+                this.blogItemSwitch.showNextItem(this.blogs);
+                return false;
+            }), new Hotkey('shift+k', (event: KeyboardEvent): boolean => {
+                this.blogItemSwitch.showPreviousItem(this.blogs);
+                return false;
+            })
+        ]);
+
+        this.settingsService.getUpdatedInDays()
+            .subscribe(updateInDays => this.updateInDays = updateInDays);
+
         this.settingsService.getBlogs()
-            .subscribe(blogs => blogs === null ? this.blogs = [] : this.blogs = blogs);
+            .subscribe(blogs => {
+                if (blogs === null) {
+                    this.blogs = [];
+                } else {
+                    this.blogs = blogs.sort((blog1, blog2) => {
+                        let blog1Recent = this.settingsService
+                            .isUpdatedInDays(blog1.updated, this.updateInDays);
+                        let blog2Recent = this.settingsService
+                            .isUpdatedInDays(blog2.updated, this.updateInDays);
+                        if (blog1Recent && !blog2Recent) {
+                            return -1;
+                        }
+                        if (!blog1Recent && blog2Recent) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                }
+            });
     }
 
-    selected(blogName: string) {
-        if (location.pathname.indexOf(blogName) > -1) {
-            return true;
-        }
-        return false;
+    private selected(blogName: string) {
+        return location.pathname.indexOf(blogName) > -1;
+    }
+
+    private isRecent(blog: Blog): boolean {
+        return this.updateInDays === 0
+            || this.settingsService.isUpdatedInDays(blog.updated, this.updateInDays);
     }
 }
