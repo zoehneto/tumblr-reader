@@ -4,11 +4,11 @@ export const config: any = require('./config/config.json');
 
 export class Settings {
     lastUpdated: Date;
-    updateInDays: number;
+    updatedInDays: number;
     blogs: Blog[];
     constructor(date?: Date) {
         this.lastUpdated = date ? date : new Date();
-        this.updateInDays = 0;
+        this.updatedInDays = 0;
         this.blogs = [];
     }
 }

@@ -31,18 +31,18 @@ export class SettingsService {
     }
 
     getUpdatedInDays(): Observable<number> {
-        this.getSettings().then(settings => this.subjectUpdate.next(settings.updateInDays));
+        this.getSettings().then(settings => this.subjectUpdate.next(settings.updatedInDays));
         return this.subjectUpdate;
     }
 
     setUpdatedInDays(days: number): Observable<number> {
         return new Observable<number>(subscriber => {
             this.getSettings().then(settings => {
-                settings.updateInDays = days;
+                settings.updatedInDays = days;
                 this.setSettings(settings)
                     .then(storedSettings => {
-                        this.subjectUpdate.next(storedSettings.updateInDays);
-                        subscriber.next(storedSettings.updateInDays);
+                        this.subjectUpdate.next(storedSettings.updatedInDays);
+                        subscriber.next(storedSettings.updatedInDays);
                         subscriber.complete();
                     });
             });
@@ -82,12 +82,8 @@ export class SettingsService {
                 blogObservables.push(this.tumblrService.getBlogInfo(blog.name));
             });
 
-            Observable.forkJoin(...blogObservables).subscribe(
-                (blogs: Blog[]) => {
+            Observable.forkJoin(blogObservables).subscribe(blogs => {
                     settings.blogs = blogs;
-                },
-                error => {},
-                () => {
                     settings.lastUpdated = new Date();
                     localforage.setItem('settings', this.dateToNumber(settings))
                         .then(newSettings => resolve(this.numberToDate(newSettings)));

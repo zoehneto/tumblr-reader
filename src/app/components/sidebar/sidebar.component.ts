@@ -27,7 +27,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
 })
 export class SidebarComponent implements OnInit {
     private blogs: Blog[];
-    private updateInDays: number = 0;
+    private updatedInDays: number = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
         private blogItemSwitch: BlogItemSwitch) {
     }
@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
         ]);
 
         this.settingsService.getUpdatedInDays()
-            .subscribe(updateInDays => this.updateInDays = updateInDays);
+            .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
 
         this.settingsService.getBlogs()
             .subscribe(blogs => {
@@ -54,7 +54,8 @@ export class SidebarComponent implements OnInit {
                     let updatedBlogs = [];
                     let notUpdatedBlogs = [];
                     blogs.forEach(blog => {
-                        if (this.settingsService.isUpdatedInDays(blog.updated, this.updateInDays)) {
+                        if (this.settingsService.
+                            isUpdatedInDays(blog.updated, this.updatedInDays)) {
                             updatedBlogs.push(blog);
                         } else {
                             notUpdatedBlogs.push(blog);
@@ -70,7 +71,7 @@ export class SidebarComponent implements OnInit {
     }
 
     private isRecent(blog: Blog): boolean {
-        return this.updateInDays === 0
-            || this.settingsService.isUpdatedInDays(blog.updated, this.updateInDays);
+        return this.updatedInDays === 0
+            || this.settingsService.isUpdatedInDays(blog.updated, this.updatedInDays);
     }
 }

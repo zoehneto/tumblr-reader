@@ -42,7 +42,7 @@ export class PostListComponent implements OnInit {
     private tagParam: string;
     private postId: number;
     private loading: boolean;
-    private updateInDays: number = 0;
+    private updatedInDays: number = 0;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
                 private settingsService: SettingsService) {
@@ -50,7 +50,7 @@ export class PostListComponent implements OnInit {
 
     ngOnInit() {
         this.settingsService.getUpdatedInDays()
-            .subscribe(updateInDays => this.updateInDays = updateInDays);
+            .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
         this.route.params.subscribe(params => {
             this.postCounter = 0;
             this.posts = [];
@@ -97,7 +97,7 @@ export class PostListComponent implements OnInit {
     }
 
     private isRecent(post: Post): boolean {
-        return this.updateInDays > 0
-            && this.settingsService.isUpdatedInDays(post.date, this.updateInDays);
+        return this.updatedInDays > 0
+            && this.settingsService.isUpdatedInDays(post.date, this.updatedInDays);
     }
 }
