@@ -51,19 +51,16 @@ export class SidebarComponent implements OnInit {
                 if (blogs === null) {
                     this.blogs = [];
                 } else {
-                    this.blogs = blogs.sort((blog1, blog2) => {
-                        let blog1Recent = this.settingsService
-                            .isUpdatedInDays(blog1.updated, this.updateInDays);
-                        let blog2Recent = this.settingsService
-                            .isUpdatedInDays(blog2.updated, this.updateInDays);
-                        if (blog1Recent && !blog2Recent) {
-                            return -1;
+                    let updatedBlogs = [];
+                    let notUpdatedBlogs = [];
+                    blogs.forEach(blog => {
+                        if (this.settingsService.isUpdatedInDays(blog.updated, this.updateInDays)) {
+                            updatedBlogs.push(blog);
+                        } else {
+                            notUpdatedBlogs.push(blog);
                         }
-                        if (!blog1Recent && blog2Recent) {
-                            return 1;
-                        }
-                        return 0;
                     });
+                    this.blogs = updatedBlogs.concat(notUpdatedBlogs);
                 }
             });
     }
