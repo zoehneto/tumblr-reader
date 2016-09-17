@@ -6,13 +6,14 @@ import { TumblrService } from './tumblr.service';
 
 @Injectable()
 export class SettingsService {
-    private subject: Subject<Blog[]> = new Subject<Blog[]>();
+    private subjectBlogs: Subject<Blog[]> = new Subject<Blog[]>();
+    private subjectUpdate: Subject<number> = new Subject<number>();
     constructor(private tumblrService: TumblrService) {
     }
 
     getBlogs(): Observable<Blog[]> {
-        this.getSettings().then(settings => this.subject.next(settings.blogs));
-        return this.subject;
+        this.getSettings().then(settings => this.subjectBlogs.next(settings.blogs));
+        return this.subjectBlogs;
     }
 
     setBlogs(blogs: Blog[]) {
@@ -20,13 +21,12 @@ export class SettingsService {
             settings.blogs = blogs;
             this.setSettings(settings);
         });
-        this.subject.next(blogs);
+        this.subjectBlogs.next(blogs);
     }
 
     getUpdatedInDays(): Observable<number> {
-        return new Observable<number>(subscriber => {
-            this.getSettings().then(settings => subscriber.next(settings.updateInDays));
-        });
+        this.getSettings().then(settings => this.subjectUpdate.next(settings.updateInDays));
+        return this.subjectUpdate;
     }
 
     setUpdatedInDays(days: number) {
@@ -34,6 +34,11 @@ export class SettingsService {
             settings.updateInDays = days;
             this.setSettings(settings);
         });
+        this.subjectUpdate.next(days);
+    }
+
+    isUpdatedInDays(date: Date, days: number) {
+        return (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24) < days;
     }
 
     private getSettings(): Promise<Settings> {

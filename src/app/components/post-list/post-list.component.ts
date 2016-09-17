@@ -4,6 +4,7 @@ import { Blog, Post } from '../../data.types';
 import { TumblrService } from '../../shared/tumblr.service';
 import { FaviconService } from '../../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
+import { SettingsService } from '../../shared/settings.service';
 
 @Component({
     selector: 'post-list',
@@ -20,7 +21,7 @@ import { Title } from '@angular/platform-browser';
             <ul postSwitch (moreItemsNeeded)="onScroll()" infinite-scroll
             [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
-                <li *ngFor="let post of posts" class="post">
+                <li *ngFor="let post of posts" class="post {{isRecent(post) ? 'recent' : ''}}">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
                 </li>
             </ul>
@@ -41,11 +42,15 @@ export class PostListComponent implements OnInit {
     private tagParam: string;
     private postId: number;
     private loading: boolean;
+    private updateInDays: number;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
-                private faviconService: FaviconService, private titleService: Title) {
+                private faviconService: FaviconService, private titleService: Title,
+                private settingsService: SettingsService) {
     }
 
     ngOnInit() {
+        this.settingsService.getUpdatedInDays()
+            .subscribe(updateInDays => this.updateInDays = updateInDays);
         this.route.params.subscribe(params => {
             this.postCounter = 0;
             this.posts = [];
@@ -89,5 +94,10 @@ export class PostListComponent implements OnInit {
                 this.titleService.setTitle('Error Loading Data');
             }
         });
+    }
+
+    private isRecent(post: Post): boolean {
+        return this.updateInDays > 0
+            && this.settingsService.isUpdatedInDays(post.date, this.updateInDays);
     }
 }

@@ -106,6 +106,8 @@ rules:
           - px
         border-radius:
           - px
+        box-shadow:
+          - px
   quotes:
     - 2
     - style: single
