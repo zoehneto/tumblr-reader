@@ -38,43 +38,57 @@ export class SettingsService {
 
     private getSettings(): Promise<Settings> {
         return new Promise<Settings>(resolve => {
-            localforage.getItem('settings').then((settings: Settings) => {
+            localforage.getItem('settings').then((settings: any) => {
                 if (settings === null) {
                     this.setSettings(new Settings(new Date(0)))
-                        .then(newSettings => resolve(newSettings));
-                } else if (this.isOutdated(settings)) {
-                    this.setSettings(settings).then(newSettings => resolve(newSettings));
+                        .then(newSettings => resolve(this.numberToDate(newSettings)));
+                } else if (this.isOutdated(new Date(settings.lastUpdated))) {
+                    this.setSettings(this.numberToDate(settings))
+                        .then(newSettings => resolve(this.numberToDate(newSettings)));
                 } else {
-                    resolve(settings);
+                    resolve(this.numberToDate(settings));
                 }
             });
         });
     }
 
     private setSettings(settings: Settings): Promise<Settings> {
-        if (!this.isOutdated(settings) || settings.blogs.length === 0) {
-            return localforage.setItem('settings', settings);
+        if (settings.blogs.length === 0) {
+            return localforage.setItem('settings', this.dateToNumber(settings));
         }
         return new Promise<Settings>(resolve => {
             let blogObservables: Observable<Blog>[] = [];
             settings.blogs.forEach(blog => {
                 blogObservables.push(this.tumblrService.getBlogInfo(blog.name));
             });
-            settings.blogs = [];
-            let observable = new Observable<Blog>().concat(blogObservables);
-            console.log(observable);
-            observable.subscribe((blog: Blog) => {
-                    settings.blogs.push(blog);
-            },
-                error => {}, () => {
+
+            Observable.forkJoin(...blogObservables).subscribe(
+                (blogs: Blog[]) => {
+                    settings.blogs = blogs;
+                },
+                error => {},
+                () => {
                     settings.lastUpdated = new Date();
-                    localforage.setItem('settings', settings)
+                    localforage.setItem('settings', this.dateToNumber(settings))
                         .then(newSettings => resolve(newSettings));
                 });
         });
     }
 
-    private isOutdated(settings: Settings): boolean {
-        return (Date.now() - settings.lastUpdated.getTime()) / (1000 * 60 * 60 * 24) > 0.25;
+    private isOutdated(lastUpdated: Date): boolean {
+        return (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60 * 24) > 0.25;
+    }
+
+    private dateToNumber(settings: Settings): any {
+        let settingsConverted = <any> settings;
+        settingsConverted.lastUpdated = settings.lastUpdated.getTime();
+        settingsConverted.blogs.forEach(blog => blog.updated = blog.updated.getTime());
+        return settingsConverted;
+    }
+
+    private numberToDate(settings: any): Settings {
+        settings.lastUpdated = new Date(settings.lastUpdated);
+        settings.blogs.forEach(blog => blog.updated = new Date(blog.updated));
+        return settings;
     }
 }
