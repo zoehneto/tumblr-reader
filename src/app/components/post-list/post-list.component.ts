@@ -42,7 +42,7 @@ export class PostListComponent implements OnInit {
     private tagParam: string;
     private postId: number;
     private loading: boolean;
-    private updateInDays: number;
+    private updateInDays: number = 0;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
                 private settingsService: SettingsService) {

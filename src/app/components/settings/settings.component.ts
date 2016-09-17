@@ -39,8 +39,9 @@ export class SettingsComponent implements OnInit {
     }
 
     saveSettings() {
-        this.settingsService.setBlogs(this.textToBlogs(this.blogText));
-        this.settingsService.setUpdatedInDays(this.updateInDays);
+        this.settingsService.setBlogs(this.textToBlogs(this.blogText)).subscribe(blogs => {
+            this.settingsService.setUpdatedInDays(this.updateInDays);
+        });
     }
 
     blogsToText(blogs: Blog[]): string {

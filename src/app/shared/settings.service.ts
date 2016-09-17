@@ -16,12 +16,18 @@ export class SettingsService {
         return this.subjectBlogs;
     }
 
-    setBlogs(blogs: Blog[]) {
-        this.getSettings().then(settings => {
-            settings.blogs = blogs;
-            this.setSettings(settings);
+    setBlogs(blogs: Blog[]): Observable<Blog[]> {
+        return new Observable<Blog[]>(subscriber => {
+            this.getSettings().then(settings => {
+                settings.blogs = blogs;
+                this.setSettings(settings)
+                    .then(storedSettings => {
+                        this.subjectBlogs.next(storedSettings.blogs);
+                        subscriber.next(storedSettings.blogs);
+                        subscriber.complete();
+                    });
+            });
         });
-        this.subjectBlogs.next(blogs);
     }
 
     getUpdatedInDays(): Observable<number> {
@@ -29,12 +35,18 @@ export class SettingsService {
         return this.subjectUpdate;
     }
 
-    setUpdatedInDays(days: number) {
-        this.getSettings().then(settings => {
-            settings.updateInDays = days;
-            this.setSettings(settings);
+    setUpdatedInDays(days: number): Observable<number> {
+        return new Observable<number>(subscriber => {
+            this.getSettings().then(settings => {
+                settings.updateInDays = days;
+                this.setSettings(settings)
+                    .then(storedSettings => {
+                        this.subjectUpdate.next(storedSettings.updateInDays);
+                        subscriber.next(storedSettings.updateInDays);
+                        subscriber.complete();
+                    });
+            });
         });
-        this.subjectUpdate.next(days);
     }
 
     isUpdatedInDays(date: Date, days: number) {
@@ -46,10 +58,10 @@ export class SettingsService {
             localforage.getItem('settings').then((settings: any) => {
                 if (settings === null) {
                     this.setSettings(new Settings(new Date(0)))
-                        .then(newSettings => resolve(this.numberToDate(newSettings)));
+                        .then(newSettings => resolve(newSettings));
                 } else if (this.isOutdated(new Date(settings.lastUpdated))) {
                     this.setSettings(this.numberToDate(settings))
-                        .then(newSettings => resolve(this.numberToDate(newSettings)));
+                        .then(newSettings => resolve(newSettings));
                 } else {
                     resolve(this.numberToDate(settings));
                 }
@@ -59,7 +71,10 @@ export class SettingsService {
 
     private setSettings(settings: Settings): Promise<Settings> {
         if (settings.blogs.length === 0) {
-            return localforage.setItem('settings', this.dateToNumber(settings));
+            return new Promise<Settings>(resolve => {
+                localforage.setItem('settings', this.dateToNumber(settings))
+                    .then(storedSettings => resolve(this.numberToDate(storedSettings)));
+            });
         }
         return new Promise<Settings>(resolve => {
             let blogObservables: Observable<Blog>[] = [];
@@ -75,7 +90,7 @@ export class SettingsService {
                 () => {
                     settings.lastUpdated = new Date();
                     localforage.setItem('settings', this.dateToNumber(settings))
-                        .then(newSettings => resolve(newSettings));
+                        .then(newSettings => resolve(this.numberToDate(newSettings)));
                 });
         });
     }
