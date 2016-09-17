@@ -88,7 +88,24 @@ rules:
     - 2
     - convention: hyphenatedlowercase
   property-sort-order: 0
-  property-units: 0
+  #Change deviating from styleguide
+  property-units:
+    - 2
+    - global:
+      - rem
+      per-property:
+        border:
+          - px
+        border-top:
+          - px
+        border-right:
+          - px
+        border-bottom:
+          - px
+        border-left:
+          - px
+        border-radius:
+          - px
   quotes:
     - 2
     - style: single

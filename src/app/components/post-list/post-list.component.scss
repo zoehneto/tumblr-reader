@@ -1,11 +1,11 @@
 @import '../../../../public/scss/variables';
 
 .center.message {
-  margin-top: -1em;
+  margin-top: -1rem;
 }
 
 ul {
-  margin: 1em 0.5em;
+  margin: 1rem 0.5rem;
   padding: 0;
   list-style: none;
 }
@@ -21,6 +21,6 @@ ul {
 .post {
   border: 1px solid $grey;
   border-radius: 4px;
-  margin: 40px 0;
+  margin: 2.5rem 0;
   overflow: hidden;
 }

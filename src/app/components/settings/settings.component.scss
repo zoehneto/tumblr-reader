@@ -1,20 +1,20 @@
 @import '../../../../public/scss/variables';
 
 .container {
-  margin: 0 1em;
+  margin: 0 1rem;
 }
 
 textarea,
 input {
-  margin: 0 0 1em;
+  margin: 0 0 1rem;
   border: 1px solid $grey;
-  padding: 2px;
+  padding: 0.125rem;
   width: calc(100% - 6px);
 }
 
 button {
-  margin-top: 1em;
-  padding: 0.8em 4em;
+  margin-top: 1rem;
+  padding: 0.8rem 4rem;
   border: 0;
   border-radius: 4px;
 }

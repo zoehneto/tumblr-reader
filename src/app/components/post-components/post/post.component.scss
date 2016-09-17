@@ -1,5 +1,5 @@
 .padded {
-  padding: 1em;
+  padding: 1rem;
 }
 
 .padded * {
@@ -7,9 +7,9 @@
 }
 
 .padded *:not(:first-child) {
-  padding-top: 1em;
+  padding-top: 1rem;
 }
 
 .padded .meta:not(:first-child) {
-  padding-top: 2em;
+  padding-top: 2rem;
 }
