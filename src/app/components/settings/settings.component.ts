@@ -11,6 +11,8 @@ import { Title } from '@angular/platform-browser';
             <div class="container">
                 <p>Enter blog urls here, one per line</p>
                 <textarea [(ngModel)]="blogText" rows="15"></textarea>
+                <p>Highlight blogs updated in the last days (0 = no highlight)</p>
+                <input type="number" [(ngModel)]="updateInDays"/>
                 <div class="center">
                     <button (click)="saveSettings()" type="button">Save</button>
                 </div>
@@ -22,6 +24,7 @@ import { Title } from '@angular/platform-browser';
 export class SettingsComponent implements OnInit {
     private blogs: Blog[];
     private blogText: string = '';
+    private updateInDays: number;
     constructor(private settingsService: SettingsService, private titleService: Title) {
     }
 
@@ -31,10 +34,13 @@ export class SettingsComponent implements OnInit {
             blogs === null ? this.blogs = [] : this.blogs = blogs;
             this.blogText = this.blogsToText(this.blogs);
         });
+        this.settingsService.getUpdatedInDays()
+            .subscribe( updateInDays => this.updateInDays = updateInDays);
     }
 
     saveSettings() {
         this.settingsService.setBlogs(this.textToBlogs(this.blogText));
+        this.settingsService.setUpdatedInDays(this.updateInDays);
     }
 
     blogsToText(blogs: Blog[]): string {
