@@ -74,6 +74,12 @@ module.exports = {
         new SassLintPlugin({
             context: [helpers.root('src', 'app'), helpers.root('public', 'scss')],
             ignorePlugins: ['extract-text-webpack-plugin']
-        })
+        }),
+
+        // see: https://github.com/angular/angular/issues/11580
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            helpers.root('src')
+        )
     ]
 };
