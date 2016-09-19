@@ -1,15 +1,21 @@
 # tumblr-reader
 This app is a simple browser based feed reader for tumblr blogs, built on the tumblr api and using angular 2.
 
-# License
-This project is licensed under the MIT license. See the LICENSE file for details.
-
 # Screenshots
 ## Desktop
 ![Desktop Screenshot](docs/Screenshot_Desktop.png)
 
 ## Mobile
 ![Mobile Screenshot](docs/Screenshot_Mobile.png)
+
+# Using the app
+## Shortcuts
+- Next Post: `j`
+- Previous Post: `k`
+
+
+- Next Blog: `shift + j`
+- Previous Blog: `shift + k`
 
 # Running the app
 ## Generate a tumblr api key
@@ -48,10 +54,6 @@ with the following content:
       RewriteRule . index.html [L]
   </IfModule>
   ```
-## Shortcuts
-- Next Post: `j`
-- Previous Post: `k`
 
-
-- Next Blog: `shift + j`
-- Previous Blog: `shift + k`
+# License
+This project is licensed under the MIT license. See the LICENSE file for details.
