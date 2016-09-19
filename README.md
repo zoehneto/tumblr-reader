@@ -4,6 +4,13 @@ This app is a simple browser based feed reader for tumblr blogs, built on the tu
 # License
 This project is licensed under the MIT license. See the LICENSE file for details.
 
+# Screenshots
+## Desktop
+![Desktop Screenshot](docs/Screenshot_Desktop.png)
+
+## Mobile
+![Mobile Screenshot](docs/Screenshot_Mobile.png)
+
 # Running the app
 ## Generate a tumblr api key
 1. Generate a tumblr api key as described [here](https://www.tumblr.com/docs/en/api/v2#what_you_need).
