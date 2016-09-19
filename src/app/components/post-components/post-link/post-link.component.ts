@@ -4,7 +4,9 @@ import { Post } from '../../../data.types';
 @Component({
     selector: 'post-link',
     template: `
-        <a [tumblrLink]="post.url">{{post.title}}</a>
+        <a [tumblrLink]="post.url">
+            <post-title [post]="post"></post-title>
+        </a>
         <p *ngIf="post.excerpt">{{post.excerpt}}</p>
         <div *ngIf="post.description" [innerHTML]="post.description" 
         tumblrLink tumblrEmbeddedImage></div>
