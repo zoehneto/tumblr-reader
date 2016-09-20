@@ -16,7 +16,7 @@ textarea,
 
 //Styles for comments in text post or caption
 blockquote {
-  border-left: 3px solid $grey;
+  border-left: 3px solid $primary;
   margin: 1rem 0;
   padding: 0 1.25rem;
 }
@@ -27,7 +27,7 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: underline;
-  color: $dark-grey;
+  color: $primary-dark;
 }
 
 a:hover {

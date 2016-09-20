@@ -1,5 +1,6 @@
 $black: #000;
 $white: #fff;
-$light-grey: #eee;
-$grey: #d3d3d3;
-$dark-grey: #6e6e6e;
+
+$primary: #d3d3d3;
+$primary-light: lighten($primary, 10%);
+$primary-dark: darken($primary, 40%);

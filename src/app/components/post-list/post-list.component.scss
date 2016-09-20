@@ -19,12 +19,12 @@ ul {
 }
 
 .post {
-  border: 1px solid $grey;
+  border: 1px solid $primary;
   border-radius: 4px;
   margin: 2.5rem 0;
   overflow: hidden;
 }
 
 .post.recent {
-  box-shadow: 0 0 6px 6px $grey;
+  box-shadow: 0 0 6px 6px $primary;
 }

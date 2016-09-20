@@ -3,7 +3,7 @@
 p {
   margin: 0.5rem 0;
   padding: 1rem 0 1rem 1rem;
-  background-color: $light-grey;
+  background-color: $primary-light;
   border-radius: 4px;
 }
 
@@ -16,7 +16,7 @@ p:last-child {
 }
 
 p:nth-child(odd) {
-  background-color: $grey;
+  background-color: $primary;
 }
 
 .label {
