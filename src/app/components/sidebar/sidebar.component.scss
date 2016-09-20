@@ -38,7 +38,7 @@ ul {
 }
 
 .blog:not(.recent) a {
-  color: $primary-dark;
+  color: $font-color-light;
 }
 
 span {
@@ -56,6 +56,6 @@ a:hover,
 a:active {
   display: table-cell;
   vertical-align: middle;
-  color: $black;
+  color: $font-color;
   text-decoration: none;
 }

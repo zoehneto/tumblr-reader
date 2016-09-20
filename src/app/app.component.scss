@@ -27,11 +27,11 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: underline;
-  color: $primary-dark;
+  color: $font-color-light;
 }
 
 a:hover {
-  color: $black;
+  color: $font-color;
 }
 
 .center {
