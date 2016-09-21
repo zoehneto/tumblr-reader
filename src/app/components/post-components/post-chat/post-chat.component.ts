@@ -5,7 +5,8 @@ import { Post } from '../../../data.types';
     selector: 'post-chat',
     template: `
         <p *ngFor="let message of post.dialogue">
-            <span class="label">{{message.label}}</span> {{message.phrase}}
+            <span class="label" [innerHTML]="message.label"></span>
+            <span [innerHTML]="message.phrase"></span>
         </p>
     `,
     styleUrls: ['./post-chat.component.scss']
