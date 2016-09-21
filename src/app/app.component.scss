@@ -37,3 +37,7 @@ a:hover {
 .center {
   text-align: center;
 }
+
+.no-margin > *:first-child {
+  margin-top: 0;
+}
