@@ -13,6 +13,7 @@ export class Settings {
     }
 }
 
+/* tslint:disable:variable-name */
 export class Blog {
     name: string;
     description: string;
@@ -25,7 +26,7 @@ export class Blog {
     }
 }
 
-export interface Post {
+export class Post {
     id: number;
     title: string;
     summary: string;
@@ -55,7 +56,7 @@ export interface VideoPlayer {
     embed_code: string;
 }
 
-export interface Photo {
+export class Photo {
     alt_sizes: PhotoSize[];
     original_size: PhotoSize;
     caption: string;
@@ -82,3 +83,4 @@ export interface Response {
     posts: Post[];
     total_posts: number;
 }
+/* tslint:enable:variable-name */

@@ -8,50 +8,50 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/core": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/router": "3.0.0",
+    "@angular/common": "2.1.0",
+    "@angular/compiler": "2.1.0",
+    "@angular/core": "2.1.0",
+    "@angular/http": "2.1.0",
+    "@angular/platform-browser": "2.1.0",
+    "@angular/platform-browser-dynamic": "2.1.0",
+    "@angular/forms": "2.1.0",
+    "@angular/router": "3.1.0",
 
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.3",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.23",
 
-    "localforage": "^1.4.1",
+    "localforage": "^1.4.3",
     "purecss": "^0.6.0",
-    "angular2-infinite-scroll": "0.2.1",
-    "angular2-hotkeys": "^0.3.0",
-    "moment": "^2.14.1"
+    "angular2-infinite-scroll": "0.2.4",
+    "angular2-hotkeys": "^0.4.0",
+    "moment": "^2.15.1"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.28",
-    "@types/node": "^6.0.36",
-    "@types/localforage": "^0.0.29",
-    "@types/mousetrap": "^1.5.30",
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.45",
+    "@types/localforage": "^0.0.31",
+    "@types/mousetrap": "^1.5.32",
 
-    "typescript": "2.0.2",
+    "typescript": "^2.0.3",
     "tslint": "^3.15.1",
     "codelyzer": "1.0.0-beta.2",
-    "typings": "^1.3.3",
-    "node-sass": "^3.8.0",
+    "typings": "^1.4.0",
+    "node-sass": "^3.10.1",
     "sass-lint": "^1.9.1",
     "rimraf": "^2.5.3",
 
     "angular2-template-loader": "^0.5.0",
     "sass-loader": "^4.0.1",
-    "css-loader": "^0.24.0",
+    "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",
     "html-loader": "^0.4.3",
     "null-loader": "^0.1.1",
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
-    "ts-loader": "^0.8.2",
+    "awesome-typescript-loader": "^2.2.4",
     "tslint-loader": "^2.1.5",
 
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
@@ -59,7 +59,7 @@
     "webpack-merge": "^0.14.0",
     "sasslint-webpack-plugin": "^1.0.4",
 
-    "webpack": "2.1.0-beta.22",
-    "webpack-dev-server": "^2.1.0-beta.4"
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^2.1.0-beta.9"
   }
 }

@@ -3,6 +3,8 @@ var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
+var path = require('path');
+
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
@@ -16,14 +18,21 @@ module.exports = webpackMerge(commonConfig, {
 
     plugins: [
         new ExtractTextPlugin('[name].css'),
-        new webpack.ProgressPlugin({})
+        new webpack.ProgressPlugin({}),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                tslint: {
+                    emitErrors: false,
+                    failOnHint: false,
+                    resourcePath: 'src'
+                },
+                sassLoader: {
+                    includePaths: [path.resolve(__dirname, 'src', 'scss')]
+                },
+                context: '/'
+            }
+        })
     ],
-
-    tslint: {
-        emitErrors: false,
-        failOnHint: false,
-        resourcePath: 'src'
-    },
 
     devServer: {
         historyApiFallback: true,

@@ -13,5 +13,9 @@
       "localforage",
       "mousetrap"
     ]
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
   }
 }

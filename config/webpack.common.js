@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var SassLintPlugin = require('sasslint-webpack-plugin');
+var ForkCheckerPlugin = ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var helpers = require('./helpers');
 
 module.exports = {
@@ -11,20 +12,20 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['.js', '.ts']
     },
 
     module: {
-        preLoaders: [
-            {
-                test: /\.ts$/, loader: 'tslint-loader', exclude: [ helpers.root('node_modules') ]
-            }
-        ],
-
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
-                loaders: ['ts', 'angular2-template-loader']
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                exclude: [ helpers.root('node_modules') ]
+            },
+            {
+                test: /\.ts$/,
+                loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
             {
                 test: /\.html$/,
@@ -63,6 +64,8 @@ module.exports = {
     },
 
     plugins: [
+        new ForkCheckerPlugin(),
+
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'polyfills']
         }),

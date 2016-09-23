@@ -3,6 +3,7 @@ var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
+var path = require('path');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -16,22 +17,32 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: '[id].[hash].chunk.js'
     },
 
-    htmlLoader: {
-        minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        customAttrSurround: [
-            [/#/, /(?:)/],
-            [/\*/, /(?:)/],
-            [/\[?\(?/, /(?:)/]
-        ],
-        customAttrAssign: [/\)?\]?=/]
-    },
-
     plugins: [
         new webpack.LoaderOptionsPlugin({
             minimize: true,
-            debug: false
+            debug: false,
+            options: {
+                tslint: {
+                    emitErrors: true,
+                    failOnHint: true,
+                    resourcePath: 'src'
+                },
+                sassLoader: {
+                    includePaths: [path.resolve(__dirname, 'src', 'scss')]
+                },
+                context: '/',
+                htmlLoader: {
+                    minimize: true,
+                    removeAttributeQuotes: false,
+                    caseSensitive: true,
+                    customAttrSurround: [
+                        [/#/, /(?:)/],
+                        [/\*/, /(?:)/],
+                        [/\[?\(?/, /(?:)/]
+                    ],
+                    customAttrAssign: [/\)?\]?=/]
+                }
+            }
         }),
         new webpack.NoErrorsPlugin(),
         // new webpack.optimize.DedupePlugin(), // see: https://github.com/webpack/webpack/issues/2644
@@ -48,11 +59,6 @@ module.exports = webpackMerge(commonConfig, {
                 'ENV': JSON.stringify(ENV)
             }
         })
-    ],
+    ]
 
-    tslint: {
-        emitErrors: true,
-        failOnHint: true,
-        resourcePath: 'src'
-    }
 });
