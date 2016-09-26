@@ -22,9 +22,9 @@ import { Title } from '@angular/platform-browser';
     styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+    blogText: string = '';
+    updatedInDays: number;
     private blogs: Blog[];
-    private blogText: string = '';
-    private updatedInDays: number;
     constructor(private settingsService: SettingsService, private titleService: Title) {
     }
 

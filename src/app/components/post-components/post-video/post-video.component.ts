@@ -11,7 +11,7 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
 })
 export class PostVideoComponent implements OnChanges {
     @Input('postPlayers') postPlayers: VideoPlayer[];
-    private player: any;
+    player: any;
     constructor(private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}
 

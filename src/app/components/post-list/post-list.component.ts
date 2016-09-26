@@ -34,14 +34,14 @@ import { SettingsService } from '../../shared/settings.service';
     styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
-    private blog: Blog;
-    private posts: Post[];
+    blog: Blog;
+    posts: Post[];
+    message: string;
+    tagParam: string;
+    postId: number;
+    loading: boolean;
     private postCounter: number;
     private totalPosts: number;
-    private message: string;
-    private tagParam: string;
-    private postId: number;
-    private loading: boolean;
     private updatedInDays: number = 0;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,

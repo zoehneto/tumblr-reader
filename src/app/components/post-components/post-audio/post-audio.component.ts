@@ -10,7 +10,7 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
 })
 export class PostAudioComponent implements OnChanges {
     @Input('postPlayer') postPlayer: string;
-    private player: any;
+    player: any;
     constructor(private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}
 
