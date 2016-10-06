@@ -79,11 +79,12 @@ export class SettingsService {
         return new Promise<Settings>(resolve => {
             let blogObservables: Observable<Blog>[] = [];
             settings.blogs.forEach(blog => {
-                blogObservables.push(this.tumblrService.getBlogInfo(blog.name));
+                blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
+                    .catch(error => Observable.of(null)));
             });
 
             Observable.forkJoin(blogObservables).subscribe(blogs => {
-                    settings.blogs = blogs;
+                    settings.blogs = blogs.filter(element => element != null);
                     settings.lastUpdated = new Date();
                     localforage.setItem('settings', this.dateToNumber(settings))
                         .then(newSettings => resolve(this.numberToDate(newSettings)));
