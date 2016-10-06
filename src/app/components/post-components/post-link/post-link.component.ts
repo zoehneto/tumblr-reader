@@ -4,12 +4,15 @@ import { Post } from '../../../data.types';
 @Component({
     selector: 'post-link',
     template: `
-        <a [tumblrLink]="post.url">
+        <a *ngIf="post.title" [tumblrLink]="post.url">
             <post-title [post]="post"></post-title>
         </a>
         <p *ngIf="post.excerpt">{{post.excerpt}}</p>
-        <div *ngIf="post.description" [innerHTML]="post.description" 
+        <div *ngIf="post.description && post.title" [innerHTML]="post.description"
         tumblrLink tumblrEmbeddedImage></div>
+        <a *ngIf="post.description && !post.title" [tumblrLink]="post.url">
+            <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
+        </a>
     `,
     styleUrls: ['./post-link.component.scss']
 })
