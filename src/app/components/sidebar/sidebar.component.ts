@@ -26,7 +26,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-    private blogs: Blog[];
+    blogs: Blog[];
     private updatedInDays: number = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
         private blogItemSwitch: BlogItemSwitch) {
@@ -66,11 +66,11 @@ export class SidebarComponent implements OnInit {
             });
     }
 
-    private selected(blogName: string) {
+    selected(blogName: string) {
         return location.pathname.indexOf(blogName) > -1;
     }
 
-    private isRecent(blog: Blog): boolean {
+    isRecent(blog: Blog): boolean {
         return this.updatedInDays === 0
             || this.settingsService.isUpdatedInDays(blog.updated, this.updatedInDays);
     }
