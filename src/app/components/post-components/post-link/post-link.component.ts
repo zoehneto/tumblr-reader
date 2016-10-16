@@ -13,6 +13,9 @@ import { Post } from '../../../data.types';
         <a *ngIf="post.description && !post.title" [tumblrLink]="post.url">
             <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
         </a>
+        <a *ngIf="post.publisher && !post.description && !post.title" [tumblrLink]="post.url">
+            <div [innerHTML]="post.publisher" tumblrLink tumblrEmbeddedImage></div>
+        </a>
     `,
     styleUrls: ['./post-link.component.scss']
 })
