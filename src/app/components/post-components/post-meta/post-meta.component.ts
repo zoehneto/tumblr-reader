@@ -47,11 +47,11 @@ export class PostMetaComponent {
         this.showReplies = false;
     }
 
-    private toggleReblogs() {
+    toggleReblogs() {
         this.showReblogs = !this.showReblogs;
     }
 
-    private toggleReplies() {
+    toggleReplies() {
         this.showReplies = !this.showReplies;
     }
 }

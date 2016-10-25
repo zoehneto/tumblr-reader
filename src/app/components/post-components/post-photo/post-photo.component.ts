@@ -17,7 +17,7 @@ export class PostPhotoComponent {
     constructor(private fullscreenService: FullscreenService) {
     }
 
-    private createSrcSet(photo: Photo): string {
+    createSrcSet(photo: Photo): string {
         if (photo.alt_sizes.length === 0) {
             return photo.original_size.url;
         }
@@ -29,7 +29,7 @@ export class PostPhotoComponent {
         return srcset.substring(0, srcset.lastIndexOf(', '));
     }
 
-    private fullScreen(event: any) {
+    fullScreen(event: any) {
         let elem = event.currentTarget;
         this.fullscreenService.requestFullscreen(elem);
     }

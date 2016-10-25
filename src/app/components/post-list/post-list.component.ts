@@ -96,7 +96,7 @@ export class PostListComponent implements OnInit {
         });
     }
 
-    private isRecent(post: Post): boolean {
+    isRecent(post: Post): boolean {
         return this.updatedInDays > 0
             && this.settingsService.isUpdatedInDays(post.date, this.updatedInDays);
     }

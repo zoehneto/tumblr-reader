@@ -11,7 +11,7 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
 })
 export class PostTextComponent implements OnChanges {
     @Input('post') post: Post;
-    private body: any;
+    body: any;
     constructor(private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}
 
