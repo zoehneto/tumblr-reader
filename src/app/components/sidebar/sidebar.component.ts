@@ -18,7 +18,9 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
                     <span>
                         <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
                     </span>
-                    <a [routerLink]="['/blog/',blog.name]">{{blog.title}}</a>
+                    <a [routerLink]="['/blog/',blog.name]">
+                        {{blog.title ? blog.title : blog.name}}
+                    </a>
                 </li>
             </ul>
         </div>
