@@ -83,6 +83,8 @@ module.exports = {
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             helpers.root('src')
-        )
+        ),
+
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
     ]
 };
