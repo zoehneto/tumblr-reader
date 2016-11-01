@@ -1,7 +1,7 @@
 export abstract class ItemSwitch<T> {
     protected loadMoreItems: Function;
 
-    public setLoadMoreItemsCallback(loadMoreItems?: Function) {
+    public setLoadMoreItemsCallback(loadMoreItems?: () => Promise<T[]>) {
         this.loadMoreItems = loadMoreItems;
     }
 
@@ -20,7 +20,9 @@ export abstract class ItemSwitch<T> {
 
             if (this.loadMoreItems && this.moreItemsNeeded(items, currentItemIndex,
                     nextItemIndex)) {
-                this.loadMoreItems();
+                this.loadMoreItems().then(updatedItems => {
+                    this.switchToItem(updatedItems[nextItemIndex]);
+                });
             }
 
             if (nextItemIndex > -1 && nextItemIndex < items.length) {

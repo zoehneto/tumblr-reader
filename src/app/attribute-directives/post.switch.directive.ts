@@ -1,10 +1,10 @@
-import { Directive, ElementRef, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, Input } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { PostItemSwitch } from '../item-switch/post.item.switch';
 
 @Directive({ selector: '[postSwitch]' })
 export class PostSwitchDirective implements OnInit, OnDestroy {
-    @Output() moreItemsNeeded = new EventEmitter();
+    @Input('loadMoreItems') loadMoreItems: () => Promise<any>;
     private hotkeys: Hotkey[];
     private el: ElementRef;
     constructor(el: ElementRef, private hotkeysService: HotkeysService,
@@ -13,7 +13,7 @@ export class PostSwitchDirective implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.postItemSwitch.setLoadMoreItemsCallback(this.onMoreItemsNeeded.bind(this));
+        this.postItemSwitch.setLoadMoreItemsCallback(this.moreItemsNeeded.bind(this));
         this.hotkeys = [
             new Hotkey('j', (event: KeyboardEvent): boolean => {
                 this.postItemSwitch.showNextItem(this.getElements(this.el));
@@ -30,8 +30,12 @@ export class PostSwitchDirective implements OnInit, OnDestroy {
         this.hotkeysService.remove(this.hotkeys);
     }
 
-    onMoreItemsNeeded() {
-        this.moreItemsNeeded.emit('load');
+    moreItemsNeeded(): Promise<HTMLElement[]> {
+        return new Promise((resolve, reject) => {
+           this.loadMoreItems()
+               .then(() => resolve(this.getElements(this.el)))
+               .catch(() => reject(this.getElements(this.el)));
+        });
     }
 
     private getElements(el: ElementRef): HTMLElement[] {

@@ -18,8 +18,8 @@ import { SettingsService } from '../../shared/settings.service';
         
         <div class="pure-u-lg-1-5"></div>
         <div class="pure-u-1 pure-u-lg-3-5">
-            <ul postSwitch (moreItemsNeeded)="onScroll()" infinite-scroll
-            [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
+            <ul postSwitch (moreItemsNeeded)="onScroll()" [loadMoreItems]="onScroll.bind(this)"
+            infinite-scroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post {{isRecent(post) ? 'recent' : ''}}">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
@@ -64,40 +64,45 @@ export class PostListComponent implements OnInit {
         });
     }
 
-    onScroll() {
-        if (this.postCounter < this.totalPosts && !this.loading) {
-            this.loadPosts();
-        }
-    }
-
-    loadPosts() {
-        this.loading = true;
-        this.message = 'Loading ...';
-        this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam,
-             this.postId).subscribe(res => {
-            this.blog = res.blog;
-            this.posts = this.posts.concat(res.posts);
-            this.totalPosts = res.total_posts;
-            this.postCounter += res.posts.length;
-
-            this.titleService.setTitle(res.blog.title !== '' ? res.blog.title : res.blog.name);
-
-            this.message = null;
-            this.loading = false;
-        }, err => {
-            let response = err.json();
-            if (response && response.meta) {
-                this.message = response.meta.msg;
-                this.titleService.setTitle(response.meta.msg);
-            }else {
-                this.message = 'Error Loading Data';
-                this.titleService.setTitle('Error Loading Data');
-            }
-        });
-    }
-
     isRecent(post: Post): boolean {
         return this.updatedInDays > 0
             && this.settingsService.isUpdatedInDays(post.date, this.updatedInDays);
+    }
+
+    onScroll(): Promise<any> {
+        if (this.postCounter < this.totalPosts && !this.loading) {
+            return this.loadPosts();
+        }
+        return new Promise((resolve, reject) => reject('Already loading or maximum reached'));
+    }
+
+    private loadPosts(): Promise<any> {
+        this.loading = true;
+        this.message = 'Loading ...';
+        return new Promise((resolve, reject) => {
+            this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam,
+                 this.postId).subscribe(res => {
+                this.blog = res.blog;
+                this.posts = this.posts.concat(res.posts);
+                this.totalPosts = res.total_posts;
+                this.postCounter += res.posts.length;
+
+                this.titleService.setTitle(res.blog.title !== '' ? res.blog.title : res.blog.name);
+
+                this.message = null;
+                this.loading = false;
+                resolve();
+            }, err => {
+                let response = err.json();
+                if (response && response.meta) {
+                    this.message = response.meta.msg;
+                    this.titleService.setTitle(response.meta.msg);
+                }else {
+                    this.message = 'Error Loading Data';
+                    this.titleService.setTitle('Error Loading Data');
+                }
+                reject();
+            });
+        });
     }
 }
