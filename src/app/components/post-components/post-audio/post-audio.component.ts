@@ -4,7 +4,7 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
 @Component({
     selector: 'post-audio',
     template: `
-        <div [innerHTML]="player" embedBehaviour></div>
+        <div switch-target [innerHTML]="player" embedBehaviour></div>
     `,
     styleUrls: ['./post-audio.component.scss']
 })

@@ -5,7 +5,7 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
 @Component({
     selector: 'post-video',
     template: `
-        <div [innerHTML]="player" videoBehaviour embedBehaviour></div>
+        <div switch-target [innerHTML]="player" videoBehaviour embedBehaviour></div>
     `,
     styleUrls: ['./post-video.component.scss']
 })

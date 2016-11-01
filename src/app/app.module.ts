@@ -8,7 +8,7 @@ import { ROUTES } from './app.routes';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { BlogItemSwitch } from './item-switch/blog.item.switch';
-import { PostItemSwitch } from './item-switch/post.item.switch';
+import { HtmlItemSwitch } from './item-switch/html.item.switch';
 import { FaviconService } from './shared/favicon.service';
 import { CustomSanitizationService } from './shared/custom.sanitization.service';
 import { SettingsService } from './shared/settings.service';
@@ -44,19 +44,21 @@ from './components/post-components/post-reblogs/post-reblogs.component';
 import { PostRepliesComponent }
 from './components/post-components/post-replies/post-replies.component';
 import { FullscreenService } from './shared/fullscreen.service';
+import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
         PostComponent, PostAnswerComponent, PostAudioComponent, PostCaptionComponent,
         PostChatComponent, PostLinkComponent, PostMetaComponent, PostPhotoComponent,
         PostQuoteComponent, PostTextComponent, PostTitleComponent, PostVideoComponent,
-        EmbedBehaviourDirective, PostSwitchDirective, TumblrEmbeddedImageDirective,
-        TumblrImageDirective, TumblrLinkDirective, VideoBehaviourDirective,
-        ResponsiveMenuComponent, PostReblogsComponent, PostRepliesComponent],
+        EmbedBehaviourDirective, PostSwitchDirective, SubPostSwitchDirective,
+        TumblrEmbeddedImageDirective, TumblrImageDirective, TumblrLinkDirective,
+        VideoBehaviourDirective, ResponsiveMenuComponent, PostReblogsComponent,
+        PostRepliesComponent],
     imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
         InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
-        FaviconService, PostItemSwitch, BlogItemSwitch, FullscreenService],
+        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

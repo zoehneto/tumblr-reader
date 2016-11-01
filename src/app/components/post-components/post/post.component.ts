@@ -12,7 +12,7 @@ import { Post, Blog } from '../../../data.types';
             <post-audio *ngIf="post.type == 'audio'" [postPlayer]="post.player">
             </post-audio>
         </div>
-        <div class="padded">
+        <div switch-target class="padded">
             <post-title *ngIf="post.title && post.type != 'link'" [post]="post"></post-title>
         
             <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>

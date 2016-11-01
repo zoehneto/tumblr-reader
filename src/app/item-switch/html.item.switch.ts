@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ItemSwitch } from './item.switch';
 
 @Injectable()
-export class PostItemSwitch extends ItemSwitch<HTMLElement> {
+export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
     protected getCurrentItemIndex(elements: HTMLElement[]): number {
         let clientRects: ClientRect[] = elements.map(element => element.getBoundingClientRect());
         for (let i = 0; i < clientRects.length; i++) {

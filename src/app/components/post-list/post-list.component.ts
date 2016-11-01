@@ -18,7 +18,8 @@ import { SettingsService } from '../../shared/settings.service';
         
         <div class="pure-u-lg-1-5"></div>
         <div class="pure-u-1 pure-u-lg-3-5">
-            <ul postSwitch (moreItemsNeeded)="onScroll()" [loadMoreItems]="onScroll.bind(this)"
+            <ul postSwitch [loadMoreItems]="onScroll.bind(this)"
+            subPostSwitch [loadMoreItems]="onScroll.bind(this)"
             infinite-scroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post {{isRecent(post) ? 'recent' : ''}}">

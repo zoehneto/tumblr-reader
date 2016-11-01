@@ -3,14 +3,16 @@ import { HotkeysService } from 'angular2-hotkeys';
 import { HtmlItemSwitch } from '../item-switch/html.item.switch';
 import { PostSwitch } from './post.switch';
 
-@Directive({ selector: '[postSwitch]' })
-export class PostSwitchDirective extends PostSwitch {
+@Directive({ selector: '[subPostSwitch]' })
+export class SubPostSwitchDirective extends PostSwitch {
     constructor(el: ElementRef, hotkeysService: HotkeysService,
                 htmlItemSwitch: HtmlItemSwitch) {
-        super(el, hotkeysService, htmlItemSwitch, 'j', 'k');
+        super(el, hotkeysService, htmlItemSwitch, 'n', 'm');
     }
 
     protected getElements(el: ElementRef): HTMLElement[] {
-        return this.toArray(el.nativeElement.children);
+        return this.flatten(this.toArray(el.nativeElement.children).map((element: HTMLElement) => {
+            return this.toArray(element.querySelectorAll('*[switch-target]'));
+        }));
     };
 }

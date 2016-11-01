@@ -10,12 +10,16 @@ This app is a simple browser based feed reader for tumblr blogs, built on the tu
 
 # Using the app
 ## Shortcuts
-- Next Post: `j`
-- Previous Post: `k`
+- Next part of post / next post: `n`
+- Previous part of post / previous post: `m`
 
 
-- Next Blog: `shift + j`
-- Previous Blog: `shift + k`
+- Next post: `j`
+- Previous post: `k`
+
+
+- Next blog: `shift + j`
+- Previous blog: `shift + k`
 
 # Running the app
 ## Generate a tumblr api key
