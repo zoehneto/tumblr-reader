@@ -22,7 +22,7 @@ export abstract class ItemSwitch<T> {
                     nextItemIndex)) {
                 this.loadMoreItems().then(updatedItems => {
                     this.switchToItem(updatedItems[nextItemIndex]);
-                });
+                }).catch(() => {});
             }
 
             if (nextItemIndex > -1 && nextItemIndex < items.length) {
