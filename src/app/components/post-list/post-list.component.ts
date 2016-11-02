@@ -5,6 +5,7 @@ import { TumblrService } from '../../shared/tumblr.service';
 import { FaviconService } from '../../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 import { SettingsService } from '../../shared/settings.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'post-list',
@@ -44,6 +45,7 @@ export class PostListComponent implements OnInit {
     private postCounter: number;
     private totalPosts: number;
     private updatedInDays: number = 0;
+    private subscription: Subscription;
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
                 private settingsService: SettingsService) {
@@ -81,8 +83,11 @@ export class PostListComponent implements OnInit {
         this.loading = true;
         this.message = 'Loading ...';
         return new Promise((resolve, reject) => {
-            this.tumblrService.getPosts(this.blog.name, this.postCounter, this.tagParam,
-                 this.postId).subscribe(res => {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
+            this.subscription = this.tumblrService.getPosts(this.blog.name, this.postCounter,
+                this.tagParam, this.postId).subscribe(res => {
                 this.blog = res.blog;
                 this.posts = this.posts.concat(res.posts);
                 this.totalPosts = res.total_posts;
