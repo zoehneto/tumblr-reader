@@ -27,6 +27,6 @@ export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
     }
 
     protected switchToItem(element: HTMLElement) {
-        window.document.body.scrollTop += element.getBoundingClientRect().top;
+        window.document.body.scrollTop += Math.round(element.getBoundingClientRect().top);
     }
 }
