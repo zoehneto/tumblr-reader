@@ -29,36 +29,36 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: 'html'
+                loader: 'html-loader'
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]'
+                loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style',
-                    loader: 'css?sourceMap'
+                    fallbackLoader: 'style-loader',
+                    loader: 'css-loader?sourceMap'
                 })
             },
             {
                 test: /\.scss$/,
                 exclude: helpers.root('src', 'app'),
                 loaders: [ExtractTextPlugin.extract({
-                    fallbackLoader: "style",
-                    loader: "css?sourceMap"
+                    fallbackLoader: "style-loader",
+                    loader: "css-loader?sourceMap"
                 }), 'sass-loader']
             },
             {
                 test: /\.scss$/,
                 include: helpers.root('src', 'app'),
-                loaders: ['raw', 'sass-loader']
+                loaders: ['raw-loader', 'sass-loader']
             },
             {
                 test: /\.json$/,
-                loader: 'json'
+                loader: 'json-loader'
             }
         ]
     },
