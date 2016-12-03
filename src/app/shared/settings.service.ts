@@ -21,11 +21,10 @@ export class SettingsService {
             this.getSettings().then(settings => {
                 settings.blogs = blogs;
                 this.setSettings(settings)
-                    .then(storedSettings => {
+                    .subscribe(storedSettings => {
                         this.subjectBlogs.next(storedSettings.blogs);
                         subscriber.next(storedSettings.blogs);
-                        subscriber.complete();
-                    });
+                    }, error => subscriber.error(error), () => subscriber.complete());
             });
         });
     }
@@ -40,11 +39,10 @@ export class SettingsService {
             this.getSettings().then(settings => {
                 settings.updatedInDays = days;
                 this.setSettings(settings)
-                    .then(storedSettings => {
+                    .subscribe(storedSettings => {
                         this.subjectUpdate.next(storedSettings.updatedInDays);
                         subscriber.next(storedSettings.updatedInDays);
-                        subscriber.complete();
-                    });
+                    }, error => subscriber.error(error), () => subscriber.complete());
             });
         });
     }
@@ -58,10 +56,10 @@ export class SettingsService {
             localforage.getItem('settings').then((settings: any) => {
                 if (settings === null) {
                     this.setSettings(new Settings(new Date(0)))
-                        .then(newSettings => resolve(newSettings));
+                        .subscribe(newSettings => resolve(newSettings));
                 } else if (this.isOutdated(new Date(settings.lastUpdated))) {
                     this.setSettings(this.numberToDate(settings))
-                        .then(newSettings => resolve(newSettings));
+                        .subscribe(newSettings => resolve(newSettings));
                 } else {
                     resolve(this.numberToDate(settings));
                 }
@@ -69,25 +67,36 @@ export class SettingsService {
         });
     }
 
-    private setSettings(settings: Settings): Promise<Settings> {
+    private setSettings(settings: Settings): Observable<Settings> {
         if (settings.blogs.length === 0) {
-            return new Promise<Settings>(resolve => {
+            return new Observable<Settings>(subscriber => {
                 localforage.setItem('settings', this.dateToNumber(settings))
-                    .then(storedSettings => resolve(this.numberToDate(storedSettings)));
+                    .then(storedSettings => subscriber.next(this.numberToDate(storedSettings)));
             });
         }
-        return new Promise<Settings>(resolve => {
+        return new Observable<Settings>(subscriber => {
             let blogObservables: Observable<Blog>[] = [];
+            let errors: string[] = [];
             settings.blogs.forEach(blog => {
                 blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
-                    .catch(error => Observable.of(null)));
+                    .catch(() => {
+                        errors.push('Blog \'' + blog.name + '\' not found');
+                        return Observable.of(null);
+                    }));
             });
 
             Observable.forkJoin(blogObservables).subscribe(blogs => {
                     settings.blogs = blogs.filter(element => element != null);
                     settings.lastUpdated = new Date();
                     localforage.setItem('settings', this.dateToNumber(settings))
-                        .then(newSettings => resolve(this.numberToDate(newSettings)));
+                        .then(newSettings => {
+                            subscriber.next(this.numberToDate(newSettings));
+                            if (errors.length === 0) {
+                                subscriber.complete();
+                            }else {
+                                subscriber.error(errors);
+                            }
+                        });
                 });
         });
     }

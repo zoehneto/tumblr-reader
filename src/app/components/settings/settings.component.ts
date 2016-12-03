@@ -16,6 +16,9 @@ import { Title } from '@angular/platform-browser';
                 <div class="center">
                     <button (click)="saveSettings()" type="button">Save</button>
                 </div>
+                <div class="center">
+                    <p *ngFor="let error of errors">{{error}}</p>
+                </div>
             </div>
         </div>
     `,
@@ -24,6 +27,7 @@ import { Title } from '@angular/platform-browser';
 export class SettingsComponent implements OnInit {
     blogText: string = '';
     updatedInDays: number;
+    errors: string[] = [];
     private blogs: Blog[];
     constructor(private settingsService: SettingsService, private titleService: Title) {
     }
@@ -39,8 +43,10 @@ export class SettingsComponent implements OnInit {
     }
 
     saveSettings() {
+        this.errors = [];
         this.settingsService.setUpdatedInDays(this.updatedInDays).subscribe(days => {
-            this.settingsService.setBlogs(this.textToBlogs(this.blogText)).subscribe();
+            this.settingsService.setBlogs(this.textToBlogs(this.blogText))
+                .subscribe(() => {}, errors => this.errors = errors);
         });
     }
 
