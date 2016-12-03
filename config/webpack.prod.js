@@ -45,7 +45,6 @@ module.exports = webpackMerge(commonConfig, {
             }
         }),
         new webpack.NoErrorsPlugin(),
-        // new webpack.optimize.DedupePlugin(), // see: https://github.com/webpack/webpack/issues/2644
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             beautify: false,
