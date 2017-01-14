@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../../data.types';
 import { SettingsService } from '../../shared/settings.service';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys/angular2-hotkeys';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
 
 @Component({
