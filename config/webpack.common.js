@@ -3,7 +3,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var SassLintPlugin = require('sasslint-webpack-plugin');
 var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-var ngtools = require('@ngtools/webpack');
 var helpers = require('./helpers');
 
 module.exports = {
@@ -23,10 +22,6 @@ module.exports = {
                 enforce: 'pre',
                 use: 'tslint-loader',
                 exclude: [ helpers.root('node_modules') ]
-            },
-            {
-                test: /\.ts$/,
-                use: ['@ngtools/webpack']
             },
             {
                 test: /\.html$/,
@@ -80,10 +75,6 @@ module.exports = {
             ignorePlugins: ['extract-text-webpack-plugin']
         }),
 
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-
-        new ngtools.AotPlugin({
-            tsConfigPath: helpers.root('tsconfig.json')
-        })
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
     ]
 };

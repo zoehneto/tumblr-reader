@@ -5,3 +5,4 @@ typings/
 **/*npm-debug.log*
 src/app/config/*
 dist
+*.d.ts
