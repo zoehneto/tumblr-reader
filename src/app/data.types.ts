@@ -29,6 +29,7 @@ export class Blog {
 export class Post {
     id: number;
     title: string;
+    description?: string;
     summary: string;
     body: string;
     date: Date;
@@ -49,6 +50,18 @@ export class Post {
     replies: Note[];
     reblogs: Note[];
     likes: number;
+    asking_url?: string;
+    asking_name?: string;
+    dialogue?: Dialogue;
+    publisher?: string;
+    source_url?: string;
+    reblogged_from_name?: string;
+    reblogged_from_url?: string;
+}
+
+export interface Dialogue {
+    label: string;
+    phrase: string;
 }
 
 export interface VideoPlayer {
