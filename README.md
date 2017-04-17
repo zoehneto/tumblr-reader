@@ -49,13 +49,10 @@ with the following content:
 
   ```
   <IfModule mod_rewrite.c>
-      Options Indexes FollowSymLinks
       RewriteEngine On
-      RewriteBase /tumblr-reader
-      RewriteRule ^index\.html$ - [L]
       RewriteCond %{REQUEST_FILENAME} !-f
       RewriteCond %{REQUEST_FILENAME} !-d
-      RewriteRule . index.html [L]
+      RewriteRule (.*) index.html [QA,L]
   </IfModule>
   ```
 

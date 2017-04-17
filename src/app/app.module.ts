@@ -55,8 +55,8 @@ import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.d
         TumblrEmbeddedImageDirective, TumblrImageDirective, TumblrLinkDirective,
         VideoBehaviourDirective, ResponsiveMenuComponent, PostReblogsComponent,
         PostRepliesComponent],
-    imports: [BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, HttpModule, JsonpModule,
-        InfiniteScrollModule, HotkeyModule.forRoot()],
+    imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule, HttpModule,
+        JsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
         FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService],
     bootstrap: [AppComponent]
