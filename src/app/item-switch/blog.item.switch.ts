@@ -27,7 +27,7 @@ export class BlogItemSwitch extends ItemSwitch<Blog> {
     }
 
     private selected(blogName: string) {
-        if (location.pathname.indexOf(blogName) > -1) {
+        if (location.hash.indexOf(blogName) > -1) {
             return true;
         }
         return false;

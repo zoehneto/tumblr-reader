@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit {
     }
 
     selected(blogName: string) {
-        return location.pathname.indexOf(blogName) > -1;
+        return location.hash.indexOf(blogName) > -1;
     }
 
     isRecent(blog: Blog): boolean {
