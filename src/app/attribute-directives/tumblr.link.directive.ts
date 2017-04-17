@@ -40,8 +40,8 @@ export class TumblrLinkDirective implements DoCheck {
         let data = currentHref.split('.tumblr.com/post/');
 
         if (data[1] === undefined) {
-            return '/blog/' + currentHref.substring(0, currentHref.indexOf('.'));
+            return '#/blog/' + currentHref.substring(0, currentHref.indexOf('.'));
         }
-        return '/blog/' + data[0] + '/post/' + data[1].match(/\d+/)[0];
+        return '#/blog/' + data[0] + '/post/' + data[1].match(/\d+/)[0];
     }
 }
