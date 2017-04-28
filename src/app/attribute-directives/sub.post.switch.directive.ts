@@ -14,5 +14,5 @@ export class SubPostSwitchDirective extends PostSwitch {
         return this.flatten(this.toArray(el.nativeElement.children).map((element: HTMLElement) => {
             return this.toArray(element.querySelectorAll('*[switch-target]'));
         }));
-    };
+    }
 }

@@ -14,20 +14,20 @@ import { Post, Blog } from '../../../data.types';
         </div>
         <div switch-target class="padded">
             <post-title *ngIf="post.title && post.type != 'link'" [post]="post"></post-title>
-        
+
             <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>
-            
+
             <post-quote *ngIf="post.type == 'quote'" [post]="post"></post-quote>
-            
+
             <post-chat *ngIf="post.type == 'chat'" [post]="post"></post-chat>
-            
+
             <post-link *ngIf="post.type == 'link'" [post]="post"></post-link>
-            
+
             <post-caption *ngIf="post.caption" [post]="post"></post-caption>
-            
+
             <post-text *ngIf="post.type == 'text' && post.body" [post]="post">
             </post-text>
-            
+
             <post-meta class="meta" [blog]="blog" [post]="post"></post-meta>
         </div>
     `,

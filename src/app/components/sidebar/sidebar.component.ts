@@ -12,7 +12,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
                 <li class="settings {{selected('/settings') ? 'selected' : ''}}">
                     <a [routerLink]="['/settings']">Settings</a>
                 </li>
-                <li *ngFor="let blog of blogs" 
+                <li *ngFor="let blog of blogs"
                 class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}
                 {{isRecent(blog) ? 'recent' : ''}}">
                     <span>

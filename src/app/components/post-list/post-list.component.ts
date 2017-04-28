@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
                 <h1>{{blog.name}}</h1>
             </a>
         </div>
-        
+
         <div class="pure-u-lg-1-5"></div>
         <div class="pure-u-1 pure-u-lg-3-5">
             <ul postSwitch [loadMoreItems]="onScroll.bind(this)"
@@ -28,7 +28,7 @@ import { Subscription } from 'rxjs';
                 </li>
             </ul>
         </div>
-        
+
         <div class="center message">
             <h2 *ngIf="message">{{message}}</h2>
         </div>
