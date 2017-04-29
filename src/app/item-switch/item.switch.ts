@@ -1,5 +1,5 @@
 export abstract class ItemSwitch<T> {
-    protected loadMoreItems: Function;
+    protected loadMoreItems: Function | undefined;
 
     public setLoadMoreItemsCallback(loadMoreItems?: () => Promise<T[]>) {
         this.loadMoreItems = loadMoreItems;
@@ -31,7 +31,7 @@ export abstract class ItemSwitch<T> {
         }
     }
 
-    protected abstract getCurrentItemIndex(items: T[]): number;
+    protected abstract getCurrentItemIndex(items: T[]): number | null;
 
     protected abstract moreItemsNeeded(items: T[], currentItemIndex: number,
         nextItemIndex: number): boolean;

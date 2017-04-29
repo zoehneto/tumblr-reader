@@ -23,7 +23,8 @@ export class TumblrService {
             });
     }
 
-    getPosts(blogId: string, offset: number = 0, tag?: string, id?: number): Observable<Response> {
+    getPosts(blogId: string, offset: number = 0,
+             tag?: string | null, id?: number | null): Observable<Response> {
         let params = new URLSearchParams();
         params.set('api_key', config.consumerKey);
         params.set('reblog_info', 'True');

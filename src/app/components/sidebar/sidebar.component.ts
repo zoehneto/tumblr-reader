@@ -53,8 +53,8 @@ export class SidebarComponent implements OnInit {
                 if (blogs === null) {
                     this.blogs = [];
                 } else {
-                    let updatedBlogs = [];
-                    let notUpdatedBlogs = [];
+                    let updatedBlogs: Blog[] = [];
+                    let notUpdatedBlogs: Blog[] = [];
                     blogs.forEach(blog => {
                         if (this.settingsService.
                             isUpdatedInDays(blog.updated, this.updatedInDays)) {

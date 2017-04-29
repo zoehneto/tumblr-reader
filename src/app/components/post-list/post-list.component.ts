@@ -38,9 +38,9 @@ import { Subscription } from 'rxjs';
 export class PostListComponent implements OnInit {
     blog: Blog;
     posts: Post[];
-    message: string;
-    tagParam: string;
-    postId: number;
+    message: string | null;
+    tagParam: string | null;
+    postId: number | null;
     loading: boolean;
     private postCounter: number;
     private totalPosts: number;

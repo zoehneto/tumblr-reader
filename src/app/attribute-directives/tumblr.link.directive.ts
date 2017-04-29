@@ -23,7 +23,7 @@ export class TumblrLinkDirective implements DoCheck {
         }
     }
 
-    private applySettings(element: any, link: string): void {
+    private applySettings(element: Element, link: string): void {
         element.setAttribute('href', this.getHref(link));
         element.setAttribute('target', '_blank');
     }
@@ -39,7 +39,7 @@ export class TumblrLinkDirective implements DoCheck {
 
         let data = currentHref.split('.tumblr.com/post/');
 
-        if (data[1] === undefined) {
+        if (data[1] === undefined || data[1] === null || data[1].match(/\d+/) == null) {
             return '#/blog/' + currentHref.substring(0, currentHref.indexOf('.'));
         }
         return '#/blog/' + data[0] + '/post/' + data[1].match(/\d+/)[0];

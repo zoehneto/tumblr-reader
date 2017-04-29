@@ -21,7 +21,7 @@ export class Blog {
     updated: Date;
     url: string;
     posts: number;
-    constructor(name?: string) {
+    constructor(name: string) {
         this.name = name;
     }
 }

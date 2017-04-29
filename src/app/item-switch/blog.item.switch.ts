@@ -9,7 +9,7 @@ export class BlogItemSwitch extends ItemSwitch<Blog> {
         super();
     }
 
-    protected getCurrentItemIndex(blogs: Blog[]): number {
+    protected getCurrentItemIndex(blogs: Blog[]): number | null {
         for (let i = 0; i < blogs.length; i++) {
             if (this.selected('/blog/' + blogs[i].name)) {
                 return i;

@@ -75,7 +75,7 @@ export class SettingsService {
             });
         }
         return new Observable<Settings>(subscriber => {
-            let blogObservables: Observable<Blog>[] = [];
+            let blogObservables: Observable<Blog | null>[] = [];
             let errors: string[] = [];
             settings.blogs.forEach(blog => {
                 blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
@@ -86,7 +86,7 @@ export class SettingsService {
             });
 
             Observable.forkJoin(blogObservables).subscribe(blogs => {
-                    settings.blogs = blogs.filter(element => element != null);
+                    settings.blogs = <Blog[]> blogs.filter(element => element != null);
                     settings.lastUpdated = new Date();
                     localforage.setItem('settings', this.dateToNumber(settings))
                         .then(newSettings => {
