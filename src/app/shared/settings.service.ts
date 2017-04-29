@@ -3,6 +3,7 @@ import { Blog, localforage, Settings } from '../data.types';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { TumblrService } from './tumblr.service';
+import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class SettingsService {
@@ -17,7 +18,7 @@ export class SettingsService {
     }
 
     setBlogs(blogs: Blog[]): Observable<Blog[]> {
-        return new Observable<Blog[]>(subscriber => {
+        return new Observable<Blog[]>((subscriber: Subscriber<Blog[]>) => {
             this.getSettings().then(settings => {
                 settings.blogs = blogs;
                 this.setSettings(settings)
@@ -35,7 +36,7 @@ export class SettingsService {
     }
 
     setUpdatedInDays(days: number): Observable<number> {
-        return new Observable<number>(subscriber => {
+        return new Observable<number>((subscriber: Subscriber<number>) => {
             this.getSettings().then(settings => {
                 settings.updatedInDays = days;
                 this.setSettings(settings)
@@ -69,12 +70,12 @@ export class SettingsService {
 
     private setSettings(settings: Settings): Observable<Settings> {
         if (settings.blogs.length === 0) {
-            return new Observable<Settings>(subscriber => {
+            return new Observable<Settings>((subscriber: Subscriber<Settings>) => {
                 localforage.setItem('settings', this.dateToNumber(settings))
                     .then(storedSettings => subscriber.next(this.numberToDate(storedSettings)));
             });
         }
-        return new Observable<Settings>(subscriber => {
+        return new Observable<Settings>((subscriber: Subscriber<Settings>) => {
             let blogObservables: Observable<Blog | null>[] = [];
             let errors: string[] = [];
             settings.blogs.forEach(blog => {
@@ -108,13 +109,13 @@ export class SettingsService {
     private dateToNumber(settings: Settings): any {
         let settingsConverted = <any> settings;
         settingsConverted.lastUpdated = settings.lastUpdated.getTime();
-        settingsConverted.blogs.forEach(blog => blog.updated = blog.updated.getTime());
+        settingsConverted.blogs.forEach((blog: any) => blog.updated = blog.updated.getTime());
         return settingsConverted;
     }
 
     private numberToDate(settings: any): Settings {
         settings.lastUpdated = new Date(settings.lastUpdated);
-        settings.blogs.forEach(blog => blog.updated = new Date(blog.updated));
+        settings.blogs.forEach((blog: any) => blog.updated = new Date(blog.updated));
         return settings;
     }
 }

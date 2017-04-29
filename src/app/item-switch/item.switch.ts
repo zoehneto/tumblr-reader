@@ -1,5 +1,5 @@
 export abstract class ItemSwitch<T> {
-    protected loadMoreItems: Function | undefined;
+    protected loadMoreItems: (() => Promise<T[]>) | undefined;
 
     public setLoadMoreItemsCallback(loadMoreItems?: () => Promise<T[]>) {
         this.loadMoreItems = loadMoreItems;
