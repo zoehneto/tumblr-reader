@@ -55,7 +55,7 @@ module.exports = webpackMerge(commonConfig, {
             }
         }),
 
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
 
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,

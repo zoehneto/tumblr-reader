@@ -12,5 +12,5 @@ export class PostSwitchDirective extends PostSwitch {
 
     protected getElements(el: ElementRef): HTMLElement[] {
         return this.toArray(el.nativeElement.children);
-    };
+    }
 }
