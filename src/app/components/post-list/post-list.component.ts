@@ -99,11 +99,16 @@ export class PostListComponent implements OnInit {
                 this.loading = false;
                 resolve();
             }, err => {
-                let response = err.json();
-                if (response && response.meta) {
-                    this.message = response.meta.msg;
-                    this.titleService.setTitle(response.meta.msg);
-                }else {
+                try {
+                    let response = err.json();
+                    if (response && response.meta) {
+                        this.message = response.meta.msg;
+                        this.titleService.setTitle(response.meta.msg);
+                    } else {
+                        this.message = 'Blog not found';
+                        this.titleService.setTitle('Blog not found');
+                    }
+                } catch (ignored) {
                     this.message = 'Error Loading Data';
                     this.titleService.setTitle('Error Loading Data');
                 }
