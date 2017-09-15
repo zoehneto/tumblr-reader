@@ -16,7 +16,7 @@ import { TumblrService } from './shared/tumblr.service';
 import { Title } from '@angular/platform-browser';
 import { HotkeyModule } from 'angular2-hotkeys';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
 import { PostSwitchDirective } from './attribute-directives/post.switch.directive';
 import { TumblrEmbeddedImageDirective }

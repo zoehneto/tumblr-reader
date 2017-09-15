@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
         <div class="pure-u-1 pure-u-lg-3-5">
             <ul postSwitch [loadMoreItems]="onScroll.bind(this)"
             subPostSwitch [loadMoreItems]="onScroll.bind(this)"
-            infinite-scroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
+            infiniteScroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts" class="post {{isRecent(post) ? 'recent' : ''}}">
                     <complete-post [post]="post" [blog]="blog"></complete-post>
