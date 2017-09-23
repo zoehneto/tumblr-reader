@@ -27,6 +27,10 @@ export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
     }
 
     protected switchToItem(element: HTMLElement) {
-        window.document.body.scrollTop += Math.ceil(element.getBoundingClientRect().top);
+        // Use documentElement as fallback in IE
+        let scrollingElement = document.scrollingElement || document.documentElement;
+        if (scrollingElement) {
+            scrollingElement.scrollTop += Math.ceil(element.getBoundingClientRect().top);
+        }
     }
 }
