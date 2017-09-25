@@ -128,10 +128,11 @@
     ],
 
     /*
-    Angular 2 style guide rules
+    Angular style guide rules
     */
     "directive-selector": [true, "attribute", "", "camelCase"],
     "component-selector": [true, "element", "", "kebab-case"],
+
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -139,10 +140,14 @@
     "no-input-rename": true,
     "no-output-rename": true,
     "no-forward-ref": true,
+    "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
+
     "pipe-naming": [true, "camelCase"],
-    "component-class-suffix": true,
-    "directive-class-suffix": true,
+    "component-class-suffix": [true, "Component"],
+    "directive-class-suffix": [true, "Directive"],
+    "templates-use-public": true,
+    "no-access-missing-member": true,
     "invoke-injectable": true
   }
 }
