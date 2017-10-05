@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Blog, localforage, Settings } from '../data.types';
+import localforage from 'localforage';
+import { Blog, Settings } from '../data.types';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { TumblrService } from './tumblr.service';

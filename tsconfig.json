@@ -10,6 +10,7 @@
     "experimentalDecorators": true,
     "strict": true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [ "./node_modules/@types" ],
     "lib": [
       "dom",
@@ -17,7 +18,6 @@
     ],
     "types": [
       "node",
-      "localforage",
       "mousetrap"
     ]
   },

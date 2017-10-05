@@ -30,7 +30,6 @@
     "@angular/platform-server": "4.3.6",
     "@ngtools/webpack": "1.7.1",
     "@types/core-js": "^0.9.43",
-    "@types/localforage": "^0.0.34",
     "@types/mousetrap": "^1.5.33",
     "@types/node": "^8.0.28",
     "angular2-template-loader": "^0.6.2",

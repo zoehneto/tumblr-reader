@@ -1,5 +1,3 @@
-// Work around missing ES6 module support in localforage
-export const localforage: LocalForage = require('localforage');
 export const config: any = require('./config/config.json');
 
 export class Settings {
