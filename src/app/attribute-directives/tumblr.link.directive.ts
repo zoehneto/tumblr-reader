@@ -30,7 +30,7 @@ export class TumblrLinkDirective implements DoCheck {
 
     private getHref(currentHref: string): string {
         // External link
-        if (currentHref.indexOf('tumblr.com') < 0) {
+        if (currentHref.indexOf('tumblr.com') < 0 || currentHref.indexOf('t.umblr.com') > -1) {
             return currentHref;
         }
 
