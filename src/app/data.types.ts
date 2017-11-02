@@ -89,6 +89,16 @@ export interface Note {
     type: 'reblog' | 'like' | 'reply' | 'posted';
 }
 
+export interface ResponseWrapper {
+    meta: Meta;
+    response: Response;
+}
+
+export interface Meta {
+    status: number;
+    msg: string;
+}
+
 export interface Response {
     blog: Blog;
     posts: Post[];

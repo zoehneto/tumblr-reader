@@ -1,53 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Jsonp, URLSearchParams } from '@angular/http';
-import { Response, config, Blog } from '../data.types';
+import {Response, config, Blog, ResponseWrapper} from '../data.types';
 import * as moment from 'moment';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class TumblrService {
     private baseUrl = 'https://api.tumblr.com/v2/';
-    constructor( private jsonp: Jsonp) {
+    constructor(private http: HttpClient) {
     }
 
     getBlogInfo(blogId: string): Observable<Blog> {
-        let params = new URLSearchParams();
-        params.set('api_key', config.consumerKey);
-        params.set('jsonp', 'JSONP_CALLBACK');
+        let params = new HttpParams()
+            .append('api_key', config.consumerKey)
+            .append('jsonp', 'JSONP_CALLBACK');
 
-        return this.jsonp.get(this.baseUrl + 'blog/' + blogId + '/info', { search: params })
-            .map(res => {
-                let response = res.json().response;
-                this.blogDateTransform(response.blog);
-                return response.blog;
+        return this.http
+            .jsonp<ResponseWrapper>(this.baseUrl + 'blog/' + blogId + '/info?' + params.toString(),
+                'JSONP_CALLBACK')
+            .map(wrapper => {
+                this.blogDateTransform(wrapper.response.blog);
+                return wrapper.response.blog;
             });
     }
 
     getPosts(blogId: string, offset: number = 0,
              tag?: string | null, id?: number | null): Observable<Response> {
-        let params = new URLSearchParams();
-        params.set('api_key', config.consumerKey);
-        params.set('reblog_info', 'True');
-        params.set('notes_info', 'True');
-        params.set('jsonp', 'JSONP_CALLBACK');
-        params.set('limit', '10');
-        params.set('offset', offset.toString());
+        let params = new HttpParams()
+            .append('api_key', config.consumerKey)
+            .append('reblog_info', 'True')
+            .append('notes_info', 'True')
+            .append('limit', '10')
+            .append('offset', offset.toString())
+            .append('jsonp', 'JSONP_CALLBACK');
         if (tag) {
-            params.set('tag', tag);
+            params.append('tag', tag);
         }
         if (id) {
-            params.set('id', id.toString());
+            params.append('id', id.toString());
         }
 
-        return this.jsonp.get(this.baseUrl + 'blog/' + blogId + '/posts', { search: params })
-            .map(res => {
-                let response = res.json().response;
-                this.blogDateTransform(response.blog);
-                response.posts.forEach((post: any) => {
+        return this.http
+            .jsonp<ResponseWrapper>(this.baseUrl + 'blog/' + blogId + '/posts?' + params.toString(),
+                'JSONP_CALLBACK')
+            .map(wrapper => {
+                this.blogDateTransform(wrapper.response.blog);
+                wrapper.response.posts.forEach((post: any) => {
                     this.postDateTransform(post);
                     this.postNoteTransform(post);
                 });
-                return response;
+                return wrapper.response;
             });
     }
 

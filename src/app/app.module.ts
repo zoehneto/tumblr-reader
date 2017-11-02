@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './app.component';
-import { HttpModule, JsonpModule } from '@angular/http';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ROUTES } from './app.routes';
@@ -55,8 +55,8 @@ import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.d
         TumblrEmbeddedImageDirective, TumblrImageDirective, TumblrLinkDirective,
         VideoBehaviourDirective, ResponsiveMenuComponent, PostReblogsComponent,
         PostRepliesComponent],
-    imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule, HttpModule,
-        JsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
+    imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule,
+        HttpClientModule, HttpClientJsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
         FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService],
     bootstrap: [AppComponent]
