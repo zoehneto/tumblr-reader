@@ -4,7 +4,7 @@ import { ItemSwitch } from './item.switch';
 @Injectable()
 export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
     protected getCurrentItemIndex(elements: HTMLElement[]): number | null {
-        let clientRects: ClientRect[] = elements.map(element => element.getBoundingClientRect());
+        const clientRects: ClientRect[] = elements.map(element => element.getBoundingClientRect());
         for (let i = 0; i < clientRects.length; i++) {
             if (clientRects[i].top >= 0 && i === 0) {
                 return i;
@@ -28,7 +28,7 @@ export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
 
     protected switchToItem(element: HTMLElement) {
         // Use documentElement as fallback in IE
-        let scrollingElement = document.scrollingElement || document.documentElement;
+        const scrollingElement = document.scrollingElement || document.documentElement;
         if (scrollingElement) {
             scrollingElement.scrollTop += Math.ceil(element.getBoundingClientRect().top);
         }

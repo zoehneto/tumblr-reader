@@ -1,7 +1,7 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }  from './app.component';
-import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ROUTES } from './app.routes';
@@ -19,17 +19,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
 import { PostSwitchDirective } from './attribute-directives/post.switch.directive';
-import { TumblrEmbeddedImageDirective }
-from './attribute-directives/tumblr.embedded.image.directive';
+import { TumblrEmbeddedImageDirective } from './attribute-directives/tumblr.embedded.image.directive';
 import { TumblrImageDirective } from './attribute-directives/tumblr.image.directive';
 import { TumblrLinkDirective } from './attribute-directives/tumblr.link.directive';
 import { VideoBehaviourDirective } from './attribute-directives/video.behaviour.directive';
 import { PostComponent } from './components/post-components/post/post.component';
-import { PostAnswerComponent }
-from './components/post-components/post-answer/post-answer.component';
+import { PostAnswerComponent } from './components/post-components/post-answer/post-answer.component';
 import { PostAudioComponent } from './components/post-components/post-audio/post-audio.component';
-import { PostCaptionComponent }
-from './components/post-components/post-caption/post-caption.component';
+import { PostCaptionComponent } from './components/post-components/post-caption/post-caption.component';
 import { PostChatComponent } from './components/post-components/post-chat/post-chat.component';
 import { PostLinkComponent } from './components/post-components/post-link/post-link.component';
 import { PostMetaComponent } from './components/post-components/post-meta/post-meta.component';
@@ -39,10 +36,8 @@ import { PostTextComponent } from './components/post-components/post-text/post-t
 import { PostTitleComponent } from './components/post-components/post-title/post-title.component';
 import { PostVideoComponent } from './components/post-components/post-video/post-video.component';
 import { ResponsiveMenuComponent } from './components/responsive-menu/responsive-menu.component';
-import { PostReblogsComponent }
-from './components/post-components/post-reblogs/post-reblogs.component';
-import { PostRepliesComponent }
-from './components/post-components/post-replies/post-replies.component';
+import { PostReblogsComponent } from './components/post-components/post-reblogs/post-reblogs.component';
+import { PostRepliesComponent } from './components/post-components/post-replies/post-replies.component';
 import { FullscreenService } from './shared/fullscreen.service';
 import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
 

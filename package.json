@@ -7,8 +7,8 @@
         "start": "ng serve",
         "build": "ng build",
         "test": "ng test",
-        "saas-lint": "./node_modules/.bin/sass-lint -c sass-lint.yml -v -q",
-        "lint": "npm run saas-lint && ng lint",
+        "sass-lint": "./node_modules/.bin/sass-lint -c sass-lint.yml -v -q",
+        "lint": "npm run sass-lint && ng lint",
         "e2e": "ng e2e"
     },
     "private": true,

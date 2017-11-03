@@ -12,9 +12,9 @@ export class TumblrLinkDirective implements DoCheck {
         if (this.tumblrLink) {
             this.applySettings(this.el.nativeElement, this.tumblrLink);
         } else {
-            let blogLinks = this.el.nativeElement.querySelectorAll('a.tumblr_blog');
+            const blogLinks = this.el.nativeElement.querySelectorAll('a.tumblr_blog');
             if (blogLinks.length > 0) {
-                for (let blogLink of blogLinks) {
+                for (const blogLink of blogLinks) {
                     if (blogLink.getAttribute('href').indexOf('tumblr') > -1) {
                         this.applySettings(blogLink, blogLink.getAttribute('href'));
                     }
@@ -37,7 +37,7 @@ export class TumblrLinkDirective implements DoCheck {
         currentHref = currentHref.replace('http://', '');
         currentHref = currentHref.replace('https://', '');
 
-        let data = currentHref.split('.tumblr.com/post/');
+        const data = currentHref.split('.tumblr.com/post/');
 
         if (data.length < 2 || data[1].match(/\d+/) == null) {
             return '#/blog/' + currentHref.substring(0, currentHref.indexOf('.'));

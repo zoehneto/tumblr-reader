@@ -8,13 +8,13 @@ export class EmbedBehaviourDirective implements DoCheck {
     }
 
     ngDoCheck() {
-        let embeds = this.el.nativeElement.querySelectorAll('iframe, embed');
+        const embeds = this.el.nativeElement.querySelectorAll('iframe, embed');
         if (embeds.length > 0) {
-            for (let embed of embeds) {
-                let width = parseInt(embed.getAttribute('width'), 10);
-                let height = parseInt(embed.getAttribute('height'), 10);
-                let ratio = height / width;
-                let newWidth = embed.parentElement.clientWidth;
+            for (const embed of embeds) {
+                const width = parseInt(embed.getAttribute('width'), 10);
+                const height = parseInt(embed.getAttribute('height'), 10);
+                const ratio = height / width;
+                const newWidth = embed.parentElement.clientWidth;
 
                 embed.setAttribute('width', newWidth);
                 embed.setAttribute('height', Math.round(newWidth * ratio));

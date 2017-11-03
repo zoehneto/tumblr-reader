@@ -25,7 +25,7 @@ import { Title } from '@angular/platform-browser';
     styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-    blogText: string = '';
+    blogText = '';
     updatedInDays: number;
     errors: string[] = [];
     private blogs: Blog[];
@@ -51,7 +51,7 @@ export class SettingsComponent implements OnInit {
     }
 
     blogsToText(blogs: Blog[]): string {
-        let blogText: string = '';
+        let blogText = '';
         blogs.forEach(blog => {
             blogText += blog.name + '\n';
         });
@@ -59,7 +59,7 @@ export class SettingsComponent implements OnInit {
     }
 
     textToBlogs(blogText: string): Blog[] {
-        let blogs: Blog[] = [];
+        const blogs: Blog[] = [];
         blogText.split('\n').forEach(blogName => {
             if (blogName) {
                 blogs.push(new Blog(blogName));

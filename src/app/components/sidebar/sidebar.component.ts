@@ -29,7 +29,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
 })
 export class SidebarComponent implements OnInit {
     blogs: Blog[];
-    private updatedInDays: number = 0;
+    private updatedInDays = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
         private blogItemSwitch: BlogItemSwitch) {
     }
@@ -53,8 +53,8 @@ export class SidebarComponent implements OnInit {
                 if (blogs === null) {
                     this.blogs = [];
                 } else {
-                    let updatedBlogs: Blog[] = [];
-                    let notUpdatedBlogs: Blog[] = [];
+                    const updatedBlogs: Blog[] = [];
+                    const notUpdatedBlogs: Blog[] = [];
                     blogs.forEach(blog => {
                         if (this.settingsService.
                             isUpdatedInDays(blog.updated, this.updatedInDays)) {

@@ -14,9 +14,9 @@ export abstract class ItemSwitch<T> {
     }
 
     protected showItem(items: T[], modifier: number): void {
-        let currentItemIndex = this.getCurrentItemIndex(items);
+        const currentItemIndex = this.getCurrentItemIndex(items);
         if (currentItemIndex !== null) {
-            let nextItemIndex = currentItemIndex + modifier;
+            const nextItemIndex = currentItemIndex + modifier;
 
             if (this.loadMoreItems && this.moreItemsNeeded(items, currentItemIndex,
                     nextItemIndex)) {

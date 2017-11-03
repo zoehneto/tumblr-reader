@@ -1,4 +1,4 @@
-import { Routes }  from '@angular/router';
+import { Routes } from '@angular/router';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 

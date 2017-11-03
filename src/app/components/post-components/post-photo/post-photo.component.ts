@@ -22,7 +22,7 @@ export class PostPhotoComponent {
             return photo.original_size.url;
         }
 
-        let srcset: string = '';
+        let srcset = '';
         photo.alt_sizes.forEach(picture => {
             srcset += picture.url + ' ' + picture.width + 'w, ';
         });
@@ -30,7 +30,7 @@ export class PostPhotoComponent {
     }
 
     fullScreen(event: any) {
-        let elem = event.currentTarget;
+        const elem = event.currentTarget;
         this.fullscreenService.requestFullscreen(elem);
     }
 }

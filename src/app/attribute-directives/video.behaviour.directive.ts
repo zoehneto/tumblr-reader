@@ -8,9 +8,9 @@ export class VideoBehaviourDirective implements DoCheck {
     }
 
     ngDoCheck() {
-        let videoElements = this.el.nativeElement.getElementsByTagName('video');
+        const videoElements = this.el.nativeElement.getElementsByTagName('video');
         if (videoElements.length > 0) {
-            for (let videoElement of videoElements) {
+            for (const videoElement of videoElements) {
                 videoElement.setAttribute('controls', '');
                 videoElement.setAttribute('width', '100%');
                 videoElement.setAttribute('height', '');

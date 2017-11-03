@@ -8,9 +8,9 @@ export class TumblrEmbeddedImageDirective implements DoCheck {
     }
 
     ngDoCheck() {
-        let imageElements = this.el.nativeElement.querySelectorAll('img');
+        const imageElements = this.el.nativeElement.querySelectorAll('img');
         if (imageElements.length > 0) {
-            for (let imageElement of imageElements) {
+            for (const imageElement of imageElements) {
                 imageElement.parentElement.style.marginLeft = 0;
                 imageElement.parentElement.style.marginRight = 0;
                 imageElement.setAttribute('width', '100%');

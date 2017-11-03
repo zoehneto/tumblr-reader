@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FullscreenService {
     public requestFullscreen(element: HTMLElement) {
-        let elementAny = <any> element;
+        const elementAny = <any> element;
         if (elementAny.requestFullscreen) {
             elementAny.requestFullscreen();
         }

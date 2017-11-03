@@ -5,7 +5,7 @@ import { TumblrService } from '../../shared/tumblr.service';
 import { FaviconService } from '../../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 import { SettingsService } from '../../shared/settings.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'post-list',
@@ -100,7 +100,7 @@ export class PostListComponent implements OnInit {
                 resolve();
             }, err => {
                 try {
-                    let response = err.json();
+                    const response = err.json();
                     if (response && response.meta) {
                         this.message = response.meta.msg;
                         this.titleService.setTitle(response.meta.msg);

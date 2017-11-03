@@ -77,8 +77,8 @@ export class SettingsService {
             });
         }
         return new Observable<Settings>((subscriber: Subscriber<Settings>) => {
-            let blogObservables: Observable<Blog | null>[] = [];
-            let errors: string[] = [];
+            const blogObservables: Observable<Blog | null>[] = [];
+            const errors: string[] = [];
             settings.blogs.forEach(blog => {
                 blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
                     .catch(() => {
@@ -108,7 +108,7 @@ export class SettingsService {
     }
 
     private dateToNumber(settings: Settings): any {
-        let settingsConverted = <any> settings;
+        const settingsConverted = <any> settings;
         settingsConverted.lastUpdated = settings.lastUpdated.getTime();
         settingsConverted.blogs.forEach((blog: any) => blog.updated = blog.updated.getTime());
         return settingsConverted;

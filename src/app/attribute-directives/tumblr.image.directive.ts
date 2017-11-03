@@ -22,7 +22,7 @@ export class TumblrImageDirective implements DoCheck {
     }
 
     private getHeight(width: number): string {
-        let ratio = this.tumblrImage.original_size.height / this.tumblrImage.original_size.width;
+        const ratio = this.tumblrImage.original_size.height / this.tumblrImage.original_size.width;
         return Math.round(width * ratio) + 'px';
     }
 }

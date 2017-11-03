@@ -10,7 +10,7 @@ export class TumblrService {
     }
 
     getBlogInfo(blogId: string): Observable<Blog> {
-        let params = new HttpParams()
+        const params = new HttpParams()
             .append('api_key', config.consumerKey)
             .append('jsonp', 'JSONP_CALLBACK');
 
