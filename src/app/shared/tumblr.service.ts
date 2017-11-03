@@ -34,10 +34,10 @@ export class TumblrService {
             .append('offset', offset.toString())
             .append('jsonp', 'JSONP_CALLBACK');
         if (tag) {
-            params.append('tag', tag);
+            params = params.append('tag', tag);
         }
         if (id) {
-            params.append('id', id.toString());
+            params = params.append('id', id.toString());
         }
 
         return this.http
