@@ -11,7 +11,7 @@ export class TumblrLinkDirective implements DoCheck {
     ngDoCheck() {
         if (this.tumblrLink) {
             this.applySettings(this.el.nativeElement, this.tumblrLink);
-        }else {
+        } else {
             let blogLinks = this.el.nativeElement.querySelectorAll('a.tumblr_blog');
             if (blogLinks.length > 0) {
                 for (let blogLink of blogLinks) {

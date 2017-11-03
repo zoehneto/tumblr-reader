@@ -9,7 +9,7 @@ export class CustomSanitizationService {
     public sanitize(html: string): string | SafeHtml {
         if (/iframe/i.test(html) || /embed/i.test(html) ) {
             return this.sanitizationService.bypassSecurityTrustHtml(html);
-        }else {
+        } else {
             return html;
         }
     }

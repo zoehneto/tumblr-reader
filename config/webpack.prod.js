@@ -72,7 +72,7 @@ module.exports = webpackMerge(commonConfig, {
             }
         }),
 
-        new ngtools.AotPlugin({
+        new ngtools.AngularCompilerPlugin({
             tsConfigPath: helpers.root('tsconfig.json')
         })
     ]

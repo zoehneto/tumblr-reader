@@ -95,7 +95,7 @@ export class SettingsService {
                             subscriber.next(this.numberToDate(newSettings));
                             if (errors.length === 0) {
                                 subscriber.complete();
-                            }else {
+                            } else {
                                 subscriber.error(errors);
                             }
                         });
