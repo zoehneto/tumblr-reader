@@ -1,3 +1,6 @@
+files:
+  include: 'src/**/*.scss'
+
 #Sass-Lint settings based on Sass Guidelines (https://sass-guidelin.es/)
 options:
   formatter: stylish

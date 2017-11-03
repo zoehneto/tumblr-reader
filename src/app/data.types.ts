@@ -1,4 +1,4 @@
-export const config: any = require('./config/config.json');
+export const config: any = require('../assets/config/config.json');
 
 export class Settings {
     lastUpdated: Date;

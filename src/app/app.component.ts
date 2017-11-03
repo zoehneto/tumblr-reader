@@ -1,10 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import 'purecss/build/grids.css';
-import 'purecss/build/grids-responsive.css';
-import '../../public/css/purecss-utils.css';
 
 @Component({
-    selector: 'tumblr-reader',
+    selector: 'app-root',
     template: `
         <div class="pure-g">
             <responsive-menu class="pure-u-1 pure-u-md-1-4 pure-u-lg-1-5"
