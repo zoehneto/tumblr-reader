@@ -1,5 +1,5 @@
 # tumblr-reader
-This app is a simple browser based feed reader for tumblr blogs, built on the tumblr api and using angular 2.
+This app is a simple browser based feed reader for tumblr blogs, built on the tumblr api and using angular.
 
 # Screenshots
 ## Desktop
@@ -25,7 +25,7 @@ This app is a simple browser based feed reader for tumblr blogs, built on the tu
 ## Generate a tumblr api key
 1. Generate a tumblr api key as described [here](https://www.tumblr.com/docs/en/api/v2#what_you_need).
 
-2. Create a file named `config.json` under `src/app/config` with the following content (replace placeholders with the
+2. Create a file named `config.json` under `src/assets/config` with the following content (replace placeholders with the
 key you just generated):
   ```
   {
@@ -34,12 +34,15 @@ key you just generated):
   }
   ```
 
+## Install prerequisites
+This project uses the [angular-cli](https://github.com/angular/angular-cli#installation) so you have to install that before continuing.
+
 ## Development
 To run the app locally for development, clone the repository, install the dependencies with `npm install` and 
-start the development server with `npm start` the app is then available in the browser under `localhost:8080`.
+start the development server with `ng serve` the app is then available in the browser under `localhost:4200`.
 
 ## Production (Apache)
-1. Build the app using `npm run build` - the generated files will appear in the `dist` directory.
+1. Build the app using `ng build --prod` - the generated files will appear in the `dist` directory.
 
 2. Create the directory `tumblr-reader` in the www root of your apache server and place the generated files from 
 the `dist` directory there.
