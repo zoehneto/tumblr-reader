@@ -37,6 +37,12 @@ export class Post {
     tags: string[];
     player?: VideoPlayer[] | string;
     photos?: Photo[];
+    audio_url?: string;
+    artist?: string;
+    album?: string;
+    track_name?: string;
+    year?: string;
+    album_art?: string;
     caption?: string;
     question?: string;
     answer?: string;

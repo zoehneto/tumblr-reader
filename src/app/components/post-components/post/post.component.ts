@@ -9,7 +9,7 @@ import { Post, Blog } from '../../../data.types';
             </post-photo>
             <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player">
             </post-video>
-            <post-audio *ngIf="post.type == 'audio'" [postPlayer]="post.player">
+            <post-audio *ngIf="post.type == 'audio'" [post]="post">
             </post-audio>
         </div>
         <div switch-target class="padded">
