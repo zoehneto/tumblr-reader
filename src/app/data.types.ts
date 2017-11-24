@@ -35,6 +35,8 @@ export class Post {
     format: string;
     post_url: string;
     tags: string[];
+    html5_capable?: boolean;
+    // VideoPlayer[] for post type 'video', string for post type 'audio'
     player?: VideoPlayer[] | string;
     photos?: Photo[];
     audio_url?: string;

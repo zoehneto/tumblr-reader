@@ -7,7 +7,7 @@ import { Post, Blog } from '../../../data.types';
         <div class="full">
             <post-photo *ngIf="post.photos" [postPhotos]="post.photos">
             </post-photo>
-            <post-video *ngIf="post.type == 'video'" [postPlayers]="post.player">
+            <post-video *ngIf="post.type == 'video'" [post]="post">
             </post-video>
             <post-audio *ngIf="post.type == 'audio'" [post]="post">
             </post-audio>
