@@ -6,7 +6,7 @@ import { FullscreenService } from '../../../shared/fullscreen.service';
     selector: 'post-photo',
     template: `
         <img switch-target *ngFor="let photo of postPhotos" (click)="fullScreen($event)"
-        src="{{photo.original_size.url}}" sizes="(min-width: 64em) 34vw,
+        src="{{photo.original_size.url}}" sizes="(min-width: 100em) 26vw, (min-width: 64em) 34vw,
         (min-width: 48em) 73vw, 95vw" [srcset]="createSrcSet(photo)"
         [tumblrImage]="photo">
     `,
