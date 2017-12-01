@@ -11,13 +11,20 @@ export class TumblrImageDirective implements DoCheck {
     }
 
     ngDoCheck() {
-        if (!this.el.nativeElement.hasAttribute('height') &&
-            !this.fullscreenService.isFullscreen()) {
-            this.el.nativeElement.setAttribute('height',
-                this.getHeight(this.el.nativeElement.width));
-        }
-        if (this.el.nativeElement.hasAttribute('height') && this.fullscreenService.isFullscreen()) {
-            this.el.nativeElement.setAttribute('height', '');
+        if (this.el.nativeElement.nodeName === 'DIV') {
+            if (!this.el.nativeElement.hasAttribute('style')) {
+                this.el.nativeElement.setAttribute('style', 'height :'
+                    + this.getHeight(this.el.nativeElement.offsetWidth) + ';');
+            }
+        } else if (this.el.nativeElement.nodeName === 'IMG') {
+            if (!this.el.nativeElement.hasAttribute('height') &&
+                !this.fullscreenService.isFullscreen()) {
+                this.el.nativeElement.setAttribute('height',
+                    this.getHeight(this.el.nativeElement.width));
+            }
+            if (this.el.nativeElement.hasAttribute('height') && this.fullscreenService.isFullscreen()) {
+                this.el.nativeElement.setAttribute('height', '');
+            }
         }
     }
 

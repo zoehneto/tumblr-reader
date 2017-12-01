@@ -5,15 +5,28 @@ import { FullscreenService } from '../../../shared/fullscreen.service';
 @Component({
     selector: 'post-photo',
     template: `
-        <img switch-target *ngFor="let photo of postPhotos" (click)="fullScreen($event)"
-        src="{{photo.original_size.url}}" sizes="(min-width: 100em) 26vw, (min-width: 64em) 34vw,
-        (min-width: 48em) 73vw, 95vw" [srcset]="createSrcSet(photo)"
-        [tumblrImage]="photo">
+        <div *ngFor="let photo of postPhotos">
+            <div *ngIf="!loadPhotos && photo.original_size.url.endsWith('.gif'); else showPhotos"
+                 switch-target (click)="enablePhotoLoading()" class="click-to-play"
+                 [tumblrImage]="photo">
+                <div class="center">
+                    <h1>GIF</h1>
+                    <p>Click to play</p>
+                </div>
+            </div>
+            <ng-template #showPhotos>
+                <img switch-target (click)="fullScreen($event)"
+                     src="{{photo.original_size.url}}" sizes="(min-width: 100em) 26vw,
+                     (min-width: 64em) 34vw, (min-width: 48em) 73vw, 95vw"
+                     [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
+            </ng-template>
+        </div>
     `,
     styleUrls: ['./post-photo.component.scss']
 })
 export class PostPhotoComponent {
     @Input('postPhotos') postPhotos: Photo[];
+    loadPhotos: boolean = false;
     constructor(private fullscreenService: FullscreenService) {
     }
 
@@ -27,6 +40,10 @@ export class PostPhotoComponent {
             srcset += picture.url + ' ' + picture.width + 'w, ';
         });
         return srcset.substring(0, srcset.lastIndexOf(', '));
+    }
+
+    enablePhotoLoading() {
+        this.loadPhotos = true;
     }
 
     fullScreen(event: any) {

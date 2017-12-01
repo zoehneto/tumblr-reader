@@ -1,3 +1,12 @@
+@import "../../../../assets/scss/variables";
+
+.click-to-play {
+    background-color: $primary-light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 img {
   display: block;
   width: 100%;
