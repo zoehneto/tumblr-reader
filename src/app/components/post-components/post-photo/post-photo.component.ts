@@ -8,7 +8,7 @@ import { SettingsService } from '../../../shared/settings.service';
     template: `
         <div *ngFor="let photo of postPhotos">
             <div *ngIf="!loadPhotos && photo.original_size.url.endsWith('.gif'); else showPhotos"
-                 switch-target (click)="enablePhotoLoading()" class="click-to-play"
+                 switch-target (click)="enablePhotoLoading()" class="clicktoplay"
                  [tumblrImage]="photo">
                 <div class="center">
                     <h1>GIF</h1>

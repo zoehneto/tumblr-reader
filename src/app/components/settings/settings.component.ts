@@ -17,7 +17,8 @@ import { Title } from '@angular/platform-browser';
                     <input type="number" [(ngModel)]="updatedInDays"/>
                 </label>
 
-                <label>Enable Click-to-Play for GIFs (improves performance and reduces downloads especially on slow connections)
+                <label>Enable Click-to-Play for GIFs
+                    (improves performance and reduces downloads especially on slow connections)
                     <input type="checkbox" [(ngModel)]="gifClickToPlay"/>
                 </label>
 
