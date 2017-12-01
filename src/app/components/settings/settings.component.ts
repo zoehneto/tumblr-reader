@@ -9,10 +9,18 @@ import { Title } from '@angular/platform-browser';
         <div class="pure-u-md-1-6 pure-u-lg-1-3"></div>
         <div class="pure-u-1 pure-u-md-2-3 pure-u-lg-1-3">
             <div class="container">
-                <p>Enter blog urls here, one per line</p>
-                <textarea [(ngModel)]="blogText" rows="15"></textarea>
-                <p>Highlight blogs updated in the last days (0 = no highlight)</p>
-                <input type="number" [(ngModel)]="updatedInDays"/>
+                <label>Enter blog urls here, one per line
+                    <textarea [(ngModel)]="blogText" rows="15"></textarea>
+                </label>
+
+                <label>Highlight blogs updated in the last days (0 = no highlight)
+                    <input type="number" [(ngModel)]="updatedInDays"/>
+                </label>
+
+                <label>Enable Click-to-Play for GIFs (improves performance and reduces downloads especially on slow connections)
+                    <input type="checkbox" [(ngModel)]="gifClickToPlay"/>
+                </label>
+
                 <div class="center">
                     <button (click)="saveSettings()" type="button">Save</button>
                 </div>
@@ -27,6 +35,7 @@ import { Title } from '@angular/platform-browser';
 export class SettingsComponent implements OnInit {
     blogText = '';
     updatedInDays: number;
+    gifClickToPlay: boolean;
     errors: string[] = [];
     private blogs: Blog[];
     constructor(private settingsService: SettingsService, private titleService: Title) {
@@ -40,13 +49,17 @@ export class SettingsComponent implements OnInit {
         });
         this.settingsService.getUpdatedInDays()
             .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
+        this.settingsService.getGifClickToPlay()
+            .subscribe(gifClickToPlayEnabled => this.gifClickToPlay = gifClickToPlayEnabled);
     }
 
     saveSettings() {
         this.errors = [];
-        this.settingsService.setUpdatedInDays(this.updatedInDays).subscribe(days => {
-            this.settingsService.setBlogs(this.textToBlogs(this.blogText))
-                .subscribe(() => {}, errors => this.errors = errors);
+        this.settingsService.setGifClickToPlay(this.gifClickToPlay).subscribe(gifClickToPlayEnabled => {
+            this.settingsService.setUpdatedInDays(this.updatedInDays).subscribe(days => {
+                this.settingsService.setBlogs(this.textToBlogs(this.blogText))
+                    .subscribe(() => {}, errors => this.errors = errors);
+            });
         });
     }
 

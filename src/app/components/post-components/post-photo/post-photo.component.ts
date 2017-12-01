@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Photo } from '../../../data.types';
 import { FullscreenService } from '../../../shared/fullscreen.service';
+import { SettingsService } from '../../../shared/settings.service';
 
 @Component({
     selector: 'post-photo',
@@ -26,8 +27,10 @@ import { FullscreenService } from '../../../shared/fullscreen.service';
 })
 export class PostPhotoComponent {
     @Input('postPhotos') postPhotos: Photo[];
-    loadPhotos: boolean = false;
-    constructor(private fullscreenService: FullscreenService) {
+    loadPhotos: boolean;
+    constructor(private fullscreenService: FullscreenService, private settingsService: SettingsService) {
+        this.settingsService.getGifClickToPlay()
+            .subscribe(gifClickToPlayEnabled => this.loadPhotos = !gifClickToPlayEnabled);
     }
 
     createSrcSet(photo: Photo): string {

@@ -10,6 +10,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 export class SettingsService {
     private subjectBlogs: Subject<Blog[]> = new Subject<Blog[]>();
     private subjectUpdate: Subject<number> = new Subject<number>();
+    private subjectGifClickToPlay: Subject<boolean> = new Subject<boolean>();
     constructor(private tumblrService: TumblrService) {
     }
 
@@ -51,6 +52,24 @@ export class SettingsService {
 
     isUpdatedInDays(date: Date, days: number) {
         return (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24) < days;
+    }
+
+    getGifClickToPlay(): Observable<boolean> {
+        this.getSettings().then(settings => this.subjectGifClickToPlay.next(settings.gifClickToPlay));
+        return this.subjectGifClickToPlay;
+    }
+
+    setGifClickToPlay(clickToPlayEnabled: boolean): Observable<boolean> {
+        return new Observable<boolean>((subscriber: Subscriber<boolean>) => {
+            this.getSettings().then(settings => {
+                settings.gifClickToPlay = clickToPlayEnabled;
+                this.setSettings(settings)
+                    .subscribe(storedSettings => {
+                        this.subjectGifClickToPlay.next(storedSettings.gifClickToPlay);
+                        subscriber.next(storedSettings.gifClickToPlay);
+                    }, error => subscriber.error(error), () => subscriber.complete());
+            });
+        });
     }
 
     private getSettings(): Promise<Settings> {
