@@ -5,7 +5,7 @@ import { Post } from '../../../data.types';
     selector: 'post-audio',
     template: `
         <div switch-target>
-            <audio class="pure-u-1" [src]="post.audio_url" controls>
+            <audio class="pure-u-1" [src]="post.audio_url" preload="metadata" controls>
             </audio>
         </div>
     `,
