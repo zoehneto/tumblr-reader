@@ -1,15 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { Post, Blog } from '../../../data.types';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'complete-post',
     template: `
         <div class="full">
-            <post-photo *ngIf="post.photos" [postPhotos]="post.photos">
+            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [play]="playSubject">
             </post-photo>
-            <post-video *ngIf="post.type == 'video'" [post]="post">
+            <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject">
             </post-video>
-            <post-audio *ngIf="post.type == 'audio'" [post]="post">
+            <post-audio *ngIf="post.type == 'audio'" [post]="post" [play]="playSubject">
             </post-audio>
         </div>
         <div switch-target class="padded">
@@ -36,4 +37,9 @@ import { Post, Blog } from '../../../data.types';
 export class PostComponent {
     @Input('blog') blog: Blog;
     @Input('post') post: Post;
+    playSubject: Subject<void> = new Subject<void>();
+
+    public play(): void {
+        this.playSubject.next();
+    }
 }

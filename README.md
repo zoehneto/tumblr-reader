@@ -10,13 +10,13 @@ This app is a simple browser based feed reader for tumblr blogs, built on the tu
 
 # Using the app
 ## Shortcuts
+- Play / pause current video, audio; load gif: `space`
+
 - Next part of post / next post: `n`
 - Previous part of post / previous post: `m`
 
-
 - Next post: `j`
 - Previous post: `k`
-
 
 - Next blog: `shift + j`
 - Previous blog: `shift + k`

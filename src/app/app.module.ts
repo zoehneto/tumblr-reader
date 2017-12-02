@@ -40,6 +40,7 @@ import { PostReblogsComponent } from './components/post-components/post-reblogs/
 import { PostRepliesComponent } from './components/post-components/post-replies/post-replies.component';
 import { FullscreenService } from './shared/fullscreen.service';
 import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
+import { CurrentPostService } from './shared/current.post.service';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -53,7 +54,7 @@ import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.d
     imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule,
         HttpClientModule, HttpClientJsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
-        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService],
+        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService, CurrentPostService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Photo } from '../../../data.types';
 import { FullscreenService } from '../../../shared/fullscreen.service';
 import { SettingsService } from '../../../shared/settings.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'post-photo',
@@ -25,12 +26,17 @@ import { SettingsService } from '../../../shared/settings.service';
     `,
     styleUrls: ['./post-photo.component.scss']
 })
-export class PostPhotoComponent {
+export class PostPhotoComponent implements OnInit {
     @Input('postPhotos') postPhotos: Photo[];
+    @Input('play') play: Observable<void>;
     loadPhotos: boolean;
     constructor(private fullscreenService: FullscreenService, private settingsService: SettingsService) {
+    }
+
+    ngOnInit() {
         this.settingsService.getGifClickToPlay()
             .subscribe(gifClickToPlayEnabled => this.loadPhotos = !gifClickToPlayEnabled);
+        this.play.subscribe(play => this.loadPhotos = true);
     }
 
     createSrcSet(photo: Photo): string {

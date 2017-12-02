@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectorRef, ElementRef, OnInit } from '@angular/core';
 import { Post, VideoPlayer } from '../../../data.types';
 import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'post-video',
@@ -10,11 +11,26 @@ import { CustomSanitizationService } from '../../../shared/custom.sanitization.s
     `,
     styleUrls: ['./post-video.component.scss']
 })
-export class PostVideoComponent implements OnChanges {
+export class PostVideoComponent implements OnInit, OnChanges {
     @Input('post') post: Post;
+    @Input('play') play: Observable<void>;
     player: any;
-    constructor(private sanitizationService: CustomSanitizationService,
+    constructor(private el: ElementRef, private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}
+
+    ngOnInit() {
+        if (this.post.html5_capable) {
+            this.play.subscribe(play => {
+                const player: HTMLVideoElement = this.el.nativeElement.querySelector('video');
+                const paused = player.paused;
+                if (paused) {
+                    player.play();
+                } else {
+                    player.pause();
+                }
+            });
+        }
+    }
 
     ngOnChanges() {
         const largestPlayer: VideoPlayer = <VideoPlayer> this.post.player[this.post.player.length - 1];

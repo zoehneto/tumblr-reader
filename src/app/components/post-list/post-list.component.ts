@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Blog, Post } from '../../data.types';
 import { TumblrService } from '../../shared/tumblr.service';
@@ -6,6 +6,9 @@ import { FaviconService } from '../../shared/favicon.service';
 import { Title } from '@angular/platform-browser';
 import { SettingsService } from '../../shared/settings.service';
 import { Subscription } from 'rxjs/Subscription';
+import { PostComponent } from '../post-components/post/post.component';
+import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+import { CurrentPostService } from '../../shared/current.post.service';
 
 @Component({
     selector: 'post-list',
@@ -35,7 +38,9 @@ import { Subscription } from 'rxjs/Subscription';
     `,
     styleUrls: ['./post-list.component.scss']
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, OnDestroy {
+    @ViewChildren(PostComponent) postComponents: QueryList<PostComponent>;
+    @ViewChildren(PostComponent, {read: ElementRef}) postElements: QueryList<ElementRef>;
     blog: Blog;
     posts: Post[];
     message: string | null;
@@ -46,9 +51,11 @@ export class PostListComponent implements OnInit {
     private totalPosts: number;
     private updatedInDays: number = 0;
     private subscription: Subscription;
+    private hotkeys: Hotkey[];
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
-                private settingsService: SettingsService) {
+                private settingsService: SettingsService, private hotkeysService: HotkeysService,
+                private currentPostService: CurrentPostService) {
     }
 
     ngOnInit() {
@@ -65,6 +72,22 @@ export class PostListComponent implements OnInit {
 
             this.loadPosts();
         });
+        this.hotkeys = [
+            new Hotkey('space', (event: KeyboardEvent): boolean => {
+                const postIndex = this.currentPostService.getCurrentPostIndex(
+                    this.postElements.map(elementRef => elementRef.nativeElement));
+                const currentPost = this.postComponents.find((item, index) => index === postIndex);
+                if (currentPost) {
+                    currentPost.play();
+                }
+                return false;
+            })
+        ];
+        this.hotkeysService.add(this.hotkeys);
+    }
+
+    ngOnDestroy() {
+        this.hotkeysService.remove(this.hotkeys);
     }
 
     isRecent(post: Post): boolean {
