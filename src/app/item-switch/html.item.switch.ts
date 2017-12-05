@@ -19,6 +19,12 @@ export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
     }
 
     protected switchToItem(element: HTMLElement) {
+        const firstFocusableChildElement = <HTMLElement | null> element.querySelector(
+            '.focus-target');
+        if (firstFocusableChildElement) {
+            firstFocusableChildElement.focus();
+        }
+
         // Use documentElement as fallback in IE
         const scrollingElement = document.scrollingElement || document.documentElement;
         if (scrollingElement) {

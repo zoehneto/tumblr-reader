@@ -41,6 +41,7 @@ import { PostRepliesComponent } from './components/post-components/post-replies/
 import { FullscreenService } from './shared/fullscreen.service';
 import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
 import { CurrentPostService } from './shared/current.post.service';
+import { FocusTargetComponent } from './components/focus-target/focus-target.component';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -50,7 +51,7 @@ import { CurrentPostService } from './shared/current.post.service';
         EmbedBehaviourDirective, PostSwitchDirective, SubPostSwitchDirective,
         TumblrEmbeddedImageDirective, TumblrImageDirective, TumblrLinkDirective,
         VideoBehaviourDirective, ResponsiveMenuComponent, PostReblogsComponent,
-        PostRepliesComponent],
+        PostRepliesComponent, FocusTargetComponent],
     imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule,
         HttpClientModule, HttpClientJsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,

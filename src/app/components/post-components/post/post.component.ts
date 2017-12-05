@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 @Component({
     selector: 'complete-post',
     template: `
+        <focus-target></focus-target>
         <div class="full">
             <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [play]="playSubject">
             </post-photo>
