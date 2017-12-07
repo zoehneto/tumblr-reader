@@ -33,7 +33,7 @@ export class PostVideoComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        const largestPlayer: VideoPlayer = <VideoPlayer> this.post.player[this.post.player.length - 1];
+        const largestPlayer: VideoPlayer = <VideoPlayer> this.post.player![this.post.player!.length - 1];
         if (this.post.html5_capable) {
             this.player = largestPlayer.embed_code;
         } else {
