@@ -35,7 +35,11 @@ export class PostPhotoComponent implements OnInit {
 
     ngOnInit() {
         this.settingsService.getGifClickToPlay()
-            .subscribe(gifClickToPlayEnabled => this.loadPhotos = !gifClickToPlayEnabled);
+            .subscribe(gifClickToPlayEnabled => {
+                if (!this.loadPhotos) {
+                    this.loadPhotos = !gifClickToPlayEnabled;
+                }
+            });
         this.play.subscribe(play => this.loadPhotos = true);
     }
 
@@ -56,7 +60,8 @@ export class PostPhotoComponent implements OnInit {
     }
 
     fullScreen(event: any) {
-        const elem = event.currentTarget;
+        const elem = <HTMLElement> event.currentTarget;
         this.fullscreenService.requestFullscreen(elem);
+        elem.setAttribute('height', '');
     }
 }
