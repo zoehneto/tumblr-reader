@@ -57,7 +57,7 @@ export class TumblrService {
     }
 
     private postDateTransform(post: any) {
-        post.date = new Date(post.date);
+        post.date = new Date(post.date.substring(0, post.date.length - 4));
     }
 
     private postNoteTransform(post: any) {
