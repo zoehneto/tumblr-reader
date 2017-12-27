@@ -73,7 +73,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             this.loadPosts();
         });
         this.hotkeys = [
-            new Hotkey('space', (event: KeyboardEvent): boolean => {
+            new Hotkey('p', (event: KeyboardEvent): boolean => {
                 const postIndex = this.currentPostService.getCurrentPostIndex(
                     this.postElements.map(elementRef => elementRef.nativeElement));
                 const currentPost = this.postComponents.find((item, index) => index === postIndex);
