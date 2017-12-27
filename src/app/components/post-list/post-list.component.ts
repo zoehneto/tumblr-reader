@@ -81,6 +81,13 @@ export class PostListComponent implements OnInit, OnDestroy {
                     currentPost.play();
                 }
                 return false;
+            }),
+            new Hotkey('space', (event: KeyboardEvent): boolean => {
+                const scrollingElement = document.scrollingElement || document.documentElement;
+                if (scrollingElement) {
+                    scrollingElement.scrollTop += window.innerHeight - 40;
+                }
+                return false;
             })
         ];
         this.hotkeysService.add(this.hotkeys);
