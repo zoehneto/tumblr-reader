@@ -1,141 +1,78 @@
 import { Injectable } from '@angular/core';
-import localforage from 'localforage';
-import { Blog, Settings } from '../data.types';
+import { Blog } from '../data.types';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { TumblrService } from './tumblr.service';
-import { Subscriber } from 'rxjs/Subscriber';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { SettingsStorageService } from './settings.storage.service';
 
 @Injectable()
 export class SettingsService {
-    private subjectBlogs: Subject<Blog[]> = new Subject<Blog[]>();
-    private subjectUpdate: Subject<number> = new Subject<number>();
-    private subjectGifClickToPlay: Subject<boolean> = new Subject<boolean>();
-    constructor(private tumblrService: TumblrService) {
+    private subjectBlogs: Subject<Blog[]> = new BehaviorSubject([]);
+    private subjectUpdate: Subject<number> = new BehaviorSubject(0);
+    private subjectGifClickToPlay: Subject<boolean> = new BehaviorSubject(false);
+    constructor(private tumblrService: TumblrService, private storageService: SettingsStorageService) {
+        this.init();
     }
 
-    getBlogs(): Observable<Blog[]> {
-        this.getSettings().then(settings => this.subjectBlogs.next(settings.blogs));
-        return this.subjectBlogs;
-    }
-
-    setBlogs(blogs: Blog[]): Observable<Blog[]> {
-        return new Observable<Blog[]>((subscriber: Subscriber<Blog[]>) => {
-            this.getSettings().then(settings => {
-                settings.blogs = blogs;
-                this.setSettings(settings)
-                    .subscribe(storedSettings => {
-                        this.subjectBlogs.next(storedSettings.blogs);
-                        subscriber.next(storedSettings.blogs);
-                    }, error => subscriber.error(error), () => subscriber.complete());
-            });
-        });
-    }
-
-    getUpdatedInDays(): Observable<number> {
-        this.getSettings().then(settings => this.subjectUpdate.next(settings.updatedInDays));
-        return this.subjectUpdate;
-    }
-
-    setUpdatedInDays(days: number): Observable<number> {
-        return new Observable<number>((subscriber: Subscriber<number>) => {
-            this.getSettings().then(settings => {
-                settings.updatedInDays = days;
-                this.setSettings(settings)
-                    .subscribe(storedSettings => {
-                        this.subjectUpdate.next(storedSettings.updatedInDays);
-                        subscriber.next(storedSettings.updatedInDays);
-                    }, error => subscriber.error(error), () => subscriber.complete());
-            });
-        });
+    private async init() {
+        const settings = await this.storageService.getSettings();
+        this.subjectBlogs.next(settings.blogs);
+        this.subjectUpdate.next(settings.updatedInDays);
+        this.subjectGifClickToPlay.next(settings.gifClickToPlay);
     }
 
     isUpdatedInDays(date: Date, days: number) {
         return (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24) < days;
     }
 
+    getUpdatedInDays(): Observable<number> {
+        return this.subjectUpdate;
+    }
+
+    async setUpdatedInDays(days: number): Promise<void> {
+        await this.storageService
+            .updateSettings(days, (settings, value) => settings.updatedInDays = value);
+        this.subjectUpdate.next(days);
+    }
+
     getGifClickToPlay(): Observable<boolean> {
-        this.getSettings().then(settings => this.subjectGifClickToPlay.next(settings.gifClickToPlay));
         return this.subjectGifClickToPlay;
     }
 
-    setGifClickToPlay(clickToPlayEnabled: boolean): Observable<boolean> {
-        return new Observable<boolean>((subscriber: Subscriber<boolean>) => {
-            this.getSettings().then(settings => {
-                settings.gifClickToPlay = clickToPlayEnabled;
-                this.setSettings(settings)
-                    .subscribe(storedSettings => {
-                        this.subjectGifClickToPlay.next(storedSettings.gifClickToPlay);
-                        subscriber.next(storedSettings.gifClickToPlay);
-                    }, error => subscriber.error(error), () => subscriber.complete());
-            });
+    async setGifClickToPlay(clickToPlayEnabled: boolean): Promise<void> {
+        await this.storageService
+            .updateSettings(clickToPlayEnabled, (settings, value) => settings.gifClickToPlay = value);
+        this.subjectGifClickToPlay.next(clickToPlayEnabled);
+    }
+
+    getBlogs(): Observable<Blog[]> {
+        return this.subjectBlogs;
+    }
+
+    async setBlogs(blogs: Blog[]): Promise<string[]> {
+        const validationResult = await this.validateBlogs(blogs);
+
+        await this.storageService
+            .updateSettings(validationResult.blogs, (settings, value) => settings.blogs = value);
+        this.subjectBlogs.next(validationResult.blogs);
+
+        return validationResult.errors;
+    }
+
+    private async validateBlogs(blogs: Blog[]): Promise<{blogs: Blog[], errors: string[]}> {
+        const blogObservables: Observable<Blog | null>[] = [];
+        const errors: string[] = [];
+        blogs.forEach(blog => {
+            blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
+                .catch(() => {
+                    errors.push('Blog \'' + blog.name + '\' not found');
+                    return Observable.of(null);
+                }));
         });
-    }
+        const resultBlogs: (Blog|null)[] = await Observable.forkJoin(blogObservables).single().toPromise();
+        blogs = <Blog[]> resultBlogs.filter(element => element != null);
 
-    private getSettings(): Promise<Settings> {
-        return new Promise<Settings>(resolve => {
-            localforage.getItem('settings').then((settings: any) => {
-                if (settings === null) {
-                    this.setSettings(new Settings(new Date(0)))
-                        .subscribe(newSettings => resolve(newSettings));
-                } else if (this.isOutdated(new Date(settings.lastUpdated))) {
-                    this.setSettings(this.numberToDate(settings))
-                        .subscribe(newSettings => resolve(newSettings));
-                } else {
-                    resolve(this.numberToDate(settings));
-                }
-            });
-        });
-    }
-
-    private setSettings(settings: Settings): Observable<Settings> {
-        if (settings.blogs.length === 0) {
-            return new Observable<Settings>((subscriber: Subscriber<Settings>) => {
-                localforage.setItem('settings', this.dateToNumber(settings))
-                    .then(storedSettings => subscriber.next(this.numberToDate(storedSettings)));
-            });
-        }
-        return new Observable<Settings>((subscriber: Subscriber<Settings>) => {
-            const blogObservables: Observable<Blog | null>[] = [];
-            const errors: string[] = [];
-            settings.blogs.forEach(blog => {
-                blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
-                    .catch(() => {
-                        errors.push('Blog \'' + blog.name + '\' not found');
-                        return Observable.of(null);
-                    }));
-            });
-
-            Observable.forkJoin(blogObservables).subscribe(blogs => {
-                    settings.blogs = <Blog[]> blogs.filter(element => element != null);
-                    settings.lastUpdated = new Date();
-                    localforage.setItem('settings', this.dateToNumber(settings))
-                        .then(newSettings => {
-                            subscriber.next(this.numberToDate(newSettings));
-                            if (errors.length === 0) {
-                                subscriber.complete();
-                            } else {
-                                subscriber.error(errors);
-                            }
-                        });
-                });
-        });
-    }
-
-    private isOutdated(lastUpdated: Date): boolean {
-        return (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60 * 24) > 0.25;
-    }
-
-    private dateToNumber(settings: Settings): any {
-        const settingsConverted = <any> settings;
-        settingsConverted.lastUpdated = settings.lastUpdated.getTime();
-        settingsConverted.blogs.forEach((blog: any) => blog.updated = blog.updated.getTime());
-        return settingsConverted;
-    }
-
-    private numberToDate(settings: any): Settings {
-        settings.lastUpdated = new Date(settings.lastUpdated);
-        settings.blogs.forEach((blog: any) => blog.updated = new Date(blog.updated));
-        return settings;
+        return {blogs: blogs, errors: errors};
     }
 }

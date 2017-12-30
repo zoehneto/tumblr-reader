@@ -9,7 +9,8 @@
         "types": [
             "node",
             "mousetrap",
-            "dompurify"
+            "dompurify",
+            "lodash.clonedeep"
         ]
     },
     "exclude": [

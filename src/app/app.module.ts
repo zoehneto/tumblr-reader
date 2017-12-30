@@ -42,6 +42,7 @@ import { FullscreenService } from './shared/fullscreen.service';
 import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
 import { CurrentPostService } from './shared/current.post.service';
 import { FocusTargetComponent } from './components/focus-target/focus-target.component';
+import { SettingsStorageService } from './shared/settings.storage.service';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -55,7 +56,8 @@ import { FocusTargetComponent } from './components/focus-target/focus-target.com
     imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule,
         HttpClientModule, HttpClientJsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
-        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService, CurrentPostService],
+        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService, CurrentPostService,
+        SettingsStorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

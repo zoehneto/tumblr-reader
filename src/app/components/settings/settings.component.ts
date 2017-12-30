@@ -54,14 +54,11 @@ export class SettingsComponent implements OnInit {
             .subscribe(gifClickToPlayEnabled => this.gifClickToPlay = gifClickToPlayEnabled);
     }
 
-    saveSettings() {
+    async saveSettings() {
         this.errors = [];
-        this.settingsService.setGifClickToPlay(this.gifClickToPlay).subscribe(gifClickToPlayEnabled => {
-            this.settingsService.setUpdatedInDays(this.updatedInDays).subscribe(days => {
-                this.settingsService.setBlogs(this.textToBlogs(this.blogText))
-                    .subscribe(() => {}, errors => this.errors = errors);
-            });
-        });
+        await this.settingsService.setGifClickToPlay(this.gifClickToPlay);
+        await this.settingsService.setUpdatedInDays(this.updatedInDays);
+        this.errors = await this.settingsService.setBlogs(this.textToBlogs(this.blogText));
     }
 
     blogsToText(blogs: Blog[]): string {
