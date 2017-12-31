@@ -1,6 +1,7 @@
 @import '../../../../assets/scss/variables';
 
 .clicktoplay {
+  cursor: pointer;
   background-color: $primary-light;
   display: flex;
   justify-content: center;
@@ -8,6 +9,7 @@
 }
 
 img {
+  cursor: pointer;
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;

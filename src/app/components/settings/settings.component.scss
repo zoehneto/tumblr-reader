@@ -16,7 +16,12 @@ input {
   width: calc(100% - 6px);
 }
 
+.checkbox {
+  cursor: pointer;
+}
+
 button {
+  cursor: pointer;
   background-color: $primary;
   margin-top: 1rem;
   padding: 0.8rem 4rem;

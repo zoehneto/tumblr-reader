@@ -19,7 +19,7 @@ import { Title } from '@angular/platform-browser';
 
                 <label>Enable Click-to-Play for GIFs
                     (improves performance and reduces downloads especially on slow connections)
-                    <input type="checkbox" [(ngModel)]="gifClickToPlay"/>
+                    <input type="checkbox" class="checkbox" [(ngModel)]="gifClickToPlay"/>
                 </label>
 
                 <div class="center">
