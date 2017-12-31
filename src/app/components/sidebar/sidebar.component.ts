@@ -28,7 +28,7 @@ import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-    blogs: Blog[];
+    blogs: Blog[] = [];
     private updatedInDays = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
         private blogItemSwitch: BlogItemSwitch) {
@@ -45,27 +45,15 @@ export class SidebarComponent implements OnInit {
             })
         ]);
 
-        this.settingsService.getUpdatedInDays()
-            .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
+        this.settingsService.getUpdatedInDays().subscribe(updatedInDays => {
+            this.updatedInDays = updatedInDays;
+            this.sortBlogs();
+        });
 
-        this.settingsService.getBlogs()
-            .subscribe(blogs => {
-                if (blogs === null) {
-                    this.blogs = [];
-                } else {
-                    const updatedBlogs: Blog[] = [];
-                    const notUpdatedBlogs: Blog[] = [];
-                    blogs.forEach(blog => {
-                        if (this.settingsService.
-                            isUpdatedInDays(blog.updated, this.updatedInDays)) {
-                            updatedBlogs.push(blog);
-                        } else {
-                            notUpdatedBlogs.push(blog);
-                        }
-                    });
-                    this.blogs = updatedBlogs.concat(notUpdatedBlogs);
-                }
-            });
+        this.settingsService.getBlogs().subscribe(blogs => {
+            this.blogs = blogs === null ? [] : blogs;
+            this.sortBlogs();
+        });
     }
 
     selected(blogName: string) {
@@ -75,5 +63,19 @@ export class SidebarComponent implements OnInit {
     isRecent(blog: Blog): boolean {
         return this.updatedInDays === 0
             || this.settingsService.isUpdatedInDays(blog.updated, this.updatedInDays);
+    }
+
+    private sortBlogs() {
+        const updatedBlogs: Blog[] = [];
+        const notUpdatedBlogs: Blog[] = [];
+        this.blogs.forEach(blog => {
+            if (this.settingsService.
+                isUpdatedInDays(blog.updated, this.updatedInDays)) {
+                updatedBlogs.push(blog);
+            } else {
+                notUpdatedBlogs.push(blog);
+            }
+        });
+        this.blogs = updatedBlogs.concat(notUpdatedBlogs);
     }
 }
