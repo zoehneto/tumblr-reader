@@ -39,7 +39,7 @@ This project uses the [angular-cli](https://github.com/angular/angular-cli#insta
 
 ## Development
 To run the app locally for development, clone the repository, install the dependencies with `npm install` and 
-start the development server with `ng serve` the app is then available in the browser under `localhost:4200`.
+start the development server with `ng serve`. The app is then available in the browser under `localhost:4200`.
 
 ## Production (Apache)
 1. Build the app using `ng build --prod` - the generated files will appear in the `dist` directory.
