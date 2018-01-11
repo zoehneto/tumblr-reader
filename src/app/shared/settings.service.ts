@@ -8,7 +8,7 @@ import { SettingsStorageService } from './settings.storage.service';
 
 @Injectable()
 export class SettingsService {
-    private subjectBlogs: Subject<Blog[]> = new BehaviorSubject([]);
+    private subjectBlogs: Subject<Blog[]> = new BehaviorSubject<Blog[]>([]);
     private subjectUpdate: Subject<number> = new BehaviorSubject(0);
     private subjectGifClickToPlay: Subject<boolean> = new BehaviorSubject(false);
     constructor(private tumblrService: TumblrService, private storageService: SettingsStorageService) {

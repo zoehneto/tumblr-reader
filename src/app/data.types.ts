@@ -63,8 +63,10 @@ export class Post {
     dialogue?: Dialogue;
     publisher?: string;
     source_url?: string;
+    source_title?: string;
     reblogged_from_name?: string;
     reblogged_from_url?: string;
+    url?: string;
 }
 
 export interface Dialogue {

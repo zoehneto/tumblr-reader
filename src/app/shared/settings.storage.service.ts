@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import localforage from 'localforage';
 import { Settings } from '../data.types';
 import * as _ from 'lodash';
+import * as localforage from 'localforage';
 
 @Injectable()
 export class SettingsStorageService {
