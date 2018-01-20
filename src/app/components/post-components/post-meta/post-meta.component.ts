@@ -22,9 +22,9 @@ import { Post, Blog } from '../../../data.types';
         </ul>
 
         <p class="bottom">
-            <a *ngIf="post.reblogs.length > 0" (click)="toggleReblogs()">{{post.reblogs.length}}
+            <a class="clickable" *ngIf="post.reblogs.length > 0" (click)="toggleReblogs()">{{post.reblogs.length}}
              {{post.reblogs.length > 1 ? 'reblogs' : 'reblog'}}</a>
-            <a *ngIf="post.replies.length > 0" (click)="toggleReplies()">{{post.replies.length}}
+            <a class="clickable" *ngIf="post.replies.length > 0" (click)="toggleReplies()">{{post.replies.length}}
              {{post.replies.length > 1 ? 'replies' : 'reply'}}</a>
             <span class="text" *ngIf="post.likes > 0">{{post.likes}}
              {{post.likes > 1 ? 'likes' : 'like'}}</span>
