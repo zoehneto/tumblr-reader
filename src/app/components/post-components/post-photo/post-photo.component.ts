@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Photo } from '../../../data.types';
 import { FullscreenService } from '../../../shared/fullscreen.service';
 import { SettingsService } from '../../../shared/settings.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'post-photo',

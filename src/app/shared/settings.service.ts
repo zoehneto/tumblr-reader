@@ -1,9 +1,8 @@
+import { forkJoin as observableForkJoin, of as observableOf,  Subject ,  Observable ,  BehaviorSubject } from 'rxjs';
+import { single, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Blog } from '../data.types';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 import { TumblrService } from './tumblr.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SettingsStorageService } from './settings.storage.service';
 
 @Injectable()
@@ -64,13 +63,13 @@ export class SettingsService {
         const blogObservables: Observable<Blog | null>[] = [];
         const errors: string[] = [];
         blogs.forEach(blog => {
-            blogObservables.push(this.tumblrService.getBlogInfo(blog.name)
-                .catch(() => {
+            blogObservables.push(this.tumblrService.getBlogInfo(blog.name).pipe(
+                catchError(() => {
                     errors.push('Blog \'' + blog.name + '\' not found');
-                    return Observable.of(null);
-                }));
+                    return observableOf(null);
+                })));
         });
-        const resultBlogs: (Blog|null)[] = await Observable.forkJoin(blogObservables).single().toPromise();
+        const resultBlogs: (Blog|null)[] = await observableForkJoin(blogObservables).pipe(single()).toPromise();
         blogs = <Blog[]> resultBlogs.filter(element => element != null);
 
         return {blogs: blogs, errors: errors};

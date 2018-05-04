@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post, Blog } from '../../../data.types';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'complete-post',

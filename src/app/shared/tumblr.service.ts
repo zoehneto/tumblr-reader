@@ -1,5 +1,6 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Response, config, Blog, ResponseWrapper } from '../data.types';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -16,11 +17,11 @@ export class TumblrService {
 
         return this.http
             .jsonp<ResponseWrapper>(this.baseUrl + 'blog/' + blogId + '/info?' + params.toString(),
-                'JSONP_CALLBACK')
-            .map(wrapper => {
+                'JSONP_CALLBACK').pipe(
+            map(wrapper => {
                 this.blogDateTransform(wrapper.response.blog);
                 return wrapper.response.blog;
-            });
+            }));
     }
 
     getPosts(blogId: string, offset: number = 0,
@@ -41,15 +42,15 @@ export class TumblrService {
 
         return this.http
             .jsonp<ResponseWrapper>(this.baseUrl + 'blog/' + blogId + '/posts?' + params.toString(),
-                'JSONP_CALLBACK')
-            .map(wrapper => {
+                'JSONP_CALLBACK').pipe(
+            map(wrapper => {
                 this.blogDateTransform(wrapper.response.blog);
                 wrapper.response.posts.forEach((post: any) => {
                     this.postDateTransform(post);
                     this.postNoteTransform(post);
                 });
                 return wrapper.response;
-            });
+            }));
     }
 
     private blogDateTransform(blog: any) {
