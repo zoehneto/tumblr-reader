@@ -40,6 +40,7 @@ export class Post {
     html5_capable?: boolean;
     // VideoPlayer[] for post type 'video', string for post type 'audio'
     player?: VideoPlayer[] | string;
+    video_url?: string;
     photos?: Photo[];
     audio_url?: string;
     artist?: string;
