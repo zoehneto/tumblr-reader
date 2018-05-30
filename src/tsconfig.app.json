@@ -9,7 +9,6 @@
         "strictPropertyInitialization": false,
         "types": [
             "node",
-            "mousetrap",
             "dompurify",
             "lodash.clonedeep"
         ]
