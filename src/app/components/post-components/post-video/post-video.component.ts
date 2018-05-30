@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 @Component({
     selector: 'post-video',
     template: `
-        <div *ngIf="post.html5_capable === true" switch-target videoBehaviour>
+        <div *ngIf="post.html5_capable === true && post.video_url" switch-target videoBehaviour>
             <video preload="metadata">
                 <source src="{{post.video_url}}"/>
             </video>
         </div>
+        <div *ngIf="post.html5_capable === true && !post.video_url" switch-target [innerHTML]="player" videoBehaviour embedBehaviour></div>
         <div *ngIf="post.html5_capable === false" switch-target [innerHTML]="player" videoBehaviour embedBehaviour></div>
     `,
     styleUrls: ['./post-video.component.scss']
@@ -39,7 +40,7 @@ export class PostVideoComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         const largestPlayer: VideoPlayer = <VideoPlayer> this.post.player![this.post.player!.length - 1];
-        if (!this.post.html5_capable) {
+        if (!this.post.html5_capable || !this.post.video_url) {
             this.player = this.sanitizationService.sanitize(largestPlayer.embed_code);
         }
         this.detectorRef.detectChanges();
