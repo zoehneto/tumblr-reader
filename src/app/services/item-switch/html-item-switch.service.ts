@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ItemSwitch } from './item.switch';
-import { CurrentPostService } from '../shared/current.post.service';
+import { ItemSwitch } from './item-switch';
+import { CurrentPostService } from '../current-post.service';
 
 @Injectable()
-export class HtmlItemSwitch extends ItemSwitch<HTMLElement> {
+export class HtmlItemSwitchService extends ItemSwitch<HTMLElement> {
     constructor(private currentPostService: CurrentPostService) {
         super();
     }

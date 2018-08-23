@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Response, config, Blog, ResponseWrapper } from '../data.types';
+import { Response, config, Blog, ResponseWrapper } from '../data-types';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()

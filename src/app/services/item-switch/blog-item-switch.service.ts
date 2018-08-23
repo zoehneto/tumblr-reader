@@ -1,10 +1,10 @@
-import { Blog } from '../data.types';
+import { Blog } from '../../data-types';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ItemSwitch } from './item.switch';
+import { ItemSwitch } from './item-switch';
 
 @Injectable()
-export class BlogItemSwitch extends ItemSwitch<Blog> {
+export class BlogItemSwitchService extends ItemSwitch<Blog> {
     constructor(private router: Router) {
         super();
     }

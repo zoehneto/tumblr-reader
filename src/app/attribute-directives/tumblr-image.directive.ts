@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, DoCheck } from '@angular/core';
-import { Photo } from '../data.types';
-import { FullscreenService } from '../shared/fullscreen.service';
+import { Photo } from '../data-types';
+import { FullscreenService } from '../services/fullscreen.service';
 
 @Directive({ selector: '[tumblrImage]' })
 export class TumblrImageDirective implements DoCheck {

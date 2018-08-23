@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Post } from '../../../data.types';
+import { Post } from '../../../data-types';
 import { Observable } from 'rxjs';
 
 @Component({

@@ -1,9 +1,9 @@
 import { forkJoin as observableForkJoin, of as observableOf,  Subject ,  Observable ,  BehaviorSubject } from 'rxjs';
 import { single, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Blog } from '../data.types';
+import { Blog } from '../data-types';
 import { TumblrService } from './tumblr.service';
-import { SettingsStorageService } from './settings.storage.service';
+import { SettingsStorageService } from './settings-storage.service';
 
 @Injectable()
 export class SettingsService {

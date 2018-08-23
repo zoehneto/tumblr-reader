@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../../data.types';
-import { SettingsService } from '../../shared/settings.service';
+import { Blog } from '../../data-types';
+import { SettingsService } from '../../services/settings.service';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
-import { BlogItemSwitch } from '../../item-switch/blog.item.switch';
+import { BlogItemSwitchService } from '../../services/item-switch/blog-item-switch.service';
 
 @Component({
     selector: 'side-bar',
@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     blogs: Blog[] = [];
     private updatedInDays = 0;
     constructor(private settingsService: SettingsService, private hotkeysService: HotkeysService,
-        private blogItemSwitch: BlogItemSwitch) {
+        private blogItemSwitch: BlogItemSwitchService) {
     }
 
     ngOnInit() {

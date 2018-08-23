@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post, Blog } from '../../../data.types';
+import { Post, Blog } from '../../../data-types';
 import { Subject } from 'rxjs';
 
 @Component({

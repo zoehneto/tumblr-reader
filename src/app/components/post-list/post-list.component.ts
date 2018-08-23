@@ -1,14 +1,14 @@
 import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Blog, Post } from '../../data.types';
-import { TumblrService } from '../../shared/tumblr.service';
-import { FaviconService } from '../../shared/favicon.service';
+import { Blog, Post } from '../../data-types';
+import { TumblrService } from '../../services/tumblr.service';
+import { FaviconService } from '../../services/favicon.service';
 import { Title } from '@angular/platform-browser';
-import { SettingsService } from '../../shared/settings.service';
+import { SettingsService } from '../../services/settings.service';
 import { Subscription } from 'rxjs';
 import { PostComponent } from '../post-components/post/post.component';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { CurrentPostService } from '../../shared/current.post.service';
+import { CurrentPostService } from '../../services/current-post.service';
 
 @Component({
     selector: 'post-list',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Settings } from '../data.types';
+import { Settings } from '../data-types';
 import * as _ from 'lodash';
 import * as localforage from 'localforage';
 

@@ -7,22 +7,22 @@ import { FormsModule } from '@angular/forms';
 import { ROUTES } from './app.routes';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PostListComponent } from './components/post-list/post-list.component';
-import { BlogItemSwitch } from './item-switch/blog.item.switch';
-import { HtmlItemSwitch } from './item-switch/html.item.switch';
-import { FaviconService } from './shared/favicon.service';
-import { CustomSanitizationService } from './shared/custom.sanitization.service';
-import { SettingsService } from './shared/settings.service';
-import { TumblrService } from './shared/tumblr.service';
+import { BlogItemSwitchService } from './services/item-switch/blog-item-switch.service';
+import { HtmlItemSwitchService } from './services/item-switch/html-item-switch.service';
+import { FaviconService } from './services/favicon.service';
+import { CustomSanitizationService } from './services/custom-sanitization.service';
+import { SettingsService } from './services/settings.service';
+import { TumblrService } from './services/tumblr.service';
 import { Title } from '@angular/platform-browser';
 import { HotkeyModule } from 'angular2-hotkeys';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { EmbedBehaviourDirective } from './attribute-directives/embed.behaviour.directive';
-import { PostSwitchDirective } from './attribute-directives/post.switch.directive';
-import { TumblrEmbeddedImageDirective } from './attribute-directives/tumblr.embedded.image.directive';
-import { TumblrImageDirective } from './attribute-directives/tumblr.image.directive';
-import { TumblrLinkDirective } from './attribute-directives/tumblr.link.directive';
-import { VideoBehaviourDirective } from './attribute-directives/video.behaviour.directive';
+import { EmbedBehaviourDirective } from './attribute-directives/embed-behaviour.directive';
+import { PostSwitchDirective } from './attribute-directives/post-switch/post-switch.directive';
+import { TumblrEmbeddedImageDirective } from './attribute-directives/tumblr-embedded-image.directive';
+import { TumblrImageDirective } from './attribute-directives/tumblr-image.directive';
+import { TumblrLinkDirective } from './attribute-directives/tumblr-link.directive';
+import { VideoBehaviourDirective } from './attribute-directives/video-behaviour.directive';
 import { PostComponent } from './components/post-components/post/post.component';
 import { PostAnswerComponent } from './components/post-components/post-answer/post-answer.component';
 import { PostAudioComponent } from './components/post-components/post-audio/post-audio.component';
@@ -38,11 +38,11 @@ import { PostVideoComponent } from './components/post-components/post-video/post
 import { ResponsiveMenuComponent } from './components/responsive-menu/responsive-menu.component';
 import { PostReblogsComponent } from './components/post-components/post-reblogs/post-reblogs.component';
 import { PostRepliesComponent } from './components/post-components/post-replies/post-replies.component';
-import { FullscreenService } from './shared/fullscreen.service';
-import { SubPostSwitchDirective } from './attribute-directives/sub.post.switch.directive';
-import { CurrentPostService } from './shared/current.post.service';
+import { FullscreenService } from './services/fullscreen.service';
+import { SubPostSwitchDirective } from './attribute-directives/post-switch/sub-post-switch.directive';
+import { CurrentPostService } from './services/current-post.service';
 import { FocusTargetComponent } from './components/focus-target/focus-target.component';
-import { SettingsStorageService } from './shared/settings.storage.service';
+import { SettingsStorageService } from './services/settings-storage.service';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, SettingsComponent, PostListComponent,
@@ -56,7 +56,7 @@ import { SettingsStorageService } from './shared/settings.storage.service';
     imports: [BrowserModule, RouterModule.forRoot(ROUTES, {useHash: true}), FormsModule,
         HttpClientModule, HttpClientJsonpModule, InfiniteScrollModule, HotkeyModule.forRoot()],
     providers: [Title, TumblrService, SettingsService, CustomSanitizationService,
-        FaviconService, HtmlItemSwitch, BlogItemSwitch, FullscreenService, CurrentPostService,
+        FaviconService, HtmlItemSwitchService, BlogItemSwitchService, FullscreenService, CurrentPostService,
         SettingsStorageService],
     bootstrap: [AppComponent]
 })

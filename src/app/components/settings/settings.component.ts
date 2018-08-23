@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../../data.types';
-import { SettingsService } from '../../shared/settings.service';
+import { Blog } from '../../data-types';
+import { SettingsService } from '../../services/settings.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({

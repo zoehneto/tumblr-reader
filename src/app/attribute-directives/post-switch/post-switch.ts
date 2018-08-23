@@ -1,32 +1,21 @@
 import { ElementRef, OnDestroy, OnInit, Input } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
-import { HtmlItemSwitch } from '../item-switch/html.item.switch';
+import { HtmlItemSwitchService } from '../../services/item-switch/html-item-switch.service';
 
 export abstract class PostSwitch implements OnInit, OnDestroy {
     @Input('loadMoreItems') loadMoreItems: () => Promise<any>;
     private hotkeys: Hotkey[];
-    private el: ElementRef;
-    private hotkeysService: HotkeysService;
-    private htmlItemSwitch: HtmlItemSwitch;
-    private nextKey: string;
-    private previousKey: string;
-    constructor(el: ElementRef, hotkeysService: HotkeysService,
-                htmlItemSwitch: HtmlItemSwitch, nextKey: string, previousKey: string) {
-        this.el = el;
-        this.hotkeysService = hotkeysService;
-        this.htmlItemSwitch = htmlItemSwitch;
-        this.nextKey = nextKey;
-        this.previousKey = previousKey;
-    }
+    constructor(private el: ElementRef, private hotkeysService: HotkeysService,
+                private htmlItemSwitchService: HtmlItemSwitchService, private nextKey: string, private previousKey: string) {}
 
     ngOnInit() {
-        this.htmlItemSwitch.setLoadMoreItemsCallback(this.moreItemsNeeded.bind(this));
+        this.htmlItemSwitchService.setLoadMoreItemsCallback(this.moreItemsNeeded.bind(this));
         this.hotkeys = [
             new Hotkey(this.nextKey, (event: KeyboardEvent): boolean => {
-                this.htmlItemSwitch.showNextItem(this.getElements(this.el));
+                this.htmlItemSwitchService.showNextItem(this.getElements(this.el));
                 return false;
             }), new Hotkey(this.previousKey, (event: KeyboardEvent): boolean => {
-                this.htmlItemSwitch.showPreviousItem(this.getElements(this.el));
+                this.htmlItemSwitchService.showPreviousItem(this.getElements(this.el));
                 return false;
             })
         ];

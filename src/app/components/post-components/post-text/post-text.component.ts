@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { Post } from '../../../data.types';
-import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
+import { Post } from '../../../data-types';
+import { CustomSanitizationService } from '../../../services/custom-sanitization.service';
 
 @Component({
     selector: 'post-text',

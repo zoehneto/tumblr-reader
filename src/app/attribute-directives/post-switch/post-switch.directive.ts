@@ -1,13 +1,13 @@
 import { ElementRef, Directive } from '@angular/core';
 import { HotkeysService } from 'angular2-hotkeys';
-import { HtmlItemSwitch } from '../item-switch/html.item.switch';
-import { PostSwitch } from './post.switch';
+import { HtmlItemSwitchService } from '../../services/item-switch/html-item-switch.service';
+import { PostSwitch } from './post-switch';
 
 @Directive({ selector: '[postSwitch]' })
 export class PostSwitchDirective extends PostSwitch {
     constructor(el: ElementRef, hotkeysService: HotkeysService,
-                htmlItemSwitch: HtmlItemSwitch) {
-        super(el, hotkeysService, htmlItemSwitch, 'j', 'k');
+                htmlItemSwitchService: HtmlItemSwitchService) {
+        super(el, hotkeysService, htmlItemSwitchService, 'j', 'k');
     }
 
     protected getElements(el: ElementRef): HTMLElement[] {

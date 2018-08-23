@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild, ElementRef, DoCheck, ChangeDetectorRef} from '@angular/core';
-import { Post } from '../../../data.types';
+import { Post } from '../../../data-types';
 
 @Component({
     selector: 'post-quote',

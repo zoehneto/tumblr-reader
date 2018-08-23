@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, ChangeDetectorRef, ElementRef, OnInit } from '@angular/core';
-import { Post, VideoPlayer } from '../../../data.types';
-import { CustomSanitizationService } from '../../../shared/custom.sanitization.service';
+import { Post, VideoPlayer } from '../../../data-types';
+import { CustomSanitizationService } from '../../../services/custom-sanitization.service';
 import { Observable } from 'rxjs';
 
 @Component({
