@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { PostComponent } from '../post-components/post/post.component';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { CurrentPostService } from '../../services/current-post.service';
-import {SmartLoadingService} from '../../services/smart-loading.service';
+import {SmartLoadingService} from '../../services/smart-loading/smart-loading.service';
 
 @Component({
     selector: 'post-list',
@@ -71,7 +71,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             this.faviconService.setFavicon('https://api.tumblr.com/v2/blog/'
                 + params['name'] + '/avatar/16');
 
-            this.smartLoadingService.clearLoadTracker();
+            this.smartLoadingService.clearLoadingQueue();
             this.loadPosts();
         });
         this.hotkeys = [

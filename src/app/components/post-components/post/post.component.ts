@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post, Blog} from '../../../data-types';
 import {Subject} from 'rxjs';
-import {SmartLoadingService} from '../../../services/smart-loading.service';
+import {SmartLoadingService} from '../../../services/smart-loading/smart-loading.service';
 
 @Component({
     selector: 'complete-post',
