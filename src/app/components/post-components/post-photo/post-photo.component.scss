@@ -1,6 +1,6 @@
 @import '../../../../assets/scss/variables';
 
-.clicktoplay {
+.placeholder {
   cursor: pointer;
   background-color: $primary-light;
   display: flex;
@@ -10,6 +10,7 @@
 
 img {
   cursor: pointer;
+  background-color: $primary-light;
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;

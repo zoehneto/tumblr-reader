@@ -1,13 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { Post, Blog } from '../../../data-types';
-import { Subject } from 'rxjs';
+import {Component, Input, OnInit} from '@angular/core';
+import {Post, Blog} from '../../../data-types';
+import {Subject} from 'rxjs';
+import {SmartLoadingService} from '../../../services/smart-loading.service';
 
 @Component({
     selector: 'complete-post',
     template: `
         <focus-target></focus-target>
         <div class="full">
-            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [play]="playSubject">
+            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [play]="playSubject"
+                        [loadAllowed]="loadAllowed" [loadFinished]="resolveFunction">
             </post-photo>
             <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject">
             </post-video>
@@ -35,12 +37,31 @@ import { Subject } from 'rxjs';
     `,
     styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
     @Input('blog') blog: Blog;
     @Input('post') post: Post;
+    @Input('index') index: number;
     playSubject: Subject<void> = new Subject<void>();
+    loadAllowed: boolean = false;
+    resolveFunction: () => void;
+
+    constructor(private smartLoadingService: SmartLoadingService) {
+    }
+
+    ngOnInit(): void {
+        this.smartLoadingService.register(this.index, () => {
+            if (this.post.photos) {
+                const promise = new Promise<void>(resolve => this.resolveFunction = resolve);
+                this.loadAllowed = true;
+                return promise;
+            }
+            return Promise.resolve();
+        });
+    }
 
     public play(): void {
         this.playSubject.next();
     }
+
+
 }

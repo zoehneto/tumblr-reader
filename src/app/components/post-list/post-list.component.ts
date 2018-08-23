@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { PostComponent } from '../post-components/post/post.component';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { CurrentPostService } from '../../services/current-post.service';
+import {SmartLoadingService} from '../../services/smart-loading.service';
 
 @Component({
     selector: 'post-list',
@@ -26,8 +27,8 @@ import { CurrentPostService } from '../../services/current-post.service';
             subPostSwitch [loadMoreItems]="onScroll.bind(this)"
             infiniteScroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
             [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
-                <li *ngFor="let post of posts" class="post {{isRecent(post) ? 'recent' : ''}}">
-                    <complete-post [post]="post" [blog]="blog"></complete-post>
+                <li *ngFor="let post of posts; let i = index" class="post {{isRecent(post) ? 'recent' : ''}}">
+                    <complete-post [post]="post" [blog]="blog" [index]="i"></complete-post>
                 </li>
             </ul>
         </div>
@@ -55,7 +56,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
                 private settingsService: SettingsService, private hotkeysService: HotkeysService,
-                private currentPostService: CurrentPostService) {
+                private currentPostService: CurrentPostService, private smartLoadingService: SmartLoadingService) {
     }
 
     ngOnInit() {
@@ -70,6 +71,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             this.faviconService.setFavicon('https://api.tumblr.com/v2/blog/'
                 + params['name'] + '/avatar/16');
 
+            this.smartLoadingService.clearLoadTracker();
             this.loadPosts();
         });
         this.hotkeys = [

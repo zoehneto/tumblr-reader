@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Photo } from '../../../data-types';
-import { FullscreenService } from '../../../services/fullscreen.service';
-import { SettingsService } from '../../../services/settings.service';
-import { Observable } from 'rxjs';
+import {Component, Input, OnInit} from '@angular/core';
+import {Photo} from '../../../data-types';
+import {FullscreenService} from '../../../services/fullscreen.service';
+import {SettingsService} from '../../../services/settings.service';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'post-photo',
     template: `
         <div *ngFor="let photo of postPhotos">
             <div *ngIf="!loadPhotos && photo.original_size.url.endsWith('.gif'); else showPhotos"
-                 switch-target (click)="enablePhotoLoading()" class="clicktoplay"
+                 switch-target (click)="enablePhotoLoading()" class="placeholder"
                  [tumblrImage]="photo">
                 <div class="center">
                     <h1>GIF</h1>
@@ -17,10 +17,16 @@ import { Observable } from 'rxjs';
                 </div>
             </div>
             <ng-template #showPhotos>
-                <img switch-target (click)="fullScreen($event)"
-                     src="{{photo.original_size.url}}" sizes="(min-width: 100em) 26vw,
+                <img *ngIf="loadAllowed" switch-target (click)="fullScreen($event)" (load)="handleLoading($event)"
+                     (error)="handleLoading($event)"
+                     [src]="photo.original_size.url" sizes="(min-width: 100em) 26vw,
                      (min-width: 64em) 34vw, (min-width: 48em) 73vw, 95vw"
                      [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
+                <div *ngIf="!loadAllowed" switch-target class="placeholder" [tumblrImage]="photo">
+                    <div class="center">
+                        <h1>Loading...</h1>
+                    </div>
+                </div>
             </ng-template>
         </div>
     `,
@@ -29,7 +35,12 @@ import { Observable } from 'rxjs';
 export class PostPhotoComponent implements OnInit {
     @Input('postPhotos') postPhotos: Photo[];
     @Input('play') play: Observable<void>;
+    @Input('loadAllowed') loadAllowed: boolean;
+    @Input('loadFinished') loadFinished: () => void;
     loadPhotos: boolean;
+    private loadCounter: number = 0;
+    private errorCounter: number = 0;
+
     constructor(private fullscreenService: FullscreenService, private settingsService: SettingsService) {
     }
 
@@ -63,5 +74,18 @@ export class PostPhotoComponent implements OnInit {
         const elem = <HTMLElement> event.currentTarget;
         this.fullscreenService.requestFullscreen(elem);
         elem.setAttribute('height', '');
+    }
+
+    handleLoading(event: any) {
+        if (event.type === 'load') {
+            this.loadCounter++;
+        } else {
+            this.errorCounter++;
+        }
+        const photosToLoad = this.postPhotos
+            .filter(photo => this.loadPhotos || !photo.original_size.url.endsWith('.gif')).length;
+        if (this.loadCounter + this.errorCounter === photosToLoad) {
+            this.loadFinished();
+        }
     }
 }
