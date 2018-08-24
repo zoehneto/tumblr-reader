@@ -9,7 +9,6 @@ import { SettingsStorageService } from './settings-storage.service';
 export class SettingsService {
     private subjectBlogs: Subject<Blog[]> = new BehaviorSubject<Blog[]>([]);
     private subjectUpdate: Subject<number> = new BehaviorSubject(0);
-    private subjectGifClickToPlay: Subject<boolean> = new BehaviorSubject(false);
     constructor(private tumblrService: TumblrService, private storageService: SettingsStorageService) {
         this.init();
     }
@@ -18,7 +17,6 @@ export class SettingsService {
         const settings = await this.storageService.getSettings();
         this.subjectBlogs.next(settings.blogs);
         this.subjectUpdate.next(settings.updatedInDays);
-        this.subjectGifClickToPlay.next(settings.gifClickToPlay);
     }
 
     isUpdatedInDays(date: Date, days: number) {
@@ -33,16 +31,6 @@ export class SettingsService {
         await this.storageService
             .updateSettings(days, (settings, value) => settings.updatedInDays = value);
         this.subjectUpdate.next(days);
-    }
-
-    getGifClickToPlay(): Observable<boolean> {
-        return this.subjectGifClickToPlay;
-    }
-
-    async setGifClickToPlay(clickToPlayEnabled: boolean): Promise<void> {
-        await this.storageService
-            .updateSettings(clickToPlayEnabled, (settings, value) => settings.gifClickToPlay = value);
-        this.subjectGifClickToPlay.next(clickToPlayEnabled);
     }
 
     getBlogs(): Observable<Blog[]> {

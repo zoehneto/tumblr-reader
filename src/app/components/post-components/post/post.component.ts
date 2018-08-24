@@ -8,8 +8,8 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
     template: `
         <focus-target></focus-target>
         <div class="full">
-            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [play]="playSubject"
-                        [loadAllowed]="loadAllowed" [loadFinished]="resolveFunction">
+            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [loadAllowed]="loadAllowed"
+                        [loadFinished]="resolveFunction">
             </post-photo>
             <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject">
             </post-video>
@@ -62,6 +62,4 @@ export class PostComponent implements OnInit {
     public play(): void {
         this.playSubject.next();
     }
-
-
 }

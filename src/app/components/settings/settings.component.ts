@@ -17,11 +17,6 @@ import { Title } from '@angular/platform-browser';
                     <input type="number" [(ngModel)]="updatedInDays"/>
                 </label>
 
-                <label>Enable Click-to-Play for GIFs
-                    (improves performance and reduces downloads especially on slow connections)
-                    <input type="checkbox" class="checkbox" [(ngModel)]="gifClickToPlay"/>
-                </label>
-
                 <div class="center">
                     <button (click)="saveSettings()" type="button">Save</button>
                 </div>
@@ -36,7 +31,6 @@ import { Title } from '@angular/platform-browser';
 export class SettingsComponent implements OnInit {
     blogText = '';
     updatedInDays: number;
-    gifClickToPlay: boolean;
     errors: string[] = [];
     private blogs: Blog[];
     constructor(private settingsService: SettingsService, private titleService: Title) {
@@ -50,13 +44,10 @@ export class SettingsComponent implements OnInit {
         });
         this.settingsService.getUpdatedInDays()
             .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
-        this.settingsService.getGifClickToPlay()
-            .subscribe(gifClickToPlayEnabled => this.gifClickToPlay = gifClickToPlayEnabled);
     }
 
     async saveSettings() {
         this.errors = [];
-        await this.settingsService.setGifClickToPlay(this.gifClickToPlay);
         await this.settingsService.setUpdatedInDays(this.updatedInDays);
         this.errors = await this.settingsService.setBlogs(this.textToBlogs(this.blogText));
     }

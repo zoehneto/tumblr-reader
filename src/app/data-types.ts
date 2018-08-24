@@ -4,12 +4,10 @@ export class Settings {
     lastUpdated: Date;
     updatedInDays: number;
     blogs: Blog[];
-    gifClickToPlay: boolean;
     constructor(date?: Date) {
         this.lastUpdated = date ? date : new Date();
         this.updatedInDays = 0;
         this.blogs = [];
-        this.gifClickToPlay = false;
     }
 }
 
