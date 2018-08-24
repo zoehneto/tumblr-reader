@@ -12,11 +12,11 @@ export class SmartLoadingService {
 
     constructor() {
         this.loadingStrategy = new WindowedLoadingStrategy(2);
-        this.trackItems();
     }
 
-    register(index: number, loadFunction: () => Promise<void>) {
+    async register(index: number, loadFunction: () => Promise<void>) {
         this.queue[index] = loadFunction;
+        while (await this.loadingStrategy.loadItems(this.queue)) {}
     }
 
     clearLoadingQueue() {
@@ -24,9 +24,4 @@ export class SmartLoadingService {
         this.loadingStrategy.reset();
     }
 
-    private async trackItems() {
-        while (true) {
-            await this.loadingStrategy.loadItems(this.queue);
-        }
-    }
 }
