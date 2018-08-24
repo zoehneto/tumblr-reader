@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {LoadingStrategy} from './loading-strategy';
-import {SerialLoadingStrategy} from './serial-loading-strategy';
+import {WindowedLoadingStrategy} from './windowed-loading-strategy';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class SmartLoadingService {
     private loadingStrategy: LoadingStrategy;
 
     constructor() {
-        this.loadingStrategy = new SerialLoadingStrategy();
+        this.loadingStrategy = new WindowedLoadingStrategy(2);
         this.trackItems();
     }
 
