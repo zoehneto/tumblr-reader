@@ -13,6 +13,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
     }
 
     reset(): void {
+        this.counter++;
         this.window = new Array(this.windowSize);
         this.highestQueueIndex = 0;
     }
@@ -24,6 +25,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
 
         this.counter++;
         await new Promise(resolve => {
+            const counterCopy = this.counter;
             for (let index = 0; index < this.window.length; index++) {
                 // load the next item from the queue if there is an empty spot in the queue
                 if (this.window[index] === undefined) {
@@ -31,12 +33,14 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
                         return;
                     }
 
-                    this.window[index] = queue[this.highestQueueIndex]();
-                    this.highestQueueIndex++;
+                    // if the counters don't match, the queue has been reset
+                    if (counterCopy === this.counter) {
+                        this.window[index] = queue[this.highestQueueIndex]();
+                        this.highestQueueIndex++;
+                    }
                 }
 
                 // empty the queue spot and resolve once the first promise is finished
-                const counterCopy = this.counter;
                 this.window[index]!.then(() => {
                     // if the counters don't match, this promise has already been resolved
                     if (counterCopy === this.counter) {
