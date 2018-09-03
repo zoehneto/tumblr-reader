@@ -1,14 +1,14 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Blog, Post } from '../../data-types';
-import { TumblrService } from '../../services/tumblr.service';
-import { FaviconService } from '../../services/favicon.service';
-import { Title } from '@angular/platform-browser';
-import { SettingsService } from '../../services/settings.service';
-import { Subscription } from 'rxjs';
-import { PostComponent } from '../post-components/post/post.component';
-import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { CurrentPostService } from '../../services/current-post.service';
+import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Blog, Post} from '../../data-types';
+import {TumblrService} from '../../services/tumblr.service';
+import {FaviconService} from '../../services/favicon.service';
+import {Title} from '@angular/platform-browser';
+import {SettingsService} from '../../services/settings.service';
+import {Subscription} from 'rxjs';
+import {PostComponent} from '../post-components/post/post.component';
+import {Hotkey, HotkeysService} from 'angular2-hotkeys';
+import {CurrentPostService} from '../../services/current-post.service';
 import {SmartLoadingService} from '../../services/smart-loading/smart-loading.service';
 
 @Component({
@@ -24,9 +24,9 @@ import {SmartLoadingService} from '../../services/smart-loading/smart-loading.se
         <div class="pure-u-lg-1-5"></div>
         <div class="pure-u-1 pure-u-lg-3-5">
             <ul postSwitch [loadMoreItems]="onScroll.bind(this)"
-            subPostSwitch [loadMoreItems]="onScroll.bind(this)"
-            infiniteScroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
-            [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
+                subPostSwitch [loadMoreItems]="onScroll.bind(this)"
+                infiniteScroll [infiniteScrollDisabled]="loading" [infiniteScrollDistance]="4"
+                [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
                 <li *ngFor="let post of posts; let i = index" class="post {{isRecent(post) ? 'recent' : ''}}">
                     <complete-post [post]="post" [blog]="blog" [index]="i"></complete-post>
                 </li>
@@ -53,7 +53,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     private updatedInDays: number = 0;
     private subscription: Subscription;
     private hotkeys: Hotkey[];
-    constructor(private route: ActivatedRoute, private tumblrService: TumblrService,
+
+    constructor(private el: ElementRef, private route: ActivatedRoute, private tumblrService: TumblrService,
                 private faviconService: FaviconService, private titleService: Title,
                 private settingsService: SettingsService, private hotkeysService: HotkeysService,
                 private currentPostService: CurrentPostService, private smartLoadingService: SmartLoadingService) {
@@ -63,6 +64,16 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.settingsService.getUpdatedInDays()
             .subscribe(updatedInDays => this.updatedInDays = updatedInDays);
         this.route.params.subscribe(params => {
+            this.smartLoadingService.clearLoadingQueue();
+
+            // Abort all currently running requests for media content
+            const mediaElements = this.el.nativeElement.querySelectorAll('img, audio, video');
+            if (mediaElements.length > 0) {
+                for (const mediaElement of mediaElements) {
+                    mediaElement.src = '';
+                }
+            }
+
             this.postCounter = 0;
             this.posts = [];
             this.blog = new Blog(params['name']);
@@ -71,7 +82,6 @@ export class PostListComponent implements OnInit, OnDestroy {
             this.faviconService.setFavicon('https://api.tumblr.com/v2/blog/'
                 + params['name'] + '/avatar/16');
 
-            this.smartLoadingService.clearLoadingQueue();
             this.loadPosts();
         });
         this.hotkeys = [
