@@ -13,7 +13,7 @@ import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
             </post-photo>
             <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject" [index]="index">
             </post-video>
-            <post-audio *ngIf="post.type == 'audio'" [post]="post" [play]="playSubject">
+            <post-audio *ngIf="post.type == 'audio'" [post]="post" [play]="playSubject" [index]="index">
             </post-audio>
         </div>
         <div switch-target class="padded">
@@ -47,7 +47,7 @@ export class PostComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (!this.post.photos && this.post.type !== 'video') {
+        if (!this.post.photos && this.post.type !== 'video' && this.post.type !== 'audio') {
             this.smartLoadingService.register(this.index, new LoadingHandler(0));
         }
     }
