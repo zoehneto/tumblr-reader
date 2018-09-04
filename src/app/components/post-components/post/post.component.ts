@@ -11,7 +11,7 @@ import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
         <div class="full">
             <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [index]="index">
             </post-photo>
-            <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject">
+            <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject" [index]="index">
             </post-video>
             <post-audio *ngIf="post.type == 'audio'" [post]="post" [play]="playSubject">
             </post-audio>
@@ -47,7 +47,7 @@ export class PostComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (!this.post.photos) {
+        if (!this.post.photos && this.post.type !== 'video') {
             this.smartLoadingService.register(this.index, new LoadingHandler(0));
         }
     }
