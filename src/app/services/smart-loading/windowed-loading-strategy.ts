@@ -1,4 +1,5 @@
 import {LoadingStrategy} from './loading-strategy';
+import {LoadingHandler} from './loading-handler';
 
 export class WindowedLoadingStrategy implements LoadingStrategy {
     private windowSize: number;
@@ -18,7 +19,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
         this.highestQueueIndex = 0;
     }
 
-    async loadItems(queue: (() => Promise<void>)[]): Promise<boolean> {
+    async loadItems(queue: LoadingHandler[]): Promise<boolean> {
         if (queue[this.highestQueueIndex] === undefined) {
             return false;
         }
@@ -35,7 +36,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
 
                     // if the counters don't match, the queue has been reset
                     if (counterCopy === this.counter) {
-                        this.window[index] = queue[this.highestQueueIndex]();
+                        this.window[index] = queue[this.highestQueueIndex].startLoading();
                         this.highestQueueIndex++;
                     }
                 }

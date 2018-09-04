@@ -1,17 +1,20 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Photo} from '../../../data-types';
 import {FullscreenService} from '../../../services/fullscreen.service';
+import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
+import {SmartLoadingService} from '../../../services/smart-loading/smart-loading.service';
 
 @Component({
     selector: 'post-photo',
     template: `
         <div *ngFor="let photo of postPhotos">
-            <img *ngIf="loadAllowed" switch-target (click)="fullScreen($event)" (load)="handleLoading($event)"
-                 (error)="handleLoading($event)"
+            <img *ngIf="loadingHandler.loadAllowed" switch-target (click)="fullScreen($event)"
+                 (load)="loadingHandler.elementLoadSuccess($event)"
+                 (error)="loadingHandler.elementLoadError($event)"
                  [src]="photo.original_size.url" sizes="(min-width: 100em) 26vw,
                  (min-width: 64em) 34vw, (min-width: 48em) 73vw, 95vw"
                  [srcset]="createSrcSet(photo)" [tumblrImage]="photo">
-            <div *ngIf="!loadAllowed" switch-target class="placeholder" [tumblrImage]="photo">
+            <div *ngIf="!loadingHandler.loadAllowed" switch-target class="placeholder" [tumblrImage]="photo">
                 <div class="center">
                     <h1>Loading...</h1>
                 </div>
@@ -20,14 +23,17 @@ import {FullscreenService} from '../../../services/fullscreen.service';
     `,
     styleUrls: ['./post-photo.component.scss']
 })
-export class PostPhotoComponent {
+export class PostPhotoComponent implements OnInit {
     @Input('postPhotos') postPhotos: Photo[];
-    @Input('loadAllowed') loadAllowed: boolean;
-    @Input('loadFinished') loadFinished: () => void;
-    private loadCounter: number = 0;
-    private errorCounter: number = 0;
+    @Input('index') index: number;
+    loadingHandler: LoadingHandler;
 
-    constructor(private fullscreenService: FullscreenService) {
+    constructor(private fullscreenService: FullscreenService, private smartLoadingService: SmartLoadingService) {
+    }
+
+    ngOnInit(): void {
+        this.loadingHandler = new LoadingHandler(this.postPhotos.length);
+        this.smartLoadingService.register(this.index, this.loadingHandler);
     }
 
     createSrcSet(photo: Photo): string {
@@ -46,17 +52,5 @@ export class PostPhotoComponent {
         const elem = <HTMLElement> event.currentTarget;
         this.fullscreenService.requestFullscreen(elem);
         elem.setAttribute('height', '');
-    }
-
-    handleLoading(event: any) {
-        if (event.type === 'load') {
-            this.loadCounter++;
-        } else {
-            this.errorCounter++;
-        }
-
-        if (this.loadCounter + this.errorCounter === this.postPhotos.length) {
-            this.loadFinished();
-        }
     }
 }

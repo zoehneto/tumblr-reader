@@ -2,14 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Post, Blog} from '../../../data-types';
 import {Subject} from 'rxjs';
 import {SmartLoadingService} from '../../../services/smart-loading/smart-loading.service';
+import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
 
 @Component({
     selector: 'complete-post',
     template: `
         <focus-target></focus-target>
         <div class="full">
-            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [loadAllowed]="loadAllowed"
-                        [loadFinished]="resolveFunction">
+            <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [index]="index">
             </post-photo>
             <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject">
             </post-video>
@@ -42,21 +42,14 @@ export class PostComponent implements OnInit {
     @Input('post') post: Post;
     @Input('index') index: number;
     playSubject: Subject<void> = new Subject<void>();
-    loadAllowed: boolean = false;
-    resolveFunction: () => void;
 
     constructor(private smartLoadingService: SmartLoadingService) {
     }
 
     ngOnInit(): void {
-        this.smartLoadingService.register(this.index, () => {
-            if (this.post.photos) {
-                const promise = new Promise<void>(resolve => this.resolveFunction = resolve);
-                this.loadAllowed = true;
-                return promise;
-            }
-            return Promise.resolve();
-        });
+        if (!this.post.photos) {
+            this.smartLoadingService.register(this.index, new LoadingHandler(0));
+        }
     }
 
     public play(): void {
