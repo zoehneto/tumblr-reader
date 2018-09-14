@@ -6,7 +6,7 @@ import { SafeHtml } from '@angular/platform-browser';
 @Component({
     selector: 'post-caption',
     template: `
-        <div class="caption" [innerHTML]="caption" tumblrLink tumblrEmbeddedImage></div>
+        <div class="caption" [innerHTML]="caption" tumblrLink tumblrEmbeddedMedia></div>
     `,
     styleUrls: ['./post-caption.component.scss']
 })

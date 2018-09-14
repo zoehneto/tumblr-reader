@@ -11,7 +11,7 @@ import { Post } from '../../../data-types';
             </p>
             <p class="question-text">{{post.question}}</p>
         </div>
-        <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedImage></div>
+        <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedMedia></div>
     `,
     styleUrls: ['./post-answer.component.scss']
 })

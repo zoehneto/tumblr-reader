@@ -5,7 +5,7 @@ import { CustomSanitizationService } from '../../../services/custom-sanitization
 @Component({
     selector: 'post-text',
     template: `
-        <div *ngIf="post.body" class="body" [innerHTML]="body" tumblrLink tumblrEmbeddedImage></div>
+        <div *ngIf="post.body" class="body" [innerHTML]="body" tumblrLink tumblrEmbeddedMedia></div>
     `,
     styleUrls: ['./post-text.component.scss']
 })

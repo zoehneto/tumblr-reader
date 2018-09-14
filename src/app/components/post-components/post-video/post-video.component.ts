@@ -8,7 +8,7 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
 @Component({
     selector: 'post-video',
     template: `
-        <div *ngIf="post.html5_capable === true && post.video_url" switch-target videoBehaviour>
+        <div *ngIf="post.html5_capable === true && post.video_url" switch-target tumblrEmbeddedMedia>
             <video *ngIf="loadingHandler && loadingHandler.loadAllowed" preload="metadata"
                    (loadedmetadata)="loadingHandler.elementLoadSuccess($event)"
                    (error)="loadingHandler.elementLoadError($event)">
@@ -20,8 +20,9 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
                 </div>
             </div>
         </div>
-        <div *ngIf="post.html5_capable === true && !post.video_url" switch-target [innerHTML]="player" videoBehaviour embedBehaviour></div>
-        <div *ngIf="post.html5_capable === false" switch-target [innerHTML]="player" videoBehaviour embedBehaviour></div>
+        <div *ngIf="post.html5_capable === true && !post.video_url" switch-target [innerHTML]="player" tumblrEmbeddedMedia
+             embedBehaviour></div>
+        <div *ngIf="post.html5_capable === false" switch-target [innerHTML]="player" tumblrEmbeddedMedia embedBehaviour></div>
     `,
     styleUrls: ['./post-video.component.scss']
 })

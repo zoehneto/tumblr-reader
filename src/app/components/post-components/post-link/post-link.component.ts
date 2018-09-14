@@ -9,12 +9,12 @@ import { Post } from '../../../data-types';
         </a>
         <p *ngIf="post.excerpt">{{post.excerpt}}</p>
         <div *ngIf="post.description && post.title" [innerHTML]="post.description"
-        tumblrLink tumblrEmbeddedImage></div>
+        tumblrLink tumblrEmbeddedMedia></div>
         <a *ngIf="post.description && !post.title" [tumblrLink]="post.url">
-            <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedImage></div>
+            <div [innerHTML]="post.description" tumblrLink tumblrEmbeddedMedia></div>
         </a>
         <a *ngIf="post.publisher && !post.description && !post.title" [tumblrLink]="post.url">
-            <div [innerHTML]="post.publisher" tumblrLink tumblrEmbeddedImage></div>
+            <div [innerHTML]="post.publisher" tumblrLink tumblrEmbeddedMedia></div>
         </a>
     `,
     styleUrls: ['./post-link.component.scss']
