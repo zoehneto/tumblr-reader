@@ -29,6 +29,8 @@ import { Post, Blog } from '../../../data-types';
             <span class="text" *ngIf="post.likes > 0">{{post.likes}}
              {{post.likes > 1 ? 'likes' : 'like'}}</span>
             <span class="text">{{post.date | date}}</span>
+
+            <a class="clickable right" target="_blank" [routerLink]="['/blog',blog.name,'post', post.id]">Direct Link</a>
         </p>
 
         <post-reblogs *ngIf="post.reblogs.length > 0 && showReblogs" [post]="post"></post-reblogs>

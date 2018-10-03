@@ -25,10 +25,18 @@ ul {
   margin-right: 0.7rem;
 }
 
+.bottom *:last-child {
+    margin-right: 0;
+}
+
 .text {
   color: $font-color-light;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.right {
+  float: right;
 }
