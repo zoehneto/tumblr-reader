@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Post, Blog } from '../../../data-types';
+import {Component, Input} from '@angular/core';
+import {Post, Blog} from '../../../data-types';
 
 @Component({
     selector: 'post-meta',
@@ -23,14 +23,15 @@ import { Post, Blog } from '../../../data-types';
 
         <p class="bottom">
             <a class="clickable" *ngIf="post.reblogs.length > 0" (click)="toggleReblogs()">{{post.reblogs.length}}
-             {{post.reblogs.length > 1 ? 'reblogs' : 'reblog'}}</a>
+                {{post.reblogs.length > 1 ? 'reblogs' : 'reblog'}}</a>
             <a class="clickable" *ngIf="post.replies.length > 0" (click)="toggleReplies()">{{post.replies.length}}
-             {{post.replies.length > 1 ? 'replies' : 'reply'}}</a>
+                {{post.replies.length > 1 ? 'replies' : 'reply'}}</a>
             <span class="text" *ngIf="post.likes > 0">{{post.likes}}
              {{post.likes > 1 ? 'likes' : 'like'}}</span>
             <span class="text">{{post.date | date}}</span>
 
-            <a class="clickable right" target="_blank" [routerLink]="['/blog',blog.name,'post', post.id]">Direct Link</a>
+            <a *ngIf="!onPostPage()" class="clickable right" target="_blank" [routerLink]="['/blog',blog.name,'post', post.id]">Direct
+                Link</a>
         </p>
 
         <post-reblogs *ngIf="post.reblogs.length > 0 && showReblogs" [post]="post"></post-reblogs>
@@ -44,6 +45,7 @@ export class PostMetaComponent {
     @Input('post') post: Post;
     showReblogs: boolean;
     showReplies: boolean;
+
     constructor() {
         this.showReblogs = false;
         this.showReplies = false;
@@ -55,5 +57,12 @@ export class PostMetaComponent {
 
     toggleReplies() {
         this.showReplies = !this.showReplies;
+    }
+
+    private onPostPage() {
+        if (location.hash.indexOf('/post/') > -1) {
+            return true;
+        }
+        return false;
     }
 }
