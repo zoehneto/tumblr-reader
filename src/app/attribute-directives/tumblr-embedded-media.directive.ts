@@ -12,10 +12,21 @@ export class TumblrEmbeddedMediaDirective implements DoCheck {
         const mediaElements = this.el.nativeElement.querySelectorAll('img, video');
         if (mediaElements.length > 0) {
             for (const mediaElement of mediaElements) {
-                mediaElement.parentElement.style.marginLeft = 0;
-                mediaElement.parentElement.style.marginRight = 0;
+                const parent = mediaElement.parentElement;
+
+                // media embedded in a post
+                if (parent.nodeName === 'FIGURE') {
+                    parent.style.marginLeft = 0;
+                    parent.style.marginRight = 0;
+
+                    if (parent.nextSibling && parent.nextSibling.nodeName !== 'FIGURE' && parent.nextSibling.setAttribute) {
+                        parent.nextSibling.setAttribute('switch-target', '');
+                    }
+                }
+
                 mediaElement.setAttribute('width', '100%');
                 mediaElement.setAttribute('height', '');
+                mediaElement.setAttribute('switch-target', '');
 
                 if (mediaElement.nodeName === 'VIDEO') {
                     mediaElement.removeAttribute('autoplay');
