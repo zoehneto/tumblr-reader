@@ -125,7 +125,8 @@
         "use-input-property-decorator": true,
         "use-output-property-decorator": true,
         "use-host-property-decorator": true,
-        "no-input-rename": true,
+        // this check is broken, so it has to be disabled
+        "no-input-rename": false,
         "no-output-rename": true,
         "use-life-cycle-interface": true,
         "use-pipe-transform-interface": true,

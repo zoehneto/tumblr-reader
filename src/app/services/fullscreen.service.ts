@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class FullscreenService {
@@ -19,13 +19,14 @@ export class FullscreenService {
     }
 
     public isFullscreen(): boolean {
-        if (document.fullscreenElement !== null && document.fullscreenElement !== undefined) {
+        const documentAny = <any>document;
+        if (documentAny.fullscreenElement !== null && documentAny.fullscreenElement !== undefined) {
             return true;
         }
-        if (document.webkitIsFullScreen) {
+        if (documentAny.webkitIsFullScreen) {
             return true;
         }
-        if ((<any>document).mozFullScreen) {
+        if (documentAny.mozFullScreen) {
             return true;
         }
         return false;
