@@ -41,6 +41,6 @@ export abstract class PostSwitch implements OnInit, OnDestroy {
     }
 
     protected flatten<T>(array: T[][]): T[] {
-        return [].concat.apply([], array);
+        return ([] as T[]).concat.apply([], array);
     }
 }
