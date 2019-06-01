@@ -16,7 +16,7 @@ import { BlogItemSwitchService } from '../../services/item-switch/blog-item-swit
                 class="blog {{selected('/blog/' + blog.name) ? 'selected' : ''}}
                 {{isRecent(blog) ? 'recent' : ''}}">
                     <span>
-                        <img src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
+                        <img class="avatar" src="https://api.tumblr.com/v2/blog/{{blog.name}}/avatar/16">
                     </span>
                     <a [routerLink]="['/blog/',blog.name]">
                         {{blog.title ? blog.title : blog.name}}

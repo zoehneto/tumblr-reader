@@ -46,8 +46,10 @@ span {
   vertical-align: middle;
 }
 
-img {
+.avatar {
   display: table-cell;
+  width: 1rem;
+  height: 1rem;
 }
 
 a:link,

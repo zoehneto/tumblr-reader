@@ -13,7 +13,7 @@ import { Post } from '../../../data-types';
 })
 export class PostQuoteComponent implements DoCheck {
     @Input('post') post: Post;
-    @ViewChild('quote') quote: ElementRef;
+    @ViewChild('quote', {static: true}) quote: ElementRef;
 
     constructor(private detectorRef: ChangeDetectorRef) {}
 
