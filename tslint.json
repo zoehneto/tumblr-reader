@@ -58,7 +58,7 @@
         "no-eval": true,
         "no-inferrable-types": false,
         "no-misused-new": true,
-        "no-non-null-assertion": true,
+        "no-non-null-assertion": false,
         "no-shadowed-variable": true,
         "no-string-literal": false,
         "no-string-throw": true,
@@ -66,7 +66,6 @@
         "no-trailing-whitespace": true,
         "no-unnecessary-initializer": true,
         "no-unused-expression": true,
-        "no-use-before-declare": true,
         "no-var-keyword": true,
         "object-literal-sort-keys": false,
         "one-line": [
@@ -110,27 +109,37 @@
             "check-separator",
             "check-type"
         ],
-        "directive-selector": [
-            true,
-            "attribute",
-            "",
-            "camelCase"
-        ],
-        "component-selector": [
-            true,
-            "element",
-            "",
-            "kebab-case"
-        ],
-        "use-input-property-decorator": true,
-        "use-output-property-decorator": true,
-        "use-host-property-decorator": true,
+        "component-class-suffix": true,
+        "component-max-inline-declarations": false,
+        "component-selector": [true, "element", "", "kebab-case"],
+        "contextual-lifecycle": true,
+        "directive-class-suffix": true,
+        "directive-selector": [true, "attribute", "", "camelCase"],
+        "no-attribute-decorator": true,
+        "no-conflicting-lifecycle": true,
+        "no-forward-ref": true,
+        "no-host-metadata-property": true,
         // this check is broken, so it has to be disabled
         "no-input-rename": false,
+        "no-inputs-metadata-property": true,
+        "no-lifecycle-call": true,
+        "no-output-native": true,
+        "no-output-on-prefix": true,
         "no-output-rename": true,
-        "use-life-cycle-interface": true,
-        "use-pipe-transform-interface": true,
-        "component-class-suffix": true,
-        "directive-class-suffix": true
+        "no-outputs-metadata-property": true,
+        "no-pipe-impure": true,
+        "no-queries-metadata-property": true,
+        "no-unused-css": true,
+        "prefer-inline-decorator": true,
+        "prefer-output-readonly": true,
+        "template-banana-in-box": true,
+        "template-conditional-complexity": [true, 4],
+        "template-cyclomatic-complexity": false,
+        "template-no-negated-async": true,
+        "template-use-track-by-function": false,
+        "use-component-selector": true,
+        "use-component-view-encapsulation": false,
+        "use-lifecycle-interface": true,
+        "use-pipe-transform-interface": true
     }
 }
