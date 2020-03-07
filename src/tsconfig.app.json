@@ -3,7 +3,6 @@
     "compilerOptions": {
         "outDir": "../out-tsc/app",
         "baseUrl": "./",
-        "module": "es2015",
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "strictPropertyInitialization": false,
@@ -13,11 +12,14 @@
             "lodash.clonedeep"
         ]
     },
-    "exclude": [
-        "test.ts",
-        "**/*.spec.ts"
-    ],
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true
-    }
+    },
+    "files": [
+        "main.ts",
+        "polyfills.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
 }

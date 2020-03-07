@@ -1,9 +1,10 @@
-import { Directive, ElementRef, DoCheck, Input } from '@angular/core';
+import {Directive, ElementRef, DoCheck, Input} from '@angular/core';
 
-@Directive({ selector: '[tumblrLink]' })
+@Directive({selector: '[tumblrLink]'})
 export class TumblrLinkDirective implements DoCheck {
     @Input('tumblrLink') tumblrLink: string;
     private el: ElementRef;
+
     constructor(el: ElementRef) {
         this.el = el;
     }
@@ -24,7 +25,7 @@ export class TumblrLinkDirective implements DoCheck {
     private applySettings(element: HTMLAnchorElement, link: string): void {
         const currentHref = element.getAttribute('href') || '';
         const newHref = this.getHref(link);
-        if (element.innerText.trim().toLowerCase() === currentHref.trim().toLowerCase()) {
+        if (element.innerText.trim().length > 0 && element.innerText.trim().toLowerCase() === currentHref.trim().toLowerCase()) {
             element.innerText = newHref;
         }
         element.setAttribute('href', newHref);
@@ -46,7 +47,7 @@ export class TumblrLinkDirective implements DoCheck {
         if (data.length < 2 || data[1].match(/\d+/) == null) {
             const blogName = currentHref.substring(0, currentHref.indexOf('.'));
             if (currentHref.includes('/tagged/')) {
-                const tag = currentHref.split('.tumblr.com/tagged/')[1].replace(/\-/g , '%20');
+                const tag = currentHref.split('.tumblr.com/tagged/')[1].replace(/\-/g, '%20');
                 return '#/blog/' + blogName + '/tag/' + tag;
             }
             return '#/blog/' + blogName;

@@ -59,10 +59,7 @@ export class PostMetaComponent {
         this.showReplies = !this.showReplies;
     }
 
-    private onPostPage() {
-        if (location.hash.indexOf('/post/') > -1) {
-            return true;
-        }
-        return false;
+    onPostPage() {
+        return location.hash.indexOf('/post/') > -1;
     }
 }
