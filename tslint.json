@@ -18,6 +18,9 @@
             "rxjs/Rx"
         ],
         "import-spacing": true,
+        "deprecation": {
+          "severity": "warning"
+        },
         "indent": [
             true,
             "spaces"

@@ -1,10 +1,10 @@
 import { ElementRef, Directive } from '@angular/core';
 import { HotkeysService } from 'angular2-hotkeys';
 import { HtmlItemSwitchService } from '../../services/item-switch/html-item-switch.service';
-import { PostSwitch } from './post-switch';
+import { BasePostSwitchDirective } from './base-post-switch.directive';
 
 @Directive({ selector: '[subPostSwitch]' })
-export class SubPostSwitchDirective extends PostSwitch {
+export class SubPostSwitchDirective extends BasePostSwitchDirective {
     constructor(el: ElementRef, hotkeysService: HotkeysService,
                 htmlItemSwitchService: HtmlItemSwitchService) {
         super(el, hotkeysService, htmlItemSwitchService, 'n', 'm');

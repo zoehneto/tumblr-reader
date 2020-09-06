@@ -1,8 +1,9 @@
-import { ElementRef, OnDestroy, OnInit, Input } from '@angular/core';
+import { ElementRef, OnDestroy, OnInit, Input, Directive } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { HtmlItemSwitchService } from '../../services/item-switch/html-item-switch.service';
 
-export abstract class PostSwitch implements OnInit, OnDestroy {
+@Directive()
+export abstract class BasePostSwitchDirective implements OnInit, OnDestroy {
     @Input('loadMoreItems') loadMoreItems: () => Promise<any>;
     private hotkeys: Hotkey[];
     constructor(private el: ElementRef, private hotkeysService: HotkeysService,
