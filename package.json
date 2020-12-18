@@ -23,7 +23,7 @@
     "@angular/router": "^10.1.0",
     "angular2-hotkeys": "^2.2.0",
     "core-js": "^3.6.5",
-    "dompurify": "^2.0.15",
+    "dompurify": "^2.0.17",
     "localforage": "^1.9.0",
     "lodash.clonedeep": "^4.5.0",
     "ngx-infinite-scroll": "9.0.0",
