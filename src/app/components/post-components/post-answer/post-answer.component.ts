@@ -9,14 +9,14 @@ import { Post } from '../../../data-types';
             <p *ngIf="post.asking_url" class="asking">
                 <a [tumblrLink]="post.asking_url">{{post.asking_name}}</a> asked:
             </p>
-            <p class="question-text">{{post.question}}</p>
+            <p class="question-text" [innerHTML]="post.question"></p>
         </div>
         <div class="answer" [innerHTML]="post.answer" tumblrLink tumblrEmbeddedMedia></div>
     `,
     styleUrls: ['./post-answer.component.scss']
 })
 export class PostAnswerComponent implements OnChanges {
-    @Input('post') post: Post;
+    @Input() post: Post;
     constructor(private detectorRef: ChangeDetectorRef) {}
 
     ngOnChanges() {

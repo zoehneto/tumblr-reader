@@ -20,7 +20,7 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-link.component.scss']
 })
 export class PostLinkComponent implements OnChanges {
-    @Input('post') post: Post;
+    @Input() post: Post;
     constructor(private detectorRef: ChangeDetectorRef) {}
 
     ngOnChanges() {

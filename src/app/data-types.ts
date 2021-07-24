@@ -11,7 +11,6 @@ export class Settings {
     }
 }
 
-/* tslint:disable:variable-name */
 export class Blog {
     name: string;
     description: string;
@@ -115,4 +114,3 @@ export interface Response {
     posts: Post[];
     total_posts: number;
 }
-/* tslint:enable:variable-name */

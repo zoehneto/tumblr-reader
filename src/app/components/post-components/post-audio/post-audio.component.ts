@@ -22,9 +22,9 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
     styleUrls: ['./post-audio.component.scss']
 })
 export class PostAudioComponent implements OnInit {
-    @Input('post') post: Post;
-    @Input('play') play: Observable<void>;
-    @Input('index') index: number;
+    @Input() post: Post;
+    @Input() play: Observable<void>;
+    @Input() index: number;
     loadingHandler: LoadingHandler;
 
     constructor(private el: ElementRef, private smartLoadingService: SmartLoadingService) {

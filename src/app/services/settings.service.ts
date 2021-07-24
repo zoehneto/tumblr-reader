@@ -57,8 +57,8 @@ export class SettingsService {
                     return observableOf(null);
                 })));
         });
-        const resultBlogs: (Blog|null)[] = await observableForkJoin(blogObservables).pipe(single()).toPromise();
-        blogs = <Blog[]> resultBlogs.filter(element => element != null);
+        const resultBlogs: (Blog|null)[]|undefined = await observableForkJoin(blogObservables).pipe(single()).toPromise();
+        blogs = <Blog[]> resultBlogs?.filter(element => element != null);
 
         return {blogs: blogs, errors: errors};
     }

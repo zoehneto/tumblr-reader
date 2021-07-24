@@ -12,5 +12,5 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-chat.component.scss']
 })
 export class PostChatComponent {
-    @Input('post') post: Post;
+    @Input() post: Post;
 }

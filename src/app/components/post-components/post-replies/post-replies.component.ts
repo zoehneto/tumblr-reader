@@ -13,5 +13,5 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-replies.component.scss']
 })
 export class PostRepliesComponent {
-    @Input('post') post: Post;
+    @Input() post: Post;
 }

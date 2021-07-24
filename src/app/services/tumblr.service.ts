@@ -24,7 +24,7 @@ export class TumblrService {
             }));
     }
 
-    getPosts(blogId: string, offset: number = 0,
+    getPosts(blogId: string, offset = 0,
              tag?: string | null, id?: number | null): Observable<Response> {
         let params = new HttpParams()
             .append('api_key', config.consumerKey)

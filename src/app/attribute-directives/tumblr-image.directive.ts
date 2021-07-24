@@ -4,7 +4,7 @@ import { FullscreenService } from '../services/fullscreen.service';
 
 @Directive({ selector: '[tumblrImage]' })
 export class TumblrImageDirective implements DoCheck {
-    @Input('tumblrImage') tumblrImage: Photo;
+    @Input() tumblrImage: Photo;
     private el: ElementRef;
     constructor(el: ElementRef, private fullscreenService: FullscreenService) {
         this.el = el;

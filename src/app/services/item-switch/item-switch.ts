@@ -19,10 +19,12 @@ export abstract class ItemSwitch<T> {
             const nextItemIndex = currentItemIndex + modifier;
 
             if (this.loadMoreItems && this.moreItemsNeeded(items, currentItemIndex,
-                    nextItemIndex)) {
+                nextItemIndex)) {
                 this.loadMoreItems().then(updatedItems => {
                     this.switchToItem(updatedItems[nextItemIndex]);
-                }).catch(() => {});
+                }).catch(() => {
+                    //Ignore error
+                });
             }
 
             if (nextItemIndex > -1 && nextItemIndex < items.length) {
@@ -34,7 +36,7 @@ export abstract class ItemSwitch<T> {
     protected abstract getCurrentItemIndex(items: T[]): number | null;
 
     protected abstract moreItemsNeeded(items: T[], currentItemIndex: number,
-        nextItemIndex: number): boolean;
+                                       nextItemIndex: number): boolean;
 
     protected abstract switchToItem(item: T): void;
 }

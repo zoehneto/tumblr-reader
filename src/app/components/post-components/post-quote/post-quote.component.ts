@@ -12,7 +12,7 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-quote.component.scss']
 })
 export class PostQuoteComponent implements DoCheck {
-    @Input('post') post: Post;
+    @Input() post: Post;
     @ViewChild('quote', {static: true}) quote: ElementRef;
 
     constructor(private detectorRef: ChangeDetectorRef) {}

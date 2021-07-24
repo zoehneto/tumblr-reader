@@ -50,7 +50,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     loading: boolean;
     private postCounter: number;
     private totalPosts: number;
-    private updatedInDays: number = 0;
+    private updatedInDays = 0;
     private subscription: Subscription;
     private hotkeys: Hotkey[];
 
@@ -124,7 +124,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     private loadPosts(): Promise<any> {
         this.loading = true;
         this.message = 'Loading ...';
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             if (this.subscription) {
                 this.subscription.unsubscribe();
             }

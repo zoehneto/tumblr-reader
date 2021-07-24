@@ -2,7 +2,7 @@ import {Directive, ElementRef, DoCheck, Input} from '@angular/core';
 
 @Directive({selector: '[tumblrLink]'})
 export class TumblrLinkDirective implements DoCheck {
-    @Input('tumblrLink') tumblrLink: string;
+    @Input() tumblrLink: string;
     private el: ElementRef;
 
     constructor(el: ElementRef) {

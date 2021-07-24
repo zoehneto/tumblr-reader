@@ -11,25 +11,25 @@ import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
         <div class="full">
             <post-photo *ngIf="post.photos" [postPhotos]="post.photos" [index]="index">
             </post-photo>
-            <post-video *ngIf="post.type == 'video'" [post]="post" [play]="playSubject" [index]="index">
+            <post-video *ngIf="post.type === 'video'" [post]="post" [play]="playSubject" [index]="index">
             </post-video>
-            <post-audio *ngIf="post.type == 'audio'" [post]="post" [play]="playSubject" [index]="index">
+            <post-audio *ngIf="post.type === 'audio'" [post]="post" [play]="playSubject" [index]="index">
             </post-audio>
         </div>
         <div switch-target class="padded">
-            <post-title *ngIf="post.title && post.type != 'link'" [post]="post"></post-title>
+            <post-title *ngIf="post.title && post.type !== 'link'" [post]="post"></post-title>
 
-            <post-answer *ngIf="post.type == 'answer'" [post]="post"></post-answer>
+            <post-answer *ngIf="post.type === 'answer'" [post]="post"></post-answer>
 
-            <post-quote *ngIf="post.type == 'quote'" [post]="post"></post-quote>
+            <post-quote *ngIf="post.type === 'quote'" [post]="post"></post-quote>
 
-            <post-chat *ngIf="post.type == 'chat'" [post]="post"></post-chat>
+            <post-chat *ngIf="post.type === 'chat'" [post]="post"></post-chat>
 
-            <post-link *ngIf="post.type == 'link'" [post]="post"></post-link>
+            <post-link *ngIf="post.type === 'link'" [post]="post"></post-link>
 
             <post-caption *ngIf="post.caption" [post]="post"></post-caption>
 
-            <post-text *ngIf="post.type == 'text' && post.body" [post]="post">
+            <post-text *ngIf="post.type === 'text' && post.body" [post]="post">
             </post-text>
 
             <post-meta class="meta" [blog]="blog" [post]="post"></post-meta>
@@ -38,9 +38,9 @@ import {LoadingHandler} from '../../../services/smart-loading/loading-handler';
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-    @Input('blog') blog: Blog;
-    @Input('post') post: Post;
-    @Input('index') index: number;
+    @Input() blog: Blog;
+    @Input() post: Post;
+    @Input() index: number;
     playSubject: Subject<void> = new Subject<void>();
 
     constructor(private smartLoadingService: SmartLoadingService) {

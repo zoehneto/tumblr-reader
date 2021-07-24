@@ -41,8 +41,8 @@ import {Post, Blog} from '../../../data-types';
     styleUrls: ['./post-meta.component.scss']
 })
 export class PostMetaComponent {
-    @Input('blog') blog: Blog;
-    @Input('post') post: Post;
+    @Input() blog: Blog;
+    @Input() post: Post;
     showReblogs: boolean;
     showReplies: boolean;
 

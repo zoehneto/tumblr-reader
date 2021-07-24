@@ -17,7 +17,9 @@ export class SmartLoadingService {
 
     async register(index: number, loadingHandler: LoadingHandler) {
         this.queue[index] = loadingHandler;
-        while (await this.loadingStrategy.loadItems(this.queue)) {}
+        while (await this.loadingStrategy.loadItems(this.queue)) {
+            // Continuously load new items
+        }
     }
 
     clearLoadingQueue() {

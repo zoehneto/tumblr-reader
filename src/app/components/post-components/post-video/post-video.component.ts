@@ -27,9 +27,9 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
     styleUrls: ['./post-video.component.scss']
 })
 export class PostVideoComponent implements OnInit, OnChanges {
-    @Input('post') post: Post;
-    @Input('play') play: Observable<void>;
-    @Input('index') index: number;
+    @Input() post: Post;
+    @Input() play: Observable<void>;
+    @Input() index: number;
     loadingHandler: LoadingHandler;
     player: any;
 

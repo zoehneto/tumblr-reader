@@ -24,8 +24,8 @@ import {SmartLoadingService} from '../../../services/smart-loading/smart-loading
     styleUrls: ['./post-photo.component.scss']
 })
 export class PostPhotoComponent implements OnInit {
-    @Input('postPhotos') postPhotos: Photo[];
-    @Input('index') index: number;
+    @Input() postPhotos: Photo[];
+    @Input() index: number;
     loadingHandler: LoadingHandler;
 
     constructor(private fullscreenService: FullscreenService, private smartLoadingService: SmartLoadingService) {

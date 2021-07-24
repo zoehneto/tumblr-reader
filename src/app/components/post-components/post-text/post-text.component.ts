@@ -10,7 +10,7 @@ import { CustomSanitizationService } from '../../../services/custom-sanitization
     styleUrls: ['./post-text.component.scss']
 })
 export class PostTextComponent implements OnChanges {
-    @Input('post') post: Post;
+    @Input() post: Post;
     body: any;
     constructor(private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}

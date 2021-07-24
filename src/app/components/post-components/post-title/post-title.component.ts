@@ -9,5 +9,5 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-title.component.scss']
 })
 export class PostTitleComponent {
-    @Input('post') post: Post;
+    @Input() post: Post;
 }

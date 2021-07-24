@@ -18,5 +18,5 @@ import { Post } from '../../../data-types';
     styleUrls: ['./post-reblogs.component.scss']
 })
 export class PostReblogsComponent {
-    @Input('post') post: Post;
+    @Input() post: Post;
 }

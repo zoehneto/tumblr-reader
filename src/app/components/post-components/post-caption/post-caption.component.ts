@@ -11,7 +11,7 @@ import { SafeHtml } from '@angular/platform-browser';
     styleUrls: ['./post-caption.component.scss']
 })
 export class PostCaptionComponent implements OnChanges {
-    @Input('post') post: Post;
+    @Input() post: Post;
     caption: string | SafeHtml;
     constructor(private sanitizationService: CustomSanitizationService,
                 private detectorRef: ChangeDetectorRef) {}

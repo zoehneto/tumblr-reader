@@ -1,7 +1,7 @@
 export class LoadingHandler {
-    public loadAllowed: boolean = false;
-    private loadCounter: number = 0;
-    private errorCounter: number = 0;
+    public loadAllowed = false;
+    private loadCounter = 0;
+    private errorCounter = 0;
     private loadingFinished: () => void;
 
     // If the itemCount is 0 loading is automatically finished

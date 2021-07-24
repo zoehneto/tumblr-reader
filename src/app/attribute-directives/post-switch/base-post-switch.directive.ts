@@ -4,7 +4,7 @@ import { HtmlItemSwitchService } from '../../services/item-switch/html-item-swit
 
 @Directive()
 export abstract class BasePostSwitchDirective implements OnInit, OnDestroy {
-    @Input('loadMoreItems') loadMoreItems: () => Promise<any>;
+    @Input() loadMoreItems: () => Promise<any>;
     private hotkeys: Hotkey[];
     constructor(private el: ElementRef, private hotkeysService: HotkeysService,
                 private htmlItemSwitchService: HtmlItemSwitchService, private nextKey: string, private previousKey: string) {}

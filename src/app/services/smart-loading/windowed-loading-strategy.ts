@@ -5,7 +5,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
     private windowSize: number;
     private window: (Promise<void> | undefined)[];
     private highestQueueIndex: number;
-    private counter: number = 0;
+    private counter = 0;
 
     constructor(windowSize: number) {
         this.windowSize = windowSize;
@@ -25,7 +25,7 @@ export class WindowedLoadingStrategy implements LoadingStrategy {
         }
 
         this.counter++;
-        await new Promise(resolve => {
+        await new Promise<void>(resolve => {
             const counterCopy = this.counter;
             for (let index = 0; index < this.window.length; index++) {
                 // load the next item from the queue if there is an empty spot in the queue
