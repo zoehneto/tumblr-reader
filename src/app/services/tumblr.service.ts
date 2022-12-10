@@ -25,7 +25,7 @@ export class TumblrService {
     }
 
     getPosts(blogId: string, offset = 0,
-             tag?: string | null, id?: number | null): Observable<Response> {
+             tag?: string | null, id?: string | null): Observable<Response> {
         let params = new HttpParams()
             .append('api_key', config.consumerKey)
             .append('reblog_info', 'True')
@@ -37,7 +37,7 @@ export class TumblrService {
             params = params.append('tag', tag);
         }
         if (id) {
-            params = params.append('id', id.toString());
+            params = params.append('id', id);
         }
 
         return this.http

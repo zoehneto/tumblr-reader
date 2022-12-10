@@ -46,7 +46,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     posts: Post[];
     message: string | null;
     tagParam: string | null;
-    postId: number | null;
+    postId: string | null;
     loading: boolean;
     private postCounter: number;
     private totalPosts: number;
@@ -78,7 +78,7 @@ export class PostListComponent implements OnInit, OnDestroy {
             this.posts = [];
             this.blog = new Blog(params['name']);
             this.tagParam = params['tag'] ? decodeURIComponent(params['tag']) : null;
-            this.postId = params['post'] ? parseInt(params['post'], 10) : null;
+            this.postId = params['post'] ? params['post'] : null;
             this.faviconService.setFavicon('https://api.tumblr.com/v2/blog/'
                 + params['name'] + '/avatar/16');
 

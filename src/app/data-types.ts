@@ -24,7 +24,10 @@ export class Blog {
 }
 
 export class Post {
+    // Don't use the id. As stated in the API documentation, it's a 64-bit integer, which isn't handled correctly by Javascript.
+    // Use id_string instead.
     id: number;
+    id_string: number;
     title: string;
     description?: string;
     summary: string;

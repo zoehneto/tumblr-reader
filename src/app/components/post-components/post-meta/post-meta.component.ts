@@ -30,7 +30,7 @@ import {Post, Blog} from '../../../data-types';
              {{post.likes > 1 ? 'likes' : 'like'}}</span>
             <span class="text">{{post.date | date}}</span>
 
-            <a *ngIf="!onPostPage()" class="clickable right" target="_blank" [routerLink]="['/blog',blog.name,'post', post.id]">Direct
+            <a *ngIf="!onPostPage()" class="clickable right" target="_blank" [routerLink]="['/blog',blog.name,'post', post.id_string]">Direct
                 Link</a>
         </p>
 
